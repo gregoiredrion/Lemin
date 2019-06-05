@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/04 19:28:55 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:58:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,25 @@ static t_rooms			**create_hash(int size)
  ** (hash << 5) + hash + c == hash * 33 + c
  */
 
-static unsigned int		fix_collision(t_rooms **rooms, int size)
+static unsigned int		fix_colli(t_rooms **rooms, unsigned int hash, int size)
 {
+	unsigned int	tmp;
 
+	tmp = hash + 1;
+	while ((int)tmp < size && tmp <= hash + 5)
+	{
+		if (!(rooms[tmp]))
+			return (tmp);
+		tmp++;
+	}
+	tmp = hash - 1;
+	while ((int)tmp < size && tmp <= hash - 5)
+	{
+		if (!(rooms[tmp]))
+			return (tmp);
+		tmp--;
+	}
+	return (tmp);
 }
 
 static unsigned int		hash(char *str, int size)
@@ -56,8 +72,10 @@ void					hashmap(t_hill *anthill, t_rooms *begin)
 	while (begin)
 	{
 		hashed = hash(begin->name, anthill->size);
-		if (!(anthill->rooms[hashed]))
-			hashed = fix_collision(anthill->rooms, hashed);
+		if (anthill->rooms[hashed])
+			hashed = fix_colli(anthill->rooms, hashed, anthill->size);
+		if (anthill->rooms[hashed])
+			printf("Big error BOI\n");
 		anthill->rooms[hashed] = begin;
 		begin = begin->next;
 	}

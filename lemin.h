@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/05/30 15:13:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:25:18 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct	s_rooms
 	int				ants;
 	intmax_t		x;
 	intmax_t		y;
+	int				stend;
+	struct s_rooms	*next;
 }				t_rooms;
 
 typedef struct	s_hill
@@ -44,16 +46,12 @@ typedef struct	s_hill
 ** stock infos anthill
 */
 t_hill			*create_anthill(void);
-int				create_rooms(t_hill *anthill, char *info, int stend);
+t_rooms			*create_rooms(t_rooms *last, char *info, int stend);
+void			hashmap(t_hill *anthill, t_rooms *begin);
 
 /*
 ** free
 */
 int				free_anthill(t_hill *anthill);
-
-/*
-** hashmap
-*/
-unsigned long	hash(char *str, int size);
 
 #endif
