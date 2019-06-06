@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/05 16:43:33 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/06/06 19:30:20 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,12 @@ int				main(void)
 	if (!(line = rooms(anthill, line)))
 		return (free_error(anthill));
 	int i = 0;
-	while (anthill->rooms[i])
+	printf("size of tab = %d\n", anthill->size);
+	printf("starting display :\n");
+	while (i < anthill->size)
 	{
-		printf("%d: %s[%ld, %ld]\n", i, anthill->rooms[i]->name, anthill->rooms[i]->x, anthill->rooms[i]->y);
+		if (anthill->rooms[i])
+			printf("%d: %s[%ld, %ld]\n", i, anthill->rooms[i]->name, anthill->rooms[i]->x, anthill->rooms[i]->y);
 		i++;
 	}
 //	printf("start = %d & end = %d\nstart->name = %s & end->name: %s\n", anthill->start, anthill->end, anthill->rooms[anthill->start]->name, anthill->rooms[anthill->end]->name);

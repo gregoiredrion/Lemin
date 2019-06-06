@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/05 14:58:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/06/06 19:33:24 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,29 @@ static t_rooms			**create_hash(int size)
 	return (hashmap);
 }
 
-/*
- ** (hash << 5) + hash + c == hash * 33 + c
- */
 
 static unsigned int		fix_colli(t_rooms **rooms, unsigned int hash, int size)
 {
-	unsigned int	tmp;
+	int		left;
+	int		right;
 
-	tmp = hash + 1;
-	while ((int)tmp < size && tmp <= hash + 5)
+	left = hash - 1;
+	right = hash + 1;
+	while (left >= 0 || right < size)
 	{
-		if (!(rooms[tmp]))
-			return (tmp);
-		tmp++;
+		if (right < size && !rooms[right])
+			return (right);
+		if (left <= 0 && !rooms[left])
+			return (left);
+		left--;
+		right++;
 	}
-	tmp = hash - 1;
-	while ((int)tmp < size && tmp <= hash - 5)
-	{
-		if (!(rooms[tmp]))
-			return (tmp);
-		tmp--;
-	}
-	return (tmp);
+	return (right);
 }
+
+/*
+** (hash << 5) + hash + c == hash * 33 + c
+*/
 
 static unsigned int		hash(char *str, int size)
 {
@@ -64,7 +63,7 @@ static unsigned int		hash(char *str, int size)
 void					hashmap(t_hill *anthill, t_rooms *begin)
 {
 	t_rooms			*save;
-	unsigned int	hashed;
+	int	hashed;
 
 	save = begin;
 	anthill->size *= 2;
@@ -72,11 +71,16 @@ void					hashmap(t_hill *anthill, t_rooms *begin)
 	while (begin)
 	{
 		hashed = hash(begin->name, anthill->size);
+		printf("name = %s and hashed = %d\n", begin->name, hashed);
 		if (anthill->rooms[hashed])
+		{
+			printf("collision !\n");
 			hashed = fix_colli(anthill->rooms, hashed, anthill->size);
+		}
 		if (anthill->rooms[hashed])
 			printf("Big error BOI\n");
 		anthill->rooms[hashed] = begin;
+		printf("tab[%d] = %s\n", hashed, anthill->rooms[hashed]->name);
 		begin = begin->next;
 	}
 	//free(save);
