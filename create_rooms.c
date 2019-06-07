@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/05 21:40:42 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/06/07 19:23:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,19 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 	i = 0;
 	if (!(split_info = ft_strsplit(info, ' ')))
 		return (NULL);
+	if (!(error_lemin(split_info, new)))
+		return (NULL);
 	if (!(new = malloc(sizeof(t_rooms))))
 		return (NULL);
 	if (!(new->name = ft_strdup(split_info[0])))
-		return (NULL);
-	new->ants = 0;
-	if (!(error_lemin(split_info, new)))
 		return (NULL);
 	while (split_info[i])
 		free(split_info[i++]);
 	free(split_info);
 	new->stend = stend;
+	new->ants = 0;
+	new->index = -1;
+	new->links = NULL;
 	if (last)
 		last->next = new;
 	new->next = NULL;

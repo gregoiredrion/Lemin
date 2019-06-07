@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/06 19:33:24 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/06/07 19:12:32 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_rooms			**create_hash(int size)
 }
 
 
-static unsigned int		fix_colli(t_rooms **rooms, unsigned int hash, int size)
+static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 {
 	int		left;
 	int		right;
@@ -60,14 +60,15 @@ static unsigned int		hash(char *str, int size)
 	return (hash % size);
 }
 
-void					hashmap(t_hill *anthill, t_rooms *begin)
+int					hashmap(t_hill *anthill, t_rooms *begin)
 {
 	t_rooms			*save;
 	int	hashed;
 
 	save = begin;
 	anthill->size *= 2;
-	anthill->rooms = create_hash(anthill->size);
+	if (!(anthill->rooms = create_hash(anthill->size)))
+		return (0);
 	while (begin)
 	{
 		hashed = hash(begin->name, anthill->size);
@@ -75,7 +76,8 @@ void					hashmap(t_hill *anthill, t_rooms *begin)
 		if (anthill->rooms[hashed])
 		{
 			printf("collision !\n");
-			hashed = fix_colli(anthill->rooms, hashed, anthill->size);
+			hashed = collision(anthill->rooms, hashed, anthill->size);
+			printf("new hashed = %d\n", hashed);
 		}
 		if (anthill->rooms[hashed])
 			printf("Big error BOI\n");
@@ -83,5 +85,5 @@ void					hashmap(t_hill *anthill, t_rooms *begin)
 		printf("tab[%d] = %s\n", hashed, anthill->rooms[hashed]->name);
 		begin = begin->next;
 	}
-	//free(save);
+	return (1);
 }
