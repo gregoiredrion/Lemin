@@ -72,6 +72,7 @@ static t_rooms	*parse_rooms(char *line, t_rooms *last)
 	}
 	else if (!(ft_strcmp(line, "##start")))
 	{
+		printf("start room\n");
 		free(line);
 		if ((get_next_line(0, &line) != 1))
 			return (NULL);
@@ -95,12 +96,13 @@ static char		*parser(t_hill *hill, char *line)
 	t_rooms		**tab;
 	t_rooms		*begin;
 	t_rooms		*last;
-
+	int i = 1;
 	last = NULL;
 	begin = NULL;
 	while (get_next_line(0, &line) == 1 && (ft_strchr((const char *)line, ' ')
 	|| line[0] == '#'))
 	{
+		printf("test numero %d\n", i++);
 		last = parse_rooms(line, last);
 		if (!begin)
 			begin = last;

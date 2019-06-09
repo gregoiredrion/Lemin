@@ -63,9 +63,9 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 	i = 0;
 	if (!(split_info = ft_strsplit(info, ' ')))
 		return (NULL);
-	if (!(error_lemin(split_info, new)))
-		return (NULL);
 	if (!(new = malloc(sizeof(t_rooms))))
+		return (NULL);
+	if (!(error_lemin(split_info, new)))
 		return (NULL);
 	if (!(new->name = ft_strdup(split_info[0])))
 		return (NULL);

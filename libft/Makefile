@@ -30,7 +30,6 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Werror -Wextra
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

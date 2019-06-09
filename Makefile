@@ -4,7 +4,6 @@ SRC = create_anthill.c\
 	  hashmap.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
