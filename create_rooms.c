@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/07 19:23:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/06/10 17:03:08 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	forb_char(char *coord)
 
 static int	free_error()
 {
-	write(2, "ERROR\n", 6);
 	//free
 	return (0);
 }

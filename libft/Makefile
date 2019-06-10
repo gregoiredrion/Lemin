@@ -6,7 +6,7 @@
 #    By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 15:38:46 by wdeltenr          #+#    #+#              #
-#    Updated: 2019/05/23 16:13:45 by wdeltenr         ###   ########.fr        #
+#    Updated: 2019/06/10 19:29:27 by gdrion           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	  ft_toupper.c ft_factorial.c ft_is_neg.c ft_sign.c ft_sqrt.c ft_power.c\
 	  get_next_line.c ft_atoi_base.c ft_wstrlen.c ft_wstrdup.c ft_uitoa.c\
 	  ft_putwchar.c ft_itoa_base.c ft_str_to_upper.c ft_uitoa_base.c\
-	  ft_putunbr.c ft_dtoa.c ft_count_digits.c ft_absolut.c ft_strcdup.c
+	  ft_putunbr.c ft_dtoa.c ft_count_digits.c ft_absolut.c ft_strcdup.c\
+	  ft_strndup.c
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Werror -Wextra
 CC = gcc

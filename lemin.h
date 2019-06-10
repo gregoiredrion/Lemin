@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/07 19:17:56 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/06/10 19:19:53 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,8 @@ int			hashmap(t_hill *anthill, t_rooms *begin);
 */
 int				free_anthill(t_hill *anthill);
 
+/*
+**
+*/
+int				parse_links(t_hill *hill, t_rooms **tab, char *line);
 #endif

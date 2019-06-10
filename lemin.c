@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/07 19:34:39 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/06/10 19:19:55 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static t_rooms	*parse_rooms(char *line, t_rooms *last)
 	}
 	else if (!(ft_strcmp(line, "##start")))
 	{
-		printf("start room\n");
 		free(line);
 		if ((get_next_line(0, &line) != 1))
 			return (NULL);
@@ -96,14 +95,14 @@ static char		*parser(t_hill *hill, char *line)
 	t_rooms		**tab;
 	t_rooms		*begin;
 	t_rooms		*last;
-	int i = 1;
 	last = NULL;
+
 	begin = NULL;
 	while (get_next_line(0, &line) == 1 && (ft_strchr((const char *)line, ' ')
 	|| line[0] == '#'))
 	{
-		printf("test numero %d\n", i++);
-		last = parse_rooms(line, last);
+		if (!(last = parse_rooms(line, last)))
+			return (NULL);
 		if (!begin)
 			begin = last;
 		hill->size++;
@@ -112,6 +111,7 @@ static char		*parser(t_hill *hill, char *line)
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (NULL);
 	//display_tab(tab, anthill->size / 2);
+	printf("links return = %d\n", parse_links(hill, tab, line));
 	return (line);
 }
 
