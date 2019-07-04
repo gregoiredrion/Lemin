@@ -51,7 +51,11 @@ intmax_t		ft_absolut(intmax_t nb);
 **Changement valeur/copy/creation avec malloc
 */
 char			*ft_strdup(const char *s);
+<<<<<<< HEAD
 char			*ft_strndup(const char *s, size_t n);
+=======
+char			*ft_strndup(const char *s1, size_t n);
+>>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 char			*ft_strcdup(const char *s, char c);
 wchar_t			*ft_wstrdup(const wchar_t *s);
 void			*ft_memalloc(size_t size);

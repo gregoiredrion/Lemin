@@ -112,6 +112,7 @@ static int		parser(t_hill *hill, char *line)
 			begin = last;
 		hill->size++;
 	}
+<<<<<<< HEAD
 	//display_tab(anthill->rooms, anthill->size);
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
@@ -120,6 +121,22 @@ static int		parser(t_hill *hill, char *line)
 		parse_links(hill, tab, line);
 	display_tab(tab, hill->size / 2);
 	return (1);
+=======
+	hashmap(hill, begin);
+	display_tab(hill->rooms, hill->size);
+	tab = small_tab(hill);
+	display_tab(tab, hill->size/2);
+//	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
+//		return (NULL);
+	printf("links return = %d\n", parse_links(hill, tab, line));
+
+	/*while (get_next_line(0, &line) == 1)
+	{
+
+	}*/
+		//display_tab(tab, anthill->size / 2);
+	return (line);
+>>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 }
 
 int				main(void)

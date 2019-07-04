@@ -46,17 +46,17 @@ typedef struct	s_hill
 /*
 ** stock infos anthill
 */
-t_hill			*create_anthill(void);
-t_rooms			*create_rooms(t_rooms *last, char *info, int stend);
-int			hashmap(t_hill *anthill, t_rooms *begin);
+t_hill				*create_anthill(void);
+t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
+int					hashmap(t_hill *anthill, t_rooms *begin);
 
 /*
 ** free
 */
-int				free_anthill(t_hill *anthill);
+int					free_anthill(t_hill *anthill);
 
 /*
 **
 */
-int				parse_links(t_hill *hill, t_rooms **tab, char *line);
+int					parse_links(t_hill *hill, t_rooms **tab, char *line);
 #endif
