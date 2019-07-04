@@ -43,7 +43,6 @@ t_rooms	*get_room_add(t_hill *hill, int hash, char *name, int size)
 	right = hash + 1;
 	while (left >= 0 || right < size)
 	{
-		printf("Boucle\n");
 		if (left >= 0 && hill->rooms[left] &&
 		!ft_strcmp(hill->rooms[left]->name, name))
 			return (hill->rooms[left]);
@@ -56,17 +55,22 @@ t_rooms	*get_room_add(t_hill *hill, int hash, char *name, int size)
 	return (NULL);
 }
 
-int		parse_links(t_hill *hill, t_rooms **tab, char *line)
+int			parse_links(t_hill *hill, t_rooms **tab, char *line)
 {
 	int		h_id;
+	int		index;
 	t_rooms	*room;
 	char	*name;
 
 	if (!(h_id = get_room_id(line, hill->size, &name)))
 		return (0);
-	printf ("Room '%s' has id '%d'\n", name, h_id);
-	if (!(get_room_add(hill, h_id, name, hill->size)))
+	printf ("Room '%s' has id '%d' and this address %p\n", name, h_id, room);
+	if (!(room = get_room_add(hill, h_id, name, hill->size)))
 		return (0);
+	printf("Room index = %d\n", room->index);
+	if (room == tab[room->index])
+		printf("Bingo !\n");
+	index = ft_strlen(name);
 	ft_strdel(&name);
-	return (1);
+	return (index);
 }

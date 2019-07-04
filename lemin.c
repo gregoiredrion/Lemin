@@ -55,7 +55,7 @@ static t_rooms		**small_tab(t_hill *anthill)
 			anthill->rooms[i]->next = NULL;
 			anthill->rooms[i]->index = j;
 			anthill->rooms[i]->stend == -1 ? anthill->end = j : 0;
-			anthill->rooms[i]->stend == 1 ? anthill->end = j : 0;
+			anthill->rooms[i]->stend == 1 ? anthill->start = j : 0;
 			new[j++] = anthill->rooms[i];
 		}
 		i++;
@@ -95,8 +95,8 @@ static char		*parser(t_hill *hill, char *line)
 	t_rooms		**tab;
 	t_rooms		*begin;
 	t_rooms		*last;
-	last = NULL;
 
+	last = NULL;
 	begin = NULL;
 	while (get_next_line(0, &line) == 1 && (ft_strchr((const char *)line, ' ')
 	|| line[0] == '#'))
@@ -107,11 +107,19 @@ static char		*parser(t_hill *hill, char *line)
 			begin = last;
 		hill->size++;
 	}
-	//display_tab(anthill->rooms, anthill->size);
-	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
-		return (NULL);
-	//display_tab(tab, anthill->size / 2);
+	hashmap(hill, begin);
+	display_tab(hill->rooms, hill->size);
+	tab = small_tab(hill);
+	display_tab(tab, hill->size/2);
+//	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
+//		return (NULL);
 	printf("links return = %d\n", parse_links(hill, tab, line));
+
+	/*while (get_next_line(0, &line) == 1)
+	{
+
+	}*/
+		//display_tab(tab, anthill->size / 2);
 	return (line);
 }
 
