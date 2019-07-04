@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/07 19:12:32 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/04 13:30:43 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 	{
 		if (right < size && !rooms[right])
 			return (right);
-		if (left <= 0 && !rooms[left])
+		if (left >= 0 && !rooms[left])
 			return (left);
 		left--;
 		right++;
@@ -48,7 +48,6 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 /*
 ** (hash << 5) + hash + c == hash * 33 + c
 */
-
 static unsigned int		hash(char *str, int size)
 {
 	unsigned long	hash;
@@ -82,7 +81,7 @@ int					hashmap(t_hill *anthill, t_rooms *begin)
 		if (anthill->rooms[hashed])
 			printf("Big error BOI\n");
 		anthill->rooms[hashed] = begin;
-		printf("tab[%d] = %s\n", hashed, anthill->rooms[hashed]->name);
+		printf("tab[%d] = %s\n\n", hashed, anthill->rooms[hashed]->name);
 		begin = begin->next;
 	}
 	return (1);

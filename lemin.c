@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/10 19:19:55 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/04 15:14:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 void	display_tab(t_rooms **tab, int size)
 {
 	printf("size of tab = %d\n", size);
-	printf("starting display :\n");
+	printf("starting display :\n\n");
 	int i = 0;
+
 	while (i < size)
 	{
-		if (tab[i])
-			printf("%d: %s[%ld, %ld]\n", i, tab[i]->name, tab[i]->x, tab[i]->y);
+		printf("%d: %s[%ld, %ld]\n", i, tab[i]->name, tab[i]->x, tab[i]->y);
+		while (tab[i]->links)
+		{
+			printf("%s-%s\n", tab[i]->name, tab[tab[i]->links->name]->name);
+			tab[i]->links = tab[i]->links->next;
+		}
+		printf("\n");
 		i++;
 	}
-
 }
 
 static int		free_error(t_hill *anthill)
@@ -52,10 +57,10 @@ static t_rooms		**small_tab(t_hill *anthill)
 	{
 		if (anthill->rooms[i])
 		{
-			anthill->rooms[i]->next = NULL;
+			//anthill->rooms[i]->next = NULL;
 			anthill->rooms[i]->index = j;
 			anthill->rooms[i]->stend == -1 ? anthill->end = j : 0;
-			anthill->rooms[i]->stend == 1 ? anthill->end = j : 0;
+			anthill->rooms[i]->stend == 1 ? anthill->start = j : 0;
 			new[j++] = anthill->rooms[i];
 		}
 		i++;
@@ -90,29 +95,31 @@ static t_rooms	*parse_rooms(char *line, t_rooms *last)
 	return (last);
 }
 
-static char		*parser(t_hill *hill, char *line)
+static int		parser(t_hill *hill, char *line)
 {
 	t_rooms		**tab;
 	t_rooms		*begin;
 	t_rooms		*last;
-	last = NULL;
 
+	last = NULL;
 	begin = NULL;
 	while (get_next_line(0, &line) == 1 && (ft_strchr((const char *)line, ' ')
 	|| line[0] == '#'))
 	{
 		if (!(last = parse_rooms(line, last)))
-			return (NULL);
+			return (0);
 		if (!begin)
 			begin = last;
 		hill->size++;
 	}
 	//display_tab(anthill->rooms, anthill->size);
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
-		return (NULL);
-	//display_tab(tab, anthill->size / 2);
-	printf("links return = %d\n", parse_links(hill, tab, line));
-	return (line);
+		return (0);
+	parse_links(hill, tab, line);
+	while (get_next_line(0, &line) == 1 && line[0] != '\0')
+		parse_links(hill, tab, line);
+	display_tab(tab, hill->size / 2);
+	return (1);
 }
 
 int				main(void)
@@ -126,17 +133,16 @@ int				main(void)
 		return (0);
 	anthill->ants = ft_atoi(line);
 	free(line);
-	if (!(line = parser(anthill, line)))
+	if (!(parser(anthill, line)))
 		return (free_error(anthill));
-	printf("%s\n", line);
-	while (get_next_line(0, &line) == 1 && line[0] != '\0')
-	{
-		printf("%s\n", line);
+//	while (get_next_line(0, &line) == 1 && line[0] != '\0')
+//	{
+//		printf("%s\n", line);
 	/*	if (line[0] != '#')
 			if (!(anthill->links = create_links(anthill->links, line)))
 				return (0);
 		free(line);*/
-	}
+//	}
 	//free(line);
 	return (0);
 }

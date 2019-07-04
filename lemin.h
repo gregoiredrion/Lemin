@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/06/10 19:19:53 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/04 14:53:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_rooms
 {
 	char			*name;
 	int				index;
-	int				*links;
+	t_links			*links;
 	int				ants;
 	intmax_t		x;
 	intmax_t		y;
