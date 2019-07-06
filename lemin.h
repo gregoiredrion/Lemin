@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/04 14:53:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/06 16:07:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "libft/libft.h"
 
+typedef struct	s_rooms t_rooms;
+
 typedef struct	s_links
 {
-	unsigned long	name;
+	t_rooms			*room;
 	int				weight;
 	struct s_links	*next;
 }				t_links;
@@ -59,4 +61,6 @@ int					free_anthill(t_hill *anthill);
 **
 */
 int					parse_links(t_hill *hill, t_rooms **tab, char *line);
+
+void				short_path(t_hill *hill);
 #endif

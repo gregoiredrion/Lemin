@@ -2,7 +2,8 @@ NAME = lem-in
 SRC = create_anthill.c\
 	  create_rooms.c\
 	  hashmap.c\
-	  create_links.c
+	  create_links.c\
+	  short_path.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 
