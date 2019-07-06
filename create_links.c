@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/04 15:14:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:18:42 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static t_rooms	*get_room_add(t_hill *hill, int hash, char *name, int size)
 	return (NULL);
 }
 
-<<<<<<< HEAD
 static int			store_links(t_rooms **tab, int id1, int id2)
 {
 	t_links		*new;
@@ -105,12 +104,6 @@ static int			store_links(t_rooms **tab, int id1, int id2)
 int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 {
 	int		hash_id;
-=======
-int			parse_links(t_hill *hill, t_rooms **tab, char *line)
-{
-	int		h_id;
-	int		index;
->>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 	t_rooms	*room;
 	char	*name;
 	int		id1;
@@ -124,23 +117,13 @@ int			parse_links(t_hill *hill, t_rooms **tab, char *line)
 	id1 = room->index;
 	if ((hash_id = get_room2_id(line, hill->size, &name)) < 0)
 		return (0);
-<<<<<<< HEAD
 	if (!(room = get_room_add(hill, hash_id, name, hill->size)))
-=======
-	printf ("Room '%s' has id '%d' and this address %p\n", name, h_id, room);
-	if (!(room = get_room_add(hill, h_id, name, hill->size)))
->>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 		return (0);
 	printf("Room index = %d\n", room->index);
 	if (room == tab[room->index])
 		printf("Bingo !\n");
-	index = ft_strlen(name);
 	ft_strdel(&name);
-<<<<<<< HEAD
 	id2 = room->index;
 	store_links(tab, id1, id2);
 	return (1);
-=======
-	return (index);
->>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 }
