@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/04 13:02:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:13:36 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ intmax_t		ft_absolut(intmax_t nb);
 **Changement valeur/copy/creation avec malloc
 */
 char			*ft_strdup(const char *s);
-<<<<<<< HEAD
 char			*ft_strndup(const char *s, size_t n);
-=======
-char			*ft_strndup(const char *s1, size_t n);
->>>>>>> 76407cd9d9f97b8c2067ae2dd3a95868a8302188
 char			*ft_strcdup(const char *s, char c);
 wchar_t			*ft_wstrdup(const wchar_t *s);
 void			*ft_memalloc(size_t size);
