@@ -73,6 +73,7 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 	free(split_info);
 	new->stend = stend;
 	new->ants = 0;
+	new->len_path = -1;
 	new->index = -1;
 	new->links = NULL;
 	if (last)
