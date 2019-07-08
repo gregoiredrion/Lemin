@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 21:11:54 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/08 22:11:00 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	djikstra(t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			if ((tab[i]->dist + 1 < li->room->dist) || li->room->dist == -1)
+			if ((tab[i]->dist + li->weight< li->room->dist) || li->room->dist == -1)
 			{
 				j++;
-				li->room->dist = tab[i]->dist + 1;
+				li->room->dist = tab[i]->dist + li->weight;
 				rearrange_tab(tab, j, li->room->index);
 				len++;
 				bad_sort(tab, i, j);
@@ -99,4 +99,5 @@ void	short_path(t_hill *hill, t_rooms **tab)
 	display_tab(tab, 7);
 	djikstra(tab);
 	//Then find path starting from end;
+	//Mais alors mettre les liens dans les deux rooms, pas sur que bonne idee
 }
