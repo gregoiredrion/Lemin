@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/04 13:30:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:13:54 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,11 @@ int					hashmap(t_hill *anthill, t_rooms *begin)
 	while (begin)
 	{
 		hashed = hash(begin->name, anthill->size);
-		printf("name = %s and hashed = %d\n", begin->name, hashed);
 		if (anthill->rooms[hashed])
-		{
-			printf("collision !\n");
 			hashed = collision(anthill->rooms, hashed, anthill->size);
-			printf("new hashed = %d\n", hashed);
-		}
 		if (anthill->rooms[hashed])
 			printf("Big error BOI\n");
 		anthill->rooms[hashed] = begin;
-		printf("tab[%d] = %s\n\n", hashed, anthill->rooms[hashed]->name);
 		begin = begin->next;
 	}
 	return (1);

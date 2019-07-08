@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/06 16:05:16 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:10:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 void	display_tab(t_rooms **tab, int size)
 {
+	int test = 0;
 	printf("size of tab = %d\n", size);
 	printf("starting display :\n\n");
 	int i = 0;
+	t_links	*link;
 
 	while (i < size)
 	{
-		printf("%d: %s[%ld, %ld]\n", i, tab[i]->name, tab[i]->x, tab[i]->y);
-		while (tab[i]->links)
+		test = 0;
+		printf("tab[%d]: %s(%ld, %ld) weight = %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->dist);
+		link = tab[i]->links;
+		while (link)
 		{
-			printf("%s-%s\n", tab[i]->name, tab[i]->links->room->name);
-			tab[i]->links = tab[i]->links->next;
+			test++;
+			printf("%s-%s\n", tab[i]->name, link->room->name);
+			link = link->next;
 		}
+		if (test == 0)
+			printf("No Links\n");
 		printf("\n");
 		i++;
 	}
@@ -118,8 +125,8 @@ static int		parser(t_hill *hill, char *line)
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		parse_links(hill, tab, line);
-	//display_tab(tab, hill->size / 2);
-	short_path(hill);
+	short_path(hill, tab);
+	printf("test\n");
 	return (1);
 }
 

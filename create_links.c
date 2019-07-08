@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/06 15:44:40 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:12:56 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,6 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 		return (0);
 	if (!(room = get_room_add(hill, hash_id, name, hill->size)))
 		return (0);
-	printf("Room index = %d\n", room->index);
-	if (room == tab[room->index])
-		printf("Bingo !\n");
 	ft_strdel(&name);
 	store_links(tab, id1, room);
 	return (1);
