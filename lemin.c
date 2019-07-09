@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 20:10:23 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 15:36:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,14 +143,5 @@ int				main(void)
 	free(line);
 	if (!(parser(anthill, line)))
 		return (free_error(anthill));
-//	while (get_next_line(0, &line) == 1 && line[0] != '\0')
-//	{
-//		printf("%s\n", line);
-	/*	if (line[0] != '#')
-			if (!(anthill->links = create_links(anthill->links, line)))
-				return (0);
-		free(line);*/
-//	}
-	//free(line);
 	return (0);
 }
