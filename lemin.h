@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 14:41:10 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:20:26 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ typedef struct	s_rooms
 	char			*name;
 	int				dist;
 	int				index;
-	t_links			*links;
 	int				ants;
 	intmax_t		x;
 	intmax_t		y;
 	int				stend;
+	t_links			*in;
+	t_links			*out;
 	struct s_rooms	*next;
 }				t_rooms;
 
@@ -65,5 +66,6 @@ int					free_anthill(t_hill *anthill);
 int					parse_links(t_hill *hill, t_rooms **tab, char *line);
 
 void				short_path(t_hill *hill, t_rooms **tab);
+int					find_path(t_rooms *room);
 void				display_tab(t_rooms **tab, int size);
 #endif

@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/09 14:45:19 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:01:13 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	int		id2;
 
 	lines = ft_strsplit(line, '-');
-	printf("Line[0] = %s\nLine[1] = %s\n", lines[0], lines[1]);
 	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
 		return (0);
 	id1 = room1->index;
@@ -77,5 +76,11 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	id2 = room2->index;
 	store_links(tab, id2, room1);
 	store_links(tab, id1, room2);
+	free(lines[0]);
+	lines[0]=NULL;
+	free(lines[1]);
+	lines[1]=NULL;
+	free(lines);
+	lines=NULL;
 	return (1);
 }

@@ -3,7 +3,8 @@ SRC = create_anthill.c\
 	  create_rooms.c\
 	  hashmap.c\
 	  create_links.c\
-	  short_path.c
+	  short_path.c\
+	  find_path.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 

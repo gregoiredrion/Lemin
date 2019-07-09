@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 15:36:50 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/09 17:58:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ static int		parser(t_hill *hill, char *line)
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		parse_links(hill, tab, line);
 	short_path(hill, tab);
-	printf("test\n");
 	return (1);
 }
 
