@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 20:09:37 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 14:41:10 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_hill
 /*
 ** stock infos anthill
 */
+unsigned int		hash(char *str, int size);
 t_hill				*create_anthill(void);
 t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
 int					hashmap(t_hill *anthill, t_rooms *begin);

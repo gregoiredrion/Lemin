@@ -6,65 +6,23 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/08 20:12:56 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 14:45:19 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int		get_room2_id(char *line, int size, char **name)
+static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
 {
+	int				left;
+	int				right;
 	unsigned int	hashed;
-	int				c;
-	int				len;
-	int				i;
 
-	len = 0;
-	hashed = 5381;
-	while (line[len] && line[len - 1] != '-')
-		len++;
-	i = len;
-	while (line[i])
-	{
-		c = line[i];
-		hashed = (hashed << 5) + hashed + c;
-		i++;
-	}
-	*name = ft_strsub(line, len, ft_strlen(line));
-	if (!(*line))
-		return (-1);
-	return ((int)(hashed % size));
-}
-
-static int		get_room_id(char *line, int size, char **name)
-{
-	unsigned int	hashed;
-	int				c;
-	int				len;
-
-	len = 0;
-	hashed = 5381;
-	while (line[len] && line[len] != '-')
-	{
-		c = line[len];
-		hashed = (hashed << 5) + hashed + c;
-		len++;
-	}
-	*name = ft_strndup(line, len);
-	if (!(*line))
-		return (-1);
-	return ((int)(hashed % size));
-}
-
-static t_rooms	*get_room_add(t_hill *hill, int hash, char *name, int size)
-{
-	int left;
-	int right;
-
-	if (hill->rooms[hash] && !ft_strcmp(hill->rooms[hash]->name, name))
-		return (hill->rooms[hash]);
-	left = hash - 1;
-	right = hash + 1;
+	hashed = hash(name, size);
+	if (hill->rooms[hashed] && !ft_strcmp(hill->rooms[hashed]->name, name))
+		return (hill->rooms[hashed]);
+	left = hashed - 1;
+	right = hashed + 1;
 	while (left >= 0 || right < size)
 	{
 		if (left >= 0 && hill->rooms[left] &&
@@ -103,23 +61,21 @@ static int		store_links(t_rooms **tab, int id1, t_rooms *room)
 
 int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 {
-	int		hash_id;
-	t_rooms	*room;
-	char	*name;
+	t_rooms	*room1;
+	t_rooms	*room2;
+	char	**lines;
 	int		id1;
 	int		id2;
 
-	if ((hash_id = get_room_id(line, hill->size, &name)) < 0)
+	lines = ft_strsplit(line, '-');
+	printf("Line[0] = %s\nLine[1] = %s\n", lines[0], lines[1]);
+	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
 		return (0);
-	if (!(room = get_room_add(hill, hash_id, name, hill->size)))
+	id1 = room1->index;
+	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
 		return (0);
-	ft_strdel(&name);
-	id1 = room->index;
-	if ((hash_id = get_room2_id(line, hill->size, &name)) < 0)
-		return (0);
-	if (!(room = get_room_add(hill, hash_id, name, hill->size)))
-		return (0);
-	ft_strdel(&name);
-	store_links(tab, id1, room);
+	id2 = room2->index;
+	store_links(tab, id2, room1);
+	store_links(tab, id1, room2);
 	return (1);
 }

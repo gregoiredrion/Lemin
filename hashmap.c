@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 20:13:54 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 14:41:20 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 /*
 ** (hash << 5) + hash + c == hash * 33 + c
 */
-static unsigned int		hash(char *str, int size)
+unsigned int			hash(char *str, int size)
 {
 	unsigned long	hash;
 	int				c;

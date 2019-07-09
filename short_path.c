@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 22:11:00 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 14:27:22 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	arrange_tab(t_rooms **tab, int i, int room_ind)
 	tab[room_ind] = tmp;
 }
 
-int		rearrange_tab(t_rooms **tab, int i, int room_ind)
+int		rearrange_tab(t_rooms **tab, int j, int room_ind)
 {
-	if (!tab[i])
+	if (!tab[j])
 		return 0;
-	if (tab[i]->dist == -1) // Not useful imo but too tired to be sure
-		arrange_tab(tab, i, room_ind);
+	if (tab[j]->dist == -1) // Not useful imo but too tired to be sure
+		arrange_tab(tab, j, room_ind);
 	return 1;
 }
 
@@ -88,9 +88,9 @@ void	djikstra(t_rooms **tab)
 			}
 			li = li->next;
 		}
+
 		i++;
 	}
-	display_tab(tab, 7);
 }
 
 void	short_path(t_hill *hill, t_rooms **tab)
@@ -98,6 +98,7 @@ void	short_path(t_hill *hill, t_rooms **tab)
 	arrange_tab(tab, 0, hill->start);
 	display_tab(tab, 7);
 	djikstra(tab);
+	display_tab(tab, 7);
 	//Then find path starting from end;
 	//Mais alors mettre les liens dans les deux rooms, pas sur que bonne idee
 }
