@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 17:58:52 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:36:24 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	display_tab(t_rooms **tab, int size)
 	{
 		test = 0;
 		printf("tab[%d]: %s(%ld, %ld) weight = %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->dist);
-		link = tab[i]->links;
+		link = tab[i]->in;
+		printf("Ins :\n");
 		while (link)
 		{
 			test++;
@@ -32,7 +33,18 @@ void	display_tab(t_rooms **tab, int size)
 			link = link->next;
 		}
 		if (test == 0)
-			printf("No Links\n");
+			printf("No Ins\n");
+		test = 0;
+		link = tab[i]->out;
+		printf("Outs :\n");
+		while (link)
+		{
+			test++;
+			printf("%s-%s\n", tab[i]->name, link->room->name);
+			link = link->next;
+		}
+		if (test == 0)
+			printf("No Outs\n");
 		printf("\n");
 		i++;
 	}

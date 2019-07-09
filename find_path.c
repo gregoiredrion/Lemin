@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/09 18:15:49 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:38:04 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	find_path(t_rooms* room)
 
 	if (room->index == 0)
 		return (1);
-	save = room->links;
+	save = room->out;
 	if (save)
 		li = save->next;
 	else

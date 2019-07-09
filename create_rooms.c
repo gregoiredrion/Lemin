@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/08 20:12:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:31:28 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 	new->ants = 0;
 	new->dist = (stend == 1) ? 0 : -1;
 	new->index = -1;
-	new->links = NULL;
+	new->in = NULL;
+	new->out = NULL;
 	if (last)
 		last->next = new;
 	new->next = NULL;

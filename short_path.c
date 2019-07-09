@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 18:15:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:30:45 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		affiche_vitfai(t_hill *hill, t_links *link, t_rooms *end)
 		return (1);
 	}
 	printf("%s", tmp->room->name);
-	tmp = tmp->room->links;
+	tmp = tmp->room->in;
 	return (affiche_vitfai(hill, tmp, end));
 }
 
@@ -69,9 +69,27 @@ void	bad_sort(t_hill *hill, t_rooms **tab, int from, int to)
 	}
 }
 
+void		blablablebleble(t_hill *hill, t_rooms **tab, t_links *li, int i)
+{
+	int j = i;
+	while (li)
+	{
+		if (((tab[i]->dist + li->weight< li->room->dist) ||
+		li->room->dist == -1) && tab[i]->dist != -1)
+		{
+			j++;
+			li->room->dist = tab[i]->dist + li->weight;
+			arrange_tab(hill, tab, j, li->room->index);
+			bad_sort(hill, tab, i, j);
+		}
+		li = li->next;
+	}
+}
+
 void	djikstra(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
+	t_links	*li2;
 	int		i;
 	int		j;
 	int		len; // Will be used to do a faster sort
@@ -80,22 +98,10 @@ void	djikstra(t_hill *hill, t_rooms **tab)
 	i = 0;
 	while (tab[i])
 	{
-		j = i;
-		li = tab[i]->links;
-		while (li)
-		{
-			if (((tab[i]->dist + li->weight< li->room->dist) ||
-			li->room->dist == -1) && tab[i]->dist != -1)
-			{
-				j++;
-				li->room->dist = tab[i]->dist + li->weight;
-				arrange_tab(hill, tab, j, li->room->index);
-				len++;
-				bad_sort(hill, tab, i, j);
-			}
-			li = li->next;
-		}
-
+		li = tab[i]->in;
+		li2 = tab[i]->out;
+		blablablebleble(hill, tab, li, i);
+		blablablebleble(hill, tab, li2, i);
 		i++;
 	}
 }
