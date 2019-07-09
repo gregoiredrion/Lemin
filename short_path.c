@@ -6,29 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 18:30:45 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/09 22:36:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-int		affiche_vitfai(t_hill *hill, t_links *link, t_rooms *end)
-{
-	t_links *tmp;
-
-	tmp = link;
-	if (!tmp)
-	//error
-		return (-1);
-	if (tmp->room == end)
-	{
-		printf("%s", tmp->room->name);
-		return (1);
-	}
-	printf("%s", tmp->room->name);
-	tmp = tmp->room->in;
-	return (affiche_vitfai(hill, tmp, end));
-}
 
 void	swap_rooms(t_hill *hill, t_rooms **tab, int i, int room_ind)
 {
