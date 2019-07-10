@@ -4,7 +4,8 @@ SRC = create_anthill.c\
 	  hashmap.c\
 	  create_links.c\
 	  short_path.c\
-	  find_path.c
+	  find_path.c\
+	  suurballe.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 

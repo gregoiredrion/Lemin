@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/09 18:34:18 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/10 13:30:22 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,19 @@ static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
 	return (NULL);
 }
 
-static int		store_ins(t_rooms **tab, int id1, t_rooms *room)
+static int		store_links(t_rooms **tab, int id1, t_rooms *room)
 {
 	t_links		*new;
 	t_links		*tmp;
 
-	tmp = tab[id1]->in;
+	tmp = tab[id1]->links;
 	if (!(new = malloc(sizeof(t_links))))
 		return (0);
 	new->room = room;
-	new->weight = 1;
+	new->w = 1;
 	new->next = NULL;
-	if (!(tab[id1]->in))
-		tab[id1]->in = new;
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-	return (1);
-}
-
-static int		store_outs(t_rooms **tab, int id1, t_rooms *room)
-{
-	t_links		*new;
-	t_links		*tmp;
-
-	tmp = tab[id1]->out;
-	if (!(new = malloc(sizeof(t_links))))
-		return (0);
-	new->room = room;
-	new->weight = 1;
-	new->next = NULL;
-	if (!(tab[id1]->out))
-		tab[id1]->out = new;
+	if (!(tab[id1]->links))
+		tab[id1]->links = new;
 	else
 	{
 		while (tmp->next)
@@ -96,8 +74,8 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
 		return (0);
 	id2 = room2->index;
-	store_outs(tab, id2, room1);
-	store_ins(tab, id1, room2);
+	store_links(tab, id2, room1);
+	store_links(tab, id1, room2);
 	free(lines[0]);
 	lines[0]=NULL;
 	free(lines[1]);
