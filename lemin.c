@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/10 14:46:20 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/13 20:59:32 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	display_tab(t_rooms **tab, int size)
 		while (link)
 		{
 			test++;
-			printf("%s-%s\n", tab[i]->name, link->room->name);
+			printf("In : %s-%s\n", tab[i]->name, link->room->name);
+			printf("Out : %s-%s\n", link->room->name, link->out->room->name);
 			link = link->next;
 		}
 		if (test == 0)
@@ -125,7 +126,8 @@ static int		parser(t_hill *hill, char *line)
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		parse_links(hill, tab, line);
-	short_path(hill, tab);
+	display_tab(tab, 7);
+	//short_path(hill, tab);
 	return (1);
 }
 

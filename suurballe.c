@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/10 15:36:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/10 16:06:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ void	new_weights(t_hill *hill, t_rooms **tab)
 
 void	suurballe(t_hill *hill, t_rooms **tab)
 {
-	new_weights(hill, tab);
 	t_links	*li;
 	t_links	*save;
 	int i = 0;
+
+	new_weights(hill, tab);
 	while (tab[i])
 	{
 		li = tab[i]->links;

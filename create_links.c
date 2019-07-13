@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/10 13:30:22 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/13 21:01:22 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,46 @@ static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
 	return (NULL);
 }
 
-static int		store_links(t_rooms **tab, int id1, t_rooms *room)
+static t_links	*init_links(t_rooms *room, t_links *out)
 {
-	t_links		*new;
-	t_links		*tmp;
+	t_links	*new;
 
-	tmp = tab[id1]->links;
 	if (!(new = malloc(sizeof(t_links))))
-		return (0);
+		return (NULL);
 	new->room = room;
 	new->w = 1;
 	new->next = NULL;
-	if (!(tab[id1]->links))
-		tab[id1]->links = new;
-	else
+	new->out = out;
+	return (new);
+}
+
+static void		stock_links(t_rooms *room, t_links *new)
+{
+	t_links	*tmp;
+
+	tmp = room->links;
+	if (!tmp)
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		room->links = new;
+		return ;
 	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+static int		store_links2(t_rooms *room1, t_rooms *room2)
+{
+	t_links	*in;
+	t_links	*out;
+
+	if (!(in = init_links(room2, NULL)))
+		return (0);
+	if (!(out = init_links(room1, in)))
+		return (0);
+	in->out = out;
+	stock_links(room1, in);
+	stock_links(room2, out);
 	return (1);
 }
 
@@ -64,23 +85,20 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	t_rooms	*room1;
 	t_rooms	*room2;
 	char	**lines;
-	int		id1;
-	int		id2;
 
-	lines = ft_strsplit(line, '-');
+	if (!(lines = ft_strsplit(line, '-')))
+		return (0);
 	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
 		return (0);
-	id1 = room1->index;
 	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
 		return (0);
-	id2 = room2->index;
-	store_links(tab, id2, room1);
-	store_links(tab, id1, room2);
-	free(lines[0]);
+	if (!(store_links2(room1, room2)))
+			return (0);
+	/*	free(lines[0]);
 	lines[0]=NULL;
 	free(lines[1]);
 	lines[1]=NULL;
 	free(lines);
-	lines=NULL;
+	lines=NULL;*/
 	return (1);
 }

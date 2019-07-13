@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/10 15:36:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/13 20:05:49 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_links
 	t_rooms			*room;
 	int				w;
 	struct s_links	*next;
+	struct s_links	*out;
 }				t_links;
 
 typedef struct	s_rooms
