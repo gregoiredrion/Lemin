@@ -6,7 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/07/14 17:20:41 by wdeltenr         ###   ########.fr       */
+=======
+/*   Updated: 2019/07/14 17:17:44 by gdrion           ###   ########.fr       */
+>>>>>>> 2eedbf0a568b59ba4a18d874760043e64c6e51c5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +68,7 @@ int					free_anthill(t_hill *anthill);
 **
 */
 int					parse_links(t_hill *hill, t_rooms **tab, char *line);
+void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int room_ind);
 
 void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int room_ind);
 void				dijkstra(t_hill *hill, t_rooms **tab);
