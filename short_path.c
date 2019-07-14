@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 17:30:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:36:22 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,48 @@ int		arrange_tab(t_hill *hill, t_rooms **tab, int j, int room_ind)
 	return 1;
 }
 
-void	bad_sort(t_hill *hill, t_rooms **tab, int from, int to)
+
+void	display_tab2(t_rooms **tab)
 {
-	int save = from;
-	while (from < to)
+	int i = 0;
+	while (tab[i])
 	{
-		if (tab[from]->d > tab[from + 1]->d)
-		{
-			swap_rooms(hill, tab, from, from + 1);
-			from = save;
-		}
-		else
-			from++;
+		printf ("| :%s: dist=%d", tab[i]->name, tab[i]->d);
+		i++;
 	}
+	printf("|\n");
 }
 
 void	dijkstra(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = i;
 	while (tab[i])
 	{
 		li = tab[i]->links;
+		printf("Before sort\n");
+		display_tab2(tab);
 		while (li)
 		{
-			printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
+			//printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
 			if (((tab[i]->d + li->w < li->room->d) ||
-			li->room->d == -1) && tab[i]->d != -1 && li->w != -1)
+			li->room->d == -1) && tab[i]->d != -1)
 			{
+				j++;
 				li->room->d = tab[i]->d + li->w;
-				printf("new: %d\n", li->room->d);
+				arrange_tab(hill, tab, j, li->room->index);
 			}
 			li = li->next;
 		}
+		display_tab2(tab);
+		printf("i = %d et j = %d\n", i, j);
+		q_sort(hill, tab, i, j);
+		printf("After sort\n");
+		display_tab2(tab);
 		i++;
 	}
 }
@@ -78,14 +85,16 @@ void	dijkstra(t_hill *hill, t_rooms **tab)
 void	short_path(t_hill *hill, t_rooms **tab)
 {
 	swap_rooms(hill, tab, 0, hill->start);
+	display_tab(tab, 7);
+	
 	dijkstra(hill, tab);
 	display_tab(tab, hill->size / 2);
-	find_path(tab, tab[hill->end]);
+	//find_path(tab, tab[hill->end]);
 	if (tab[hill->size / 2 - 1]->d == -1)
 	{
 		write(2, "Error no path\n", 15);
 	}
-	suurballe(hill, tab);
+	//suurballe(hill, tab);
 	//Then find path starting from end;
 	//Mais alors mettre les liens dans les deux rooms, pas sur que bonne idee
 }

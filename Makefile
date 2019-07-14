@@ -5,7 +5,8 @@ SRC = create_anthill.c\
 	  create_links.c\
 	  short_path.c\
 	  find_path.c\
-	  suurballe.c
+	  suurballe.c\
+	  q_sort.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 
