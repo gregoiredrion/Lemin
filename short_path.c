@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/10 14:42:12 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/14 14:43:14 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	bad_sort(t_hill *hill, t_rooms **tab, int from, int to)
 	}
 }
 
-void	djikstra(t_hill *hill, t_rooms **tab)
+void	dijkstra(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
 	int		i;
@@ -73,7 +73,8 @@ void	djikstra(t_hill *hill, t_rooms **tab)
 				li->room->d = tab[i]->d + li->w;
 				arrange_tab(hill, tab, j, li->room->index);
 				len++;
-				bad_sort(hill, tab, i, j);
+				if (j < hill->size / 2)
+					bad_sort(hill, tab, i, j);
 			}
 			li = li->next;
 		}
@@ -84,8 +85,8 @@ void	djikstra(t_hill *hill, t_rooms **tab)
 void	short_path(t_hill *hill, t_rooms **tab)
 {
 	swap_rooms(hill, tab, 0, hill->start);
-	djikstra(hill, tab);
-	display_tab(tab, 8);
+	dijkstra(hill, tab);
+	display_tab(tab, hill->size / 2);
 	find_path(tab, tab[hill->end]);
 	if (tab[hill->size / 2 - 1]->d == -1)
 	{

@@ -6,13 +6,13 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/10 14:23:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/14 14:47:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void		opp_link(t_rooms *room, char *name)
+/*static void		opp_link(t_rooms *room, char *name)
 {
 	t_links *tmp;
 
@@ -27,7 +27,7 @@ static void		opp_link(t_rooms *room, char *name)
 		tmp = tmp->next;
 	}
 }
-
+*/
 int				find_path(t_rooms **tab, t_rooms* room)
 {
 	t_links	*li;
@@ -48,8 +48,8 @@ int				find_path(t_rooms **tab, t_rooms* room)
 	}
 	if (!find_path(tab, save->room))
 		return (0);
-	opp_link(save->room, room->name);
-	room->links->w = 0;
+	save->w = 0;
+	save->out->w = -1;
 //	printf("L%s-%s\n", save->room->name, room->name);
 //	printf("%d\n", room->links->w);
 	return (1);

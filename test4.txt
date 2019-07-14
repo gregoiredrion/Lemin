@@ -1,0 +1,26 @@
+999
+##start
+start 0 0
+##end
+end 99 99
+a 1 1
+b 2 2
+c 3 3
+d 4 4
+e 5 5
+f 6 6
+g 7 7
+h 8 8
+i 9 9
+start-a
+start-e
+start-g
+a-b
+b-c
+c-d
+e-f
+g-h
+h-i
+d-end
+f-end
+i-end
