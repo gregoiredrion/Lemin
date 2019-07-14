@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 15:05:00 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/14 17:18:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	suurballe(t_hill *hill, t_rooms **tab)
 	while (tab[i])
 	{
 		li = tab[i]->links;
+		printf("\n--%s-dist: %d--\n", tab[i]->name, tab[i]->d);
 		while (li)
 		{
 			printf("%s-%s: %d\n", tab[i]->name, tab[li->room->index]->name, li->w);
@@ -85,29 +86,13 @@ void	suurballe(t_hill *hill, t_rooms **tab)
 		}
 		i++;
 	}
-	i = 0;
-	while (ft_strcmp("end", tab[i]->name))
-	{
-		li = tab[i]->links;
-		save = tab[i]->links;
-		while (li)
-		{
-		//	printf("w1: %d - w2: %d\nd1: %d - d2: %d\n", li->w, save->w, li->room->d, save->room->d);
-			if (li->w < save->w && li->w >= 0)
-				save = li;
-			else if (li->w == save->w && li->room->d > save->room->d)
-				save = li;
-			li = li->next;
-		}
-		save->w = -1;
-		i = save->room->index;
-		printf("%s\n", save->room->name);
-	}
-	new_paths(tab);
+	printf("\n========\n");
+	dijkstra(hill, tab);
 	i = 0;
 	while (tab[i])
 	{
 		li = tab[i]->links;
+		printf("\n--%s-dist: %d--\n", tab[i]->name, tab[i]->d);
 		while (li)
 		{
 			printf("%s-%s: %d\n", tab[i]->name, tab[li->room->index]->name, li->w);

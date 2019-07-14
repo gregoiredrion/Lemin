@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 14:43:14 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/14 17:30:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,19 @@ void	dijkstra(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
 	int		i;
-	int		j;
-	int		len; // Will be used to do a faster sort
 
-	len = 0;
 	i = 0;
 	while (tab[i])
 	{
-		j = i;
 		li = tab[i]->links;
 		while (li)
 		{
+			printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
 			if (((tab[i]->d + li->w < li->room->d) ||
-			li->room->d == -1) && tab[i]->d != -1)
+			li->room->d == -1) && tab[i]->d != -1 && li->w != -1)
 			{
-				j++;
 				li->room->d = tab[i]->d + li->w;
-				arrange_tab(hill, tab, j, li->room->index);
-				len++;
-				if (j < hill->size / 2)
-					bad_sort(hill, tab, i, j);
+				printf("new: %d\n", li->room->d);
 			}
 			li = li->next;
 		}
