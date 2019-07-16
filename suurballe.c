@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 17:18:50 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:24:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,80 +24,80 @@ static void		new_weights(t_hill *hill, t_rooms **tab)
 		while (li)
 		{
 			if (li->w > 0 && tab[i]->d != -1)
-			{
 				li->w = li->w - tab[li->room->index]->d + tab[i]->d;
-			}
 			li = li->next;
 		}
 		i++;
 	}
 }
 
-static void		new_paths(t_rooms **tab)
+static int		max_paths(t_hill *hill, t_rooms **tab)
 {
-	t_links *li;
-	t_links *tmp;
+	int			start;
+	int			end;
+	t_links		*tmp;
 
-	li = tab[0]->links;
-	while (li)
+	start = 0;
+	end = 0;
+	tmp = tab[hill->start]->links;
+	while (tmp)
 	{
-		printf("start - ");
-		tmp = li;
-		while (tmp)
+		tmp = tmp->next;
+		start++;
+	}
+	tmp = tab[hill->end]->links;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		end++;
+	}
+	if (end < start)
+		return (end);
+	return (start);
+}
+
+static void		dijkstra(t_hill *hill, t_rooms **tab)
+{
+	t_links		*li;
+	int			i;
+
+	i = 0;
+	while (tab[i])
+	{
+		li = tab[i]->links;
+		while (li)
 		{
-			if (tmp == li && tmp->w != -1)
+			//printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
+			if (li->w == -1 && li->w == li->out->w)
 			{
-				li = li->next;
-				tmp = li;
+				li->w = 0;
+				li->out->w = 0;
 			}
-			if (tmp->w == -1 && tmp->out->w != -1)
-			{
-				printf("%s - ", tmp->room->name);
-				tmp = tmp->room->links;
-			}
-			else if (tmp->w == -1 && tmp->out->w == -1)
-			{
-				tmp->w = 0;
-				tmp->out->w = 0;
-			}
-			tmp = tmp->next;
+			if (tab[i]->d + li->w < li->room->d && li->w != -1)
+				li->room->d = tab[i]->d + li->w;
+			li = li->next;
 		}
-		printf("\n");
-		li = li->next;
+		i++;
 	}
 }
 
 void	suurballe(t_hill *hill, t_rooms **tab)
 {
-	t_links	*li;
-	t_links	*save;
-	int i;
+	t_links		*li;
+	t_links		*save;
+	int			i;
+	int			paths;
 
-	new_weights(hill, tab);
-	i = 0;
-	while (tab[i])
+	paths = 1;
+	hill->max_paths = max_paths(hill, tab);
+	while (paths < hill->max_paths)
 	{
-		li = tab[i]->links;
-		printf("\n--%s-dist: %d--\n", tab[i]->name, tab[i]->d);
-		while (li)
-		{
-			printf("%s-%s: %d\n", tab[i]->name, tab[li->room->index]->name, li->w);
-			li = li->next;
-		}
-		i++;
+		new_weights(hill, tab);
+		dijkstra(hill, tab);
+		if (find_path(tab, tab[hill->end]) == -1)
+			break;
+		paths++;
 	}
-	printf("\n========\n");
-	dijkstra(hill, tab);
-	i = 0;
-	while (tab[i])
-	{
-		li = tab[i]->links;
-		printf("\n--%s-dist: %d--\n", tab[i]->name, tab[i]->d);
-		while (li)
-		{
-			printf("%s-%s: %d\n", tab[i]->name, tab[li->room->index]->name, li->w);
-			li = li->next;
-		}
-		i++;
-	}
+//	display_tab(tab, hill->size / 2);
+	mfpaths(hill, tab);
 }
