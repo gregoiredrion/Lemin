@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 19:36:22 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/16 17:41:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	dijkstra(t_hill *hill, t_rooms **tab)
 	while (tab[i])
 	{
 		li = tab[i]->links;
-		printf("Before sort\n");
-		display_tab2(tab);
 		while (li)
 		{
 			//printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
@@ -73,11 +71,7 @@ void	dijkstra(t_hill *hill, t_rooms **tab)
 			}
 			li = li->next;
 		}
-		display_tab2(tab);
-		printf("i = %d et j = %d\n", i, j);
 		q_sort(hill, tab, i, j);
-		printf("After sort\n");
-		display_tab2(tab);
 		i++;
 	}
 }
@@ -85,16 +79,18 @@ void	dijkstra(t_hill *hill, t_rooms **tab)
 void	short_path(t_hill *hill, t_rooms **tab)
 {
 	swap_rooms(hill, tab, 0, hill->start);
-	display_tab(tab, 7);
+//	display_tab(tab, 7);
 	
 	dijkstra(hill, tab);
-	display_tab(tab, hill->size / 2);
-	//find_path(tab, tab[hill->end]);
+//	display_tab(tab, hill->size / 2);
+	find_path(tab, tab[hill->end]);
+//	printf("=================================\n");
+//	display_tab(tab, hill->size / 2);
 	if (tab[hill->size / 2 - 1]->d == -1)
 	{
 		write(2, "Error no path\n", 15);
 	}
-	//suurballe(hill, tab);
+	suurballe(hill, tab);
 	//Then find path starting from end;
 	//Mais alors mettre les liens dans les deux rooms, pas sur que bonne idee
 }

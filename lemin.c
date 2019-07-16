@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/14 14:09:46 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:52:17 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	display_tab(t_rooms **tab, int size)
 		while (link)
 		{
 			test++;
-			printf("In : %s-%s\n", tab[i]->name, link->room->name);
-			printf("Out : %s-%s\n", link->room->name, link->out->room->name);
+			printf("In : %s-%s - w: %d\n", tab[i]->name, link->room->name, link->w);
+			printf("Out : %s-%s - w: %d\n", link->room->name, link->out->room->name, link->out->w);
 			link = link->next;
 		}
 		if (test == 0)

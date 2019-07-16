@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:09:33 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/14 19:52:25 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/16 15:46:28 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	partition(t_hill *hill, t_rooms **tab, int start, int end)
 	pivot = tab[end]->d;
 	while (j < end)
 	{
-		if (tab[j]->d < pivot)
+		if (tab[j]->d <= pivot)
 		{
 			i++;
 			swap_rooms(hill, tab, i, j);
