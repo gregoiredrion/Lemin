@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/16 18:24:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:54:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,11 @@ void	suurballe(t_hill *hill, t_rooms **tab)
 	{
 		new_weights(hill, tab);
 		dijkstra(hill, tab);
-		if (find_path(tab, tab[hill->end]) == -1)
+		display_tab(tab, hill->size / 2);
+		printf("============================\n");
+		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break;
+		display_tab(tab, hill->size / 2);
 		paths++;
 	}
 //	display_tab(tab, hill->size / 2);
