@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/16 17:41:46 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:52:59 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,7 @@ void	short_path(t_hill *hill, t_rooms **tab)
 //	display_tab(tab, 7);
 	
 	dijkstra(hill, tab);
-//	display_tab(tab, hill->size / 2);
-	find_path(tab, tab[hill->end]);
-//	printf("=================================\n");
-//	display_tab(tab, hill->size / 2);
+	find_path(tab, tab[hill->end], NULL);
 	if (tab[hill->size / 2 - 1]->d == -1)
 	{
 		write(2, "Error no path\n", 15);
