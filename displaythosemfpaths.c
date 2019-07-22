@@ -17,6 +17,7 @@ static void		new_dists(t_hill *hill, t_rooms **tab)
 {
 	t_links		*li;
 	t_links		*tmp;
+	t_rooms		*save;
 	t_rooms		*prev;
 
 	li = tab[0]->links;
@@ -25,15 +26,19 @@ static void		new_dists(t_hill *hill, t_rooms **tab)
 		tmp = li;
 		if (tmp->w == -1)
 		{
+			save = tmp->room;
 			prev = tab[0];
-			while (prev != tab[hill->end])
+			while (1)
 			{
 				while (tmp->w != -1)
 					tmp = tmp->next;
+				if (tmp->room == tab[hill->end])
+					break ;
 				tmp->room->d = prev->d + 1;
 				prev = tmp->room;
 				tmp = prev->links;
 			}
+			save->d = prev->d;
 		}
 		li = li->next;
 	}
@@ -55,5 +60,6 @@ void	mfpaths(t_hill *hill, t_rooms **tab)
 		li = li->next;
 	}
 	new_dists(hill, tab);
+	display_tab(tab, hill->size / 2);
 	//sort links of start by shortest paths
 }
