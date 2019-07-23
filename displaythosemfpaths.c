@@ -60,6 +60,8 @@ void	mfpaths(t_hill *hill, t_rooms **tab)
 		li = li->next;
 	}
 	new_dists(hill, tab);
+//	display_tab(tab, hill->size / 2);
+	sort_start(tab[0]);
 	display_tab(tab, hill->size / 2);
 	//sort links of start by shortest paths
 }

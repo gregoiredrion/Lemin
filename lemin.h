@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/17 17:31:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:50:37 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				q_sort(t_hill *hill, t_rooms **tab, int start, int end);
 void				suurballe(t_hill *hill, t_rooms **tab);
 void				short_path(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
-
+void				sort_start(t_rooms *start);
 
 
 
