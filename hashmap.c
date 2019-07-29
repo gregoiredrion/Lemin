@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/09 14:41:20 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/25 23:38:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_rooms			**create_hash(int size)
 		hashmap[i++] = NULL;
 	return (hashmap);
 }
-
 
 static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 {
@@ -48,6 +47,7 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 /*
 ** (hash << 5) + hash + c == hash * 33 + c
 */
+
 unsigned int			hash(char *str, int size)
 {
 	unsigned long	hash;
@@ -59,10 +59,10 @@ unsigned int			hash(char *str, int size)
 	return (hash % size);
 }
 
-int					hashmap(t_hill *anthill, t_rooms *begin)
+int						hashmap(t_hill *anthill, t_rooms *begin)
 {
-	t_rooms			*save;
-	int	hashed;
+	t_rooms		*save;
+	int			hashed;
 
 	save = begin;
 	anthill->size *= 2;

@@ -6,13 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/16 15:52:17 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:25:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	display_tab(t_rooms **tab, int size)
+void			display_tab(t_rooms **tab, int size)
 {
 	int test = 0;
 	printf("size of tab = %d\n", size);
@@ -23,7 +23,7 @@ void	display_tab(t_rooms **tab, int size)
 	while (i < size)
 	{
 		test = 0;
-		printf("tab[%d]: %s(%ld, %ld) dist = %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d);
+		printf("tab[%d]: %s(%ld, %ld) dist = %d ants: %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d, tab[i]->ants);
 		link = tab[i]->links;
 		while (link)
 		{
@@ -48,7 +48,7 @@ static int		free_error(t_hill *anthill)
 	return (0);
 }
 
-static t_rooms		**small_tab(t_hill *anthill)
+static t_rooms	**small_tab(t_hill *anthill)
 {
 	t_rooms		**new;
 	int			i;
@@ -120,13 +120,11 @@ static int		parser(t_hill *hill, char *line)
 			begin = last;
 		hill->size++;
 	}
-	//display_tab(anthill->rooms, anthill->size);
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		parse_links(hill, tab, line);
-	//display_tab(tab, 7);
 	short_path(hill, tab);
 	return (1);
 }

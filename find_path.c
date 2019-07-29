@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/22 15:57:45 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/25 23:34:43 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void		update_w(t_links *li)
 	{
 		li->w = 1;
 		li->out->w = 1;
-		
 	}
 	else
 	{
@@ -27,10 +26,10 @@ static void		update_w(t_links *li)
 	}
 }
 
-int			find_path(t_rooms **tab, t_rooms *room, t_links *out)
+int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 {
-	t_links	*li;
-	t_links	*save;
+	t_links		*li;
+	t_links		*save;
 
 	if (room->index == 0)
 		return (1);
@@ -40,7 +39,6 @@ int			find_path(t_rooms **tab, t_rooms *room, t_links *out)
 	li = save->next;
 	while (li)
 	{
-//		printf("Room = %s / li = %s w = %d d = %d / Save = %s w = %d d = %d\n", room->name, li->room->name, li->w, li->room->d, save->room->name, save->w, save->room->d);
 		if (((li->room->d < save->room->d && li->out->w != -1) ||
 		save->out->w == -1) && li != out)
 			save = li;
@@ -55,6 +53,3 @@ int			find_path(t_rooms **tab, t_rooms *room, t_links *out)
 	update_w(save);
 	return (0);
 }
-
-
-

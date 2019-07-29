@@ -1,0 +1,22 @@
+##start
+start 0 0
+##end
+end 99 99
+a 1 1
+b 2 2
+c 3 3
+start-end
+start-a
+a-b
+b-a
+b-c
+c-b
+c-end
+
+
+
+
+
+
+Si chemin direct, utilise et stocke correctemen?
+Si lien declare deux fois, cree deux fois?

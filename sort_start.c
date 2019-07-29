@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:09:33 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/23 18:41:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:14:42 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		delete_unused(t_rooms *start)
 			else
 				prev->next = li;
 			tmp->next = NULL;
-			free (tmp);
+			free(tmp);
 			tmp = NULL;
 		}
 		else

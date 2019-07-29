@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:09:33 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/23 16:41:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/25 23:33:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static int	partition(t_hill *hill, t_rooms **tab, int start, int end)
 	swap_rooms(hill, tab, i + 1, end);
 	return (i + 1);
 }
-
-// fix pivot
 
 void		q_sort(t_hill *hill, t_rooms **tab, int start, int end)
 {

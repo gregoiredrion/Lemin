@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/22 15:57:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/25 23:35:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void		dijkstra(t_hill *hill, t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			//printf("%-5s(%d) - %-5s(%d) w:%2d\n", tab[i]->name, tab[i]->d, li->room->name, li->room->d, li->w);
 			if (li->w == -1 && li->w == li->out->w)
 			{
 				li->w = 0;
@@ -81,7 +80,7 @@ static void		dijkstra(t_hill *hill, t_rooms **tab)
 	}
 }
 
-void	suurballe(t_hill *hill, t_rooms **tab)
+void			suurballe(t_hill *hill, t_rooms **tab)
 {
 	t_links		*li;
 	t_links		*save;
@@ -95,9 +94,8 @@ void	suurballe(t_hill *hill, t_rooms **tab)
 		new_weights(hill, tab);
 		dijkstra(hill, tab);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
-			break;
+			break ;
 		paths++;
 	}
-//	display_tab(tab, hill->size / 2);
-	mfpaths(hill, tab);
+	all_paths(hill, tab, paths);
 }
