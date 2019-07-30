@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 20:07:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 20:16:01 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/30 14:19:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		new_dists(t_hill *hill, t_rooms **tab)
 	}
 }
 
-void			all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
+t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 {
 	t_links		*li;
 	t_rooms		***paths;
@@ -80,28 +80,22 @@ void			all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 
 	i = 0;
 	if (!(paths = malloc(sizeof(t_rooms ***) * nb_paths + 1)))
-		//write error ?
-		return ;
+		return (NULL);
 	paths[nb_paths] = NULL;
-	new_dists(hill, tab);
-	sort_start(tab[0]);
 	li = tab[0]->links;
 	while (li)
 	{
 		if (li->w == -1)
 		{
-			//printf("%s-%s", tab[0]->name, li->room->name);
-			//display_paths(li->room, tab[hill->end]);
-			//printf("\n");
+			printf("%s-%s", tab[0]->name, li->room->name);
+			display_paths(li->room, tab[hill->end]);
+			printf("\n");
 			if (!(tmp = malloc(sizeof(t_rooms **) * (li->room->d + 1))))
-				//write error ?
-				return ;
+				return (NULL);
 			tmp[0] = li->room;
 			paths[i++] = store_paths(tmp, li->room, tab[hill->end], 1);
 		}
 		li = li->next;
 	}
-	tab[hill->start]->ants = hill->ants;
-	tab[hill->end]->ants = hill->ants;
-	move_ants(hill, paths, tab);
+	return (paths);
 }

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 18:08:11 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/30 14:15:37 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static void	dijkstra(t_hill *hill, t_rooms **tab)
 
 void		short_path(t_hill *hill, t_rooms **tab)
 {
+	t_rooms		***paths;
+
 	swap_rooms(hill, tab, 0, hill->start);
 	dijkstra(hill, tab);
 	find_path(tab, tab[hill->end], NULL);
@@ -87,5 +89,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	{
 		write(2, "Error no path\n", 15);
 	}
-	suurballe(hill, tab);
+	paths = all_paths(hill, tab, 1);
+	hill->turns = max_turns(hill, paths, 1);
+	suurballe(hill, tab, paths);
 }

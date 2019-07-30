@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 17:04:23 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/30 13:50:20 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_hill
 	int				end;
 	int				ants;
 	int				size;
+	double			turns;
 	int				max_paths;
 }				t_hill;
 
@@ -67,13 +68,13 @@ int					free_anthill(t_hill *anthill);
 int					parse_links(t_hill *hill, t_rooms **tab, char *line);
 void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int r_ind);
 void				q_sort(t_hill *hill, t_rooms **tab, int start, int end);
-void				suurballe(t_hill *hill, t_rooms **tab);
+void				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
 void				short_path(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
 void				sort_start(t_rooms *start);
 void				move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
-void				all_paths(t_hill *hill, t_rooms **tab, int paths);
-
+t_rooms				***all_paths(t_hill *hill, t_rooms **tab, int paths);
+double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
 
 //delete
 void				display_tab2(t_rooms **tab);

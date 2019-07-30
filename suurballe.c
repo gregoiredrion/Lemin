@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/25 23:35:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/30 14:19:47 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,38 @@ static void		dijkstra(t_hill *hill, t_rooms **tab)
 	}
 }
 
-void			suurballe(t_hill *hill, t_rooms **tab)
+void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 {
 	t_links		*li;
 	t_links		*save;
-	int			i;
-	int			paths;
+	double		turns;
+	int			nb_paths;
+	t_rooms		***tmp;
 
-	paths = 1;
+	tab[hill->start]->ants = hill->ants;
+	tab[hill->end]->ants = hill->ants;
+	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
-	while (paths < hill->max_paths)
+	while (nb_paths < hill->max_paths)
 	{
 		new_weights(hill, tab);
 		dijkstra(hill, tab);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
-		paths++;
+		if (!(tmp = all_paths(hill, tab, nb_paths)))
+		// write error?
+			return ;
+		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths)))
+		{
+			//free (paths)
+			paths = tmp;
+			hill->turns = turns;
+		}
+		else
+		{
+			//free tmp
+			break;
+		}
+		nb_paths++;
 	}
-	all_paths(hill, tab, paths);
 }
