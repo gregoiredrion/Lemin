@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 14:19:47 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/30 16:40:12 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		dijkstra(hill, tab);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
-		if (!(tmp = all_paths(hill, tab, nb_paths)))
+		if (!(tmp = all_paths(hill, tab, nb_paths + 1)))
 		// write error?
 			return ;
-		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths)))
+		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths + 1)))
 		{
 			//free (paths)
 			paths = tmp;
