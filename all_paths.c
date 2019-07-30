@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 20:07:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 16:32:24 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/29 20:16:01 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void			all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 	{
 		if (li->w == -1)
 		{
-			if (!(tmp = malloc(sizeof(t_rooms *) * (li->room->d + 1))))
+			//printf("%s-%s", tab[0]->name, li->room->name);
+			//display_paths(li->room, tab[hill->end]);
+			//printf("\n");
+			if (!(tmp = malloc(sizeof(t_rooms **) * (li->room->d + 1))))
 				//write error ?
 				return ;
 			tmp[0] = li->room;

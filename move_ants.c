@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 16:54:09 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/29 17:54:50 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	help_move_ants(t_rooms **path, t_rooms **tab, int j, int id)
 			path[j]->ants = path[j - 1]->ants;
 			if (path[j - 1]->ants)
 				printf("L%d-%s ", path[j]->ants, path[j]->name);
+			else
+				break ;
 		}
 		j--;
 	}
@@ -45,7 +47,6 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	static int		id = 1;
 	int				i;
 	int				j;
-	int				ant;
 
 	i = 0;
 	while (paths[i])
@@ -58,12 +59,14 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 			paths[i][j - 1]->ants = 0;
 			j--;
 		}
-		id = help_move_ants(paths[i], tab, j, id);
 		if (!tab[hill->end]->ants)
 			break ;
-		i++;
+		id = help_move_ants(paths[i], tab, j, id);
+		if (!paths[++i] && tab[hill->end]->ants)
+		{
+			printf("\n");
+			i = 0;
+		}
 	}
 	printf("\n");
-	if (tab[hill->end]->ants)
-		move_ants(hill, paths, tab);
 }

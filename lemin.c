@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/29 16:25:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/29 18:06:03 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			display_tab(t_rooms **tab, int size)
 	while (i < size)
 	{
 		test = 0;
-		printf("tab[%d]: %s(%ld, %ld) dist = %d ants: %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d, tab[i]->ants);
+		printf("tab[%d]: %s(%ld, %ld) dist = %d ants: %d - stend: %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d, tab[i]->ants, tab[i]->stend);
 		link = tab[i]->links;
 		while (link)
 		{
