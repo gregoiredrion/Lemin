@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 17:16:17 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/07/30 17:40:31 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,5 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	while (paths[j])
 		display_tab2(paths[j++]);
 	//
+	move_ants(hill, paths, tab);
 }

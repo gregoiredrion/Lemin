@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 14:50:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:28:04 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	dijkstra(t_hill *hill, t_rooms **tab)
 	}
 }
 
+
 void		short_path(t_hill *hill, t_rooms **tab)
 {
 	t_rooms		***paths;
@@ -91,5 +92,6 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	}
 	paths = all_paths(hill, tab, 1);
 	hill->turns = max_turns(hill, paths, 1);
+	hill->rooms = tab;//Assigner a un meilleur endroit
 	suurballe(hill, tab, paths);
 }
