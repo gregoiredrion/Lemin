@@ -12,7 +12,10 @@
 
 #include "lemin.h"
 
-static int	forb_char(char *coord)
+// J'ai géré les liens comme si les rooms devaient être composées de lettre ou chiffres
+// Donc oeut etre faire la meme pour les rooms
+// Pas sur que c'est la demarche a faire mais j'ai pas de pdf
+/*static int	forb_char(char *coord)
 {
 	int		i;
 
@@ -37,6 +40,7 @@ static int	free_error()
 	return (0);
 }
 
+// Surtout ça
 static int	error_lemin(char **infos, t_rooms *new)
 {
 	if (!(infos[1]) || !(infos[2]))
@@ -46,13 +50,15 @@ static int	error_lemin(char **infos, t_rooms *new)
 	if (!(forb_char(infos[1])) || !(forb_char(infos[2])))
 		return (free_error());
 	new->x = ft_atoi(infos[1]);
-	new->y = ft_atoi(infos[2]);
+	new->y = ft_atoi(infos[2]); // ce sera toujours dans la range d'un int si atoi;
+	// meme si atol ou atointmax peut overflow, faut proteger
 	if (new->x > INT_MAX || new->x < INT_MIN
 	|| new->y > INT_MAX || new->y < INT_MIN)
 		return (free_error());
 	return (1);
 }
 
+// wtf c'est monstrueux ça en fait
 t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 {
 	t_rooms			*new;
@@ -80,4 +86,13 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 		last->next = new;
 	new->next = NULL;
 	return (new);
+}*/
+
+t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
+{
+	t_rooms		*new;
+	char 		**tab;
+
+	if (!(tab = verif_rooms(line)))
+		return (NULL);
 }

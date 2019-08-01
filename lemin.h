@@ -52,6 +52,9 @@ typedef struct	s_hill
 /*
 ** stock infos anthill
 */
+int					verif_ants(char *line);
+char				**verif_links(char *line);
+char				**verif_rooms(char *line);
 unsigned int		hash(char *str, int size);
 t_hill				*create_anthill(void);
 t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
@@ -60,7 +63,8 @@ int					hashmap(t_hill *anthill, t_rooms *begin);
 /*
 ** free
 */
-int					free_anthill(t_hill *anthill);
+void				free_room(t_rooms **room);
+void				free_hill(t_hill *anthill);
 
 /*
 **

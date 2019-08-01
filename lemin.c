@@ -22,6 +22,9 @@ void			display_tab(t_rooms **tab, int size)
 
 	while (i < size)
 	{
+	if(tab[i])
+	{
+		printf("i = %d\n", i);
 		test = 0;
 		printf("tab[%d]: %s(%ld, %ld) dist = %d ants: %d - stend: %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d, tab[i]->ants, tab[i]->stend);
 		link = tab[i]->links;
@@ -35,13 +38,15 @@ void			display_tab(t_rooms **tab, int size)
 		if (test == 0)
 			printf("No Links\n");
 		printf("\n");
-		i++;
 	}
+	i++;
+	}
+
 }
 
 static int		free_error(t_hill *anthill)
 {
-	t_hill *supprimer_cette_var;
+	t_hill *supprimer_cette_var; // ça c'est sur
 	//free();
 	supprimer_cette_var = anthill;
 	write(2, "Error\n", 6);
@@ -65,7 +70,7 @@ static t_rooms	**small_tab(t_hill *anthill)
 	{
 		if (anthill->rooms[i])
 		{
-			//anthill->rooms[i]->next = NULL;
+			//anthill->rooms[i]->next = NULL; Pourquoi c'est en commentaire ?
 			anthill->rooms[i]->index = j;
 			anthill->rooms[i]->stend == -1 ? anthill->end = j : 0;
 			anthill->rooms[i]->stend == 1 ? anthill->start = j : 0;
@@ -116,6 +121,8 @@ static int		parser(t_hill *hill, char *line)
 	{
 		if (!(last = parse_rooms(line, last)))
 			return (0);
+		//Badant car hashmap et du coup free_hill a ameliorer ou bien faire
+		//Une nouvelle fonction pour free hill quand c'est la hashmap
 		if (!begin)
 			begin = last;
 		hill->size++;
@@ -124,7 +131,10 @@ static int		parser(t_hill *hill, char *line)
 		return (0);
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
-		parse_links(hill, tab, line);
+		if (!(parse_links(hill, tab, line)))
+			return (0);
+	//switch small tab and free hashmap
+
 	short_path(hill, tab);
 	return (1);
 }
@@ -138,7 +148,11 @@ int				main(void)
 		return (0);
 	if (!(anthill = create_anthill()))
 		return (0);
-	anthill->ants = ft_atoi(line);
+	if ((anthill->ants = verif_ants(line)) <= 0)
+	{
+		free_hill(anthill);
+		return (0);
+	}
 	free(line);
 	if (!(parser(anthill, line)))
 		return (free_error(anthill));

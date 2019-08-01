@@ -61,7 +61,13 @@ static void		stock_links(t_rooms *room, t_links *new)
 		return ;
 	}
 	while (tmp->next)
+	{
+		if (!ft_strcmp(tmp->room->name, new->room->name))
+			return ;
 		tmp = tmp->next;
+	}
+	if (!ft_strcmp(tmp->room->name, new->room->name))
+		return ;
 	tmp->next = new;
 }
 
@@ -77,6 +83,7 @@ static int		store_links2(t_rooms *room1, t_rooms *room2)
 	in->out = out;
 	stock_links(room1, in);
 	stock_links(room2, out);
+	//en fonction du retour du premier stock_links, ne pas appeler le deuxieme et free
 	return (1);
 }
 
@@ -86,7 +93,7 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	t_rooms	*room2;
 	char	**lines;
 
-	if (!(lines = ft_strsplit(line, '-')))
+	if (!(lines = verif_links(line)))
 		return (0);
 	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
 		return (0);
