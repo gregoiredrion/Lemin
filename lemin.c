@@ -127,6 +127,7 @@ static int		parser(t_hill *hill, char *line)
 			begin = last;
 		hill->size++;
 	}
+	return 1;
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
 	parse_links(hill, tab, line);

@@ -51,7 +51,7 @@ void			free_hill(t_hill *hill)
 	tab = hill->rooms;
 	while (tab && tab[i])
 	{
-		free_room(&tab[i]);
+		free_room(&tab[i]); // wtf c'est pas du tout bon ça j'étais bien trop naze dans 'avion;
 		tab[i] = NULL;
 	}
 	hill->rooms = NULL;

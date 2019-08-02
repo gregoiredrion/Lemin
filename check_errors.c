@@ -18,22 +18,61 @@ int			verif_ants(char *line)
 	return (ret);
 }
 
+static char	**room_errors(char **infos)
+{
+	int		i;
+	int		j;
+	if (!infos)
+		return (NULL);
+	i = 1;
+	while (i < 3)
+	{
+		j = 0;
+		while (infos[i][j])
+		{
+			if (!ft_isdigit(infos[i][j]))
+				return (NULL); // and free;
+			j++;
+			if (j > 10)
+				return (NULL); // and free;
+		}
+		i++;
+	}
+	return (infos);
+}
+
 char		**verif_rooms(char *line)
 {
 	int		i;
 	int		space;
 
 	i = 0;
-	while (line[i])
+	space = 0;
+	while (line[i] && !space)
 	{
 		if (!ft_isalpha(line[i]) && !ft_isdigit(line[i]))
 		{
 			if (line[i] == ' ')
 			{
-				if (space && !ft_isdigit(line[i]))
-					return (NULL);
+				i++;
 				space++;
-				if (space > 3)
+				if (!ft_isdigit(line[i]))
+					return (NULL);
+				break ;
+			}
+			else
+				return (NULL);
+		}
+		i++;
+	}
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]))
+		{
+			if (line[i] == ' ')
+			{
+				space++;
+				if (space > 2 || !ft_isdigit(line[i + 1]))
 					return (NULL);
 			}
 			else
@@ -41,7 +80,27 @@ char		**verif_rooms(char *line)
 		}
 		i++;
 	}
+	return (room_errors(ft_strsplit(line, ' ')));
+/*	while (line[i])
+	{
+		if (!space && !ft_isalpha(line[i]) && !ft_isdigit(line[i]))
+		{
+			if (line[i] == ' ')
+			{
+				if (space && !ft_isdigit(line[i + 1]))
+					return (NULL);
+				space++;
+			}
+			else
+				return (NULL);
+		}
 
+		i++;
+	}*/
+	if (space != 2)
+		return (NULL);
+	if (!ft_strsplit(line, ' '))
+		return (NULL);
 }
 
 char		**verif_links(char *line)
@@ -66,5 +125,7 @@ char		**verif_links(char *line)
 		}
 		i++;
 	}
+	if (tiret != 1)
+		return (NULL);
 	return (ft_strsplit(line, '-'));
 }

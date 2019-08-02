@@ -77,7 +77,7 @@ t_rooms		*create_rooms(t_rooms *last, char *info, int stend)
 	while (split_info[i])
 		free(split_info[i++]);
 	free(split_info);
-	new->stend = stend;
+		new->stend = stend;
 	new->ants = 0;
 	new->d = (stend == 1) ? 0 : -1;
 	new->index = -1;
@@ -95,4 +95,17 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 
 	if (!(tab = verif_rooms(line)))
 		return (NULL);
+	if (!(new = malloc(sizeof(t_rooms))))
+		return (NULL);
+	if (!(new->name = ft_strdup(tab[0])))
+		return (NULL);
+	new->stend = stend;
+	new->ants = 0;
+	new->d = (stend == 1) ? 0 : -1;
+	new->index = -1;
+	new->links = NULL;
+	if (last)
+		last->next = new;
+	new->next = NULL;
+	return (new);
 }
