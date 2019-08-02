@@ -127,15 +127,13 @@ static int		parser(t_hill *hill, char *line)
 			begin = last;
 		hill->size++;
 	}
-	return 1;
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		if (!(parse_links(hill, tab, line)))
 			return (0);
-	//switch small tab and free hashmap
-
+	//from_map_to_tab(hill, tab); //ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
 	short_path(hill, tab);
 	return (1);
 }

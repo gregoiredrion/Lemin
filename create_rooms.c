@@ -104,6 +104,11 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 	new->d = (stend == 1) ? 0 : -1;
 	new->index = -1;
 	new->links = NULL;
+//	int i = 0;
+//	while(tab[i])
+//		printf("tab[i] = %s\n", tab[i++]);
+	new->x = ft_atoi(tab[1]);
+	new->y = ft_atoi(tab[2]);
 	if (last)
 		last->next = new;
 	new->next = NULL;

@@ -80,3 +80,15 @@ int						hashmap(t_hill *anthill, t_rooms *begin)
 	}
 	return (1);
 }
+
+void					from_map_to_tab(t_hill *hill, t_rooms **tab)
+{
+	t_rooms		**tmp_tab;
+
+	tmp_tab = hill->rooms;
+	ft_memdel((void**)tmp_tab);
+	hill->rooms = tab;
+	//hill->size /= 2;
+}
+
+

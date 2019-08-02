@@ -100,8 +100,8 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
 		return (0);
 	if (!(store_links2(room1, room2)))
-			return (0);
-	/*	free(lines[0]);
+		return (0);
+/*	free(lines[0]);
 	lines[0]=NULL;
 	free(lines[1]);
 	lines[1]=NULL;

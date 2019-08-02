@@ -31,8 +31,8 @@ typedef struct	s_rooms
 	int				d;
 	int				index;
 	int				ants;
-	intmax_t		x;
-	intmax_t		y;
+	int				x;
+	int				y;
 	int				stend;
 	t_links			*links;
 	struct s_rooms	*next;
@@ -81,7 +81,7 @@ t_rooms				***all_paths(t_hill *hill, t_rooms **tab, int paths);
 double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
 void				sort_paths(t_rooms ***paths, int start, int end);
 void				new_dists(t_rooms ***paths);
-
+void				from_map_to_tab(t_hill *hill, t_rooms **tab);
 //delete
 void				display_tab2(t_rooms **tab);
 //delete

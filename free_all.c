@@ -49,10 +49,14 @@ void			free_hill(t_hill *hill)
 
 	i = 0;
 	tab = hill->rooms;
-	while (tab && tab[i])
+	while (i < hill->size)
 	{
-		free_room(&tab[i]); // wtf c'est pas du tout bon ça j'étais bien trop naze dans 'avion;
-		tab[i] = NULL;
+		if (tab[i])
+		{
+			free_room(&tab[i]);
+			tab[i] = NULL;
+		}
+		i++;
 	}
 	hill->rooms = NULL;
 	hill->start = 0;
@@ -61,4 +65,6 @@ void			free_hill(t_hill *hill)
 	hill->size = 0;
 	hill->turns = 0;
 	hill->max_paths = 0;
+	ft_memdel((void **)&tab);
+	ft_memdel((void **)&hill);
 }
