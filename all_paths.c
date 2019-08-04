@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   displaythosemfpaths.c                              :+:      :+:    :+:   */
+/*   all_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/23 20:07:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 15:14:04 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/08/04 23:40:47 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static int		len(t_rooms *room, t_rooms *end)
 			len++;
 			li = li->room->links;
 		}
-		li = li->next;
+		else
+			li = li->next;
 	}
 	return (len + 1);
 }
@@ -80,10 +81,8 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 	{
 		if (li->w == -1)
 		{
-			printf("%s-%s", tab[0]->name, li->room->name);
-			display_paths(li->room, tab[hill->end]);
-			printf("\n");
-			if (!(tmp = malloc(sizeof(t_rooms **) * (len(li->room, tab[hill->end]) + 1))))
+			if (!(tmp =
+			malloc(sizeof(t_rooms **) * (len(li->room, tab[hill->end]) + 1))))
 				return (NULL);
 			tmp[0] = li->room;
 			paths[i++] = store_paths(tmp, li->room, tab[hill->end], 1);

@@ -6,65 +6,89 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 17:53:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/04 22:46:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	help_move_ants(t_hill *hill, t_rooms **path, int j, int id, int turns)
+static int	move_to_end(t_hill *hill, t_rooms **tab, t_rooms **path)
 {
-	while (j > 0 && path[j - 1]->ants == 0)
-		j--;
-	while (j >= 0)
+	int		j;
+
+	j = path[0]->d;
+	if (j == 0 || path[j - 1]->ants != 0)
 	{
-		if (j == 0)
-		{
-			if (!hill->rooms[0]->ants || path[0]->d + (int)turns > (int)hill->turns)
-			{
-				path[j]->ants = 0;
-				break ;
-			}
-			path[j]->ants = id++;
-			hill->rooms[0]->ants--;
-			printf("L%d-%s ", path[j]->ants, path[j]->name);
-		}
-		else
-		{
-			path[j]->ants = path[j - 1]->ants;
-			if (path[j - 1]->ants)
-				printf("L%d-%s ", path[j]->ants, path[j]->name);
-			else
-				break ;
-		}
+		tab[hill->end]->ants--;
+		printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
+		path[j - 1]->ants = 0;
 		j--;
 	}
-	return (id);
+	if (!tab[hill->end]->ants)
+		return (-1);
+	while (j > 0 && path[j - 1]->ants == 0)
+		j--;
+	return (j);
+}
+
+static int	move_to_rooms(t_rooms **path, int j)
+{
+	path[j]->ants = path[j - 1]->ants;
+	if (path[j - 1]->ants)
+		printf("L%d-%s ", path[j]->ants, path[j]->name);
+	else
+		return (0);
+	return (1);
+}
+
+/*
+** Are there still ants that need to be moved, is using this paths at this
+** moment the fastest way and are there leftover ants that need te be send
+*/
+
+static int	use_path(t_hill *hill, t_rooms ***paths, int i, int turns)
+{
+	if (!hill->rooms[0]->ants ||
+	(paths[i][0]->d + turns > (int)hill->turns &&
+	(!paths[i + 1] || paths[i][0]->d != paths[0][0]->d)))
+	{
+		paths[i][0]->ants = 0;
+		return (0);
+	}
+	return (1);
+}
+
+static void	move_from_start(t_hill *hill, t_rooms ***paths, int i, int turns)
+{
+	if (!(use_path(hill, paths, i, turns)))
+		return ;
+	hill->rooms[0]->ants--;
+	paths[i][0]->ants = hill->ants - hill->rooms[0]->ants;
+	printf("L%d-%s ", paths[i][0]->ants, paths[i][0]->name);
 }
 
 void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 {
-	static int		id = 1;
 	int				i;
 	int				j;
 	int				turns;
 
 	turns = 1;
 	i = 0;
-	printf("turns: %lf\n", hill->turns);
 	while (paths[i])
 	{
-		j = paths[i][0]->d;
-		if (j == 0 || paths[i][j - 1]->ants != 0)
+		j = move_to_end(hill, tab, paths[i]);
+		while (j >= 0)
 		{
-			tab[hill->end]->ants--;
-			printf("L%d-%s ", paths[i][j - 1]->ants, paths[i][j]->name);
-			paths[i][j - 1]->ants = 0;
+			if (j == 0)
+				move_from_start(hill, paths, i, turns);
+			else
+			{
+				if (!move_to_rooms(paths[i], j))
+					break ;
+			}
 			j--;
 		}
-		if (!tab[hill->end]->ants)
-			break ;
-		id = help_move_ants(hill, paths[i], j, id, turns);
 		if (!paths[++i] && tab[hill->end]->ants)
 		{
 			turns++;

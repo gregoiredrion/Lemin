@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 17:28:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/04 23:18:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,25 @@ static int	arrange_tab(t_hill *hill, t_rooms **tab, int j, int room_ind)
 		swap_rooms(hill, tab, j, room_ind);
 	return (1);
 }
-//DELETE FUNCTION
+
 void		display_tab2(t_rooms **tab)
 {
-	int i = 0;
+	t_links	*li;
+	int		i;
+
+	i = 0;
 	while (tab[i])
 	{
-		printf ("| :%s: dist=%d", tab[i]->name, tab[i]->d);
+		printf("%s: dist=%d\n", tab[i]->name, tab[i]->d);
+		li = tab[i]->links;
+		while (li)
+		{
+			printf("%s-%s: %d\n", tab[i]->name, li->room->name, li->w);
+			li = li->next;
+		}
+		printf("\n");
 		i++;
 	}
-	printf("|\n");
 }
 
 static void	dijkstra(t_hill *hill, t_rooms **tab)
@@ -78,7 +87,6 @@ static void	dijkstra(t_hill *hill, t_rooms **tab)
 	}
 }
 
-
 void		short_path(t_hill *hill, t_rooms **tab)
 {
 	t_rooms		***paths;
@@ -89,9 +97,10 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	if (tab[hill->size / 2 - 1]->d == -1)
 	{
 		write(2, "Error no path\n", 15);
+		free_hill(hill);
+		return ;
 	}
 	paths = all_paths(hill, tab, 1);
 	hill->turns = max_turns(hill, paths, 1);
-	hill->rooms = tab;//Assigner a un meilleur endroit
 	suurballe(hill, tab, paths);
 }

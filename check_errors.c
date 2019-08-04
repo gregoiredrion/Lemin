@@ -1,6 +1,6 @@
 #include "lemin.h"
 
-int			verif_ants(char *line)
+int			check_ants(char *line)
 {
 	int		ret;
 
@@ -13,7 +13,7 @@ int			verif_ants(char *line)
 	{
 		if (!(*line >= '0' && *line <= '9'))
 			return (-1);
-		ret = ret * 10 + *line++ - 48;
+		ret = ret * 10 + *(line)++ - 48;
 	}
 	return (ret);
 }

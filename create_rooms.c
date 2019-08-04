@@ -6,17 +6,17 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/10 13:30:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/04 23:40:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
+/*static int	forb_char(char *coord)
+{
 // J'ai géré les liens comme si les rooms devaient être composées de lettre ou chiffres
 // Donc oeut etre faire la meme pour les rooms
 // Pas sur que c'est la demarche a faire mais j'ai pas de pdf
-/*static int	forb_char(char *coord)
-{
 	int		i;
 
 	i = 0;
@@ -104,9 +104,6 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 	new->d = (stend == 1) ? 0 : -1;
 	new->index = -1;
 	new->links = NULL;
-//	int i = 0;
-//	while(tab[i])
-//		printf("tab[i] = %s\n", tab[i++]);
 	new->x = ft_atoi(tab[1]);
 	new->y = ft_atoi(tab[2]);
 	if (last)

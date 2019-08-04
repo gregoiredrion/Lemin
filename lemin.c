@@ -6,49 +6,15 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 17:39:02 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/04 23:16:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void			display_tab(t_rooms **tab, int size)
-{
-	int test = 0;
-	printf("size of tab = %d\n", size);
-	printf("starting display :\n\n");
-	int i = 0;
-	t_links	*link;
-
-	while (i < size)
-	{
-	if(tab[i])
-	{
-		printf("i = %d\n", i);
-		test = 0;
-		printf("tab[%d]: %s(%ld, %ld) dist = %d ants: %d - stend: %d\n", i, tab[i]->name, tab[i]->x, tab[i]->y, tab[i]->d, tab[i]->ants, tab[i]->stend);
-		link = tab[i]->links;
-		while (link)
-		{
-			test++;
-			printf("In : %s-%s - w: %d\n", tab[i]->name, link->room->name, link->w);
-			printf("Out : %s-%s - w: %d\n", link->room->name, link->out->room->name, link->out->w);
-			link = link->next;
-		}
-		if (test == 0)
-			printf("No Links\n");
-		printf("\n");
-	}
-	i++;
-	}
-
-}
-
 static int		free_error(t_hill *anthill)
 {
-	t_hill *supprimer_cette_var; // ça c'est sur
-	//free();
-	supprimer_cette_var = anthill;
+	free_hill(anthill);
 	write(2, "Error\n", 6);
 	return (0);
 }
@@ -133,7 +99,10 @@ static int		parser(t_hill *hill, char *line)
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 		if (!(parse_links(hill, tab, line)))
 			return (0);
-	//from_map_to_tab(hill, tab); //ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
+	//from_map_to_tab(hill, tab); 
+	////ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
+	////Je crois que c'est parce que tu free les rooms
+	hill->rooms = tab;
 	short_path(hill, tab);
 	return (1);
 }
@@ -143,17 +112,18 @@ int				main(void)
 	char		*line;
 	t_hill		*anthill;
 
-	if (get_next_line(0, &line) != 1)
-		return (0);
 	if (!(anthill = create_anthill()))
 		return (0);
-	if ((anthill->ants = verif_ants(line)) <= 0)
-	{
-		free_hill(anthill);
+	if (get_next_line(0, &line) != 1)
 		return (0);
+	if ((anthill->ants = check_ants(line)) <= 0)
+	{
+		free(line);
+		return (free_error(anthill));
 	}
 	free(line);
 	if (!(parser(anthill, line)))
 		return (free_error(anthill));
+//	free_hill(anthill);
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/08/04 23:32:05 by wdeltenr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void		del_link(t_links **link)
@@ -53,6 +65,9 @@ void			free_hill(t_hill *hill)
 	{
 		if (tab[i])
 		{
+			//Ancien (grand) tableau existe toujours, ce qui cause un seffault
+			//vu qu'il veut free quelque chose qui existait a l'index x dans
+			//le grand mais il a deja ete free a l'index y dans le petit
 			free_room(&tab[i]);
 			tab[i] = NULL;
 		}

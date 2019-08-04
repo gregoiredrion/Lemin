@@ -16,10 +16,5 @@ d-end
 b-e
 
 
-
-
-
-
-
-
-
+1 path
+start-a-b-e-end
