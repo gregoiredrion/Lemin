@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/07/25 23:34:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:44:59 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 	save = room->links;
 	if (!save)
 		return (-1);
-	li = save->next;
+	li = room->links;
 	while (li)
 	{
+//		printf("%s(dist: %d)-%s(dist: %d) = w: %d\n", room->name, room->d, li->room->name, li->room->d, li->w);
 		if (((li->room->d < save->room->d && li->out->w != -1) ||
 		save->out->w == -1) && li != out)
 			save = li;
@@ -46,6 +47,7 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 			save = li;
 		li = li->next;
 	}
+//	printf("%s-%s\n", room->name, save->room->name);
 	if (save->out->w == -1 || save == out)
 		return (-1);
 	if (find_path(tab, save->room, save->out) == -1)

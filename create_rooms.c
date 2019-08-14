@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 23:40:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:59:12 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 	t_rooms		*new;
 	char 		**tab;
 
-	if (!(tab = verif_rooms(line)))
+	if (!(tab = check_rooms(line)))
 		return (NULL);
 	if (!(new = malloc(sizeof(t_rooms))))
 		return (NULL);
@@ -104,8 +104,10 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 	new->d = (stend == 1) ? 0 : -1;
 	new->index = -1;
 	new->links = NULL;
-	new->x = ft_atoi(tab[1]);
-	new->y = ft_atoi(tab[2]);
+	if ((new->x = ft_atoi(tab[1])) > INT_MAX || new->x < INT_MIN)
+		return (NULL);//error && free
+	if ((new->y = ft_atoi(tab[2])) > INT_MAX ||  new->x < INT_MIN)
+		return (NULL);//error && free
 	if (last)
 		last->next = new;
 	new->next = NULL;

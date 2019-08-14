@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 23:17:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:39:34 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct	s_hill
 ** stock infos anthill
 */
 int					check_ants(char *line);
-char				**verif_links(char *line);
-char				**verif_rooms(char *line);
+char				**check_links(char *line);
+char				**check_rooms(char *line);
 unsigned int		hash(char *str, int size);
 t_hill				*create_anthill(void);
 t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
@@ -82,13 +82,14 @@ double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
 void				sort_paths(t_rooms ***paths, int start, int end);
 void				new_dists(t_rooms ***paths);
 void				from_map_to_tab(t_hill *hill, t_rooms **tab);
-
-
+void				dead_end(t_hill *hill, t_rooms **tab);
 
 //delete + fonction!!
 void				display_tab2(t_rooms **tab);
 //delete + fonction!!
 void				display_tab(t_rooms **tab, int size);
+//delete + fonction!!
+void				display_paths(t_hill *hill, t_rooms ***paths);
 
 
 

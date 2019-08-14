@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 20:36:28 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:50:35 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,15 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	double		turns;
 	int			nb_paths;
 	t_rooms		***tmp;
+	int			tmp2;
 
+	printf("IN SUURBALLE\n");
 	tab[hill->start]->ants = hill->ants;
 	tab[hill->end]->ants = hill->ants;
 	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
+	tmp2 = 0;
+//	display_tab2(tab);
 	while (nb_paths < hill->max_paths)
 	{
 		new_weights(hill, tab);
@@ -104,16 +108,22 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths + 1)))
 		{
 			//free (paths)
+			tmp2 = 0;
 			paths = tmp;
 			hill->turns = turns;
 		}
 		else
 		{
-			//free tmp
-			break;
+			free (tmp);//meilleur free necessaire
+			tmp2++;
 		}
 		nb_paths++;
 	}
+	nb_paths -= tmp2;
+	printf("Max paths == %d && paths == %d && max turns == %d\n", hill->max_paths, nb_paths, (int)hill->turns);
+	//display_tab2(tab);
 	new_dists(paths);
+	display_paths(hill, paths);
+	printf("OUT SUURBALLE\n");
 	move_ants(hill, paths, tab);
 }

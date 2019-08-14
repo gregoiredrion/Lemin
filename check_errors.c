@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_errors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/06 16:33:02 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/08/06 16:58:26 by wdeltenr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 int			check_ants(char *line)
@@ -22,18 +34,24 @@ static char	**room_errors(char **infos)
 {
 	int		i;
 	int		j;
+	int		sign;
+
 	if (!infos)
 		return (NULL);
 	i = 1;
 	while (i < 3)
 	{
+		sign = 0;
 		j = 0;
+		if (infos[i][0] == '-' || infos[i][0] == '+')
+		{
+			j++;
+			sign = 1;
+		}
 		while (infos[i][j])
 		{
-			if (!ft_isdigit(infos[i][j]))
-				return (NULL); // and free;
 			j++;
-			if (j > 10)
+			if (j - sign > 10)
 				return (NULL); // and free;
 		}
 		i++;
@@ -41,7 +59,7 @@ static char	**room_errors(char **infos)
 	return (infos);
 }
 
-char		**verif_rooms(char *line)
+char		**check_rooms(char *line)
 {
 	int		i;
 	int		space;
@@ -50,17 +68,13 @@ char		**verif_rooms(char *line)
 	space = 0;
 	while (line[i] && !space)
 	{
-		if (!ft_isalpha(line[i]) && !ft_isdigit(line[i]))
+		if (line[i] == ' ')
 		{
-			if (line[i] == ' ')
-			{
+			i++;
+			space++;
+			if (line[i] == '-' || line[i] == '+')
 				i++;
-				space++;
-				if (!ft_isdigit(line[i]))
-					return (NULL);
-				break ;
-			}
-			else
+			if (!ft_isdigit(line[i]))
 				return (NULL);
 		}
 		i++;
@@ -72,6 +86,8 @@ char		**verif_rooms(char *line)
 			if (line[i] == ' ')
 			{
 				space++;
+				if (line[i] == '-' || line[i] == '+')
+					i++;
 				if (space > 2 || !ft_isdigit(line[i + 1]))
 					return (NULL);
 			}
@@ -80,52 +96,29 @@ char		**verif_rooms(char *line)
 		}
 		i++;
 	}
-	return (room_errors(ft_strsplit(line, ' ')));
-/*	while (line[i])
-	{
-		if (!space && !ft_isalpha(line[i]) && !ft_isdigit(line[i]))
-		{
-			if (line[i] == ' ')
-			{
-				if (space && !ft_isdigit(line[i + 1]))
-					return (NULL);
-				space++;
-			}
-			else
-				return (NULL);
-		}
-
-		i++;
-	}*/
 	if (space != 2)
 		return (NULL);
-	if (!ft_strsplit(line, ' '))
-		return (NULL);
+	return (room_errors(ft_strsplit(line, ' ')));
 }
 
-char		**verif_links(char *line)
+char		**check_links(char *line)
 {
 	int		i;
-	char	tiret;
+	char	hyphen;
 
-	tiret = 0;
+	hyphen = 0;
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isalpha(line[i]) && !ft_isdigit(line[i]))
+		if (line[i] == '-')
 		{
-			if (line[i] == '-')
-			{
-				if (tiret == 1)
-					return (NULL);
-				tiret++;
-			}
-			else
+			if (hyphen == 1)
 				return (NULL);
+			hyphen++;
 		}
 		i++;
 	}
-	if (tiret != 1)
+	if (hyphen != 1)
 		return (NULL);
 	return (ft_strsplit(line, '-'));
 }

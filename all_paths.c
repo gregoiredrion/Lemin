@@ -6,25 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 23:40:47 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:36:15 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-//delete
-void			display_paths(t_rooms *room, t_rooms *end)
-{
-	t_links		*li;
-
-	if (room == end)
-		return ;
-	li = room->links;
-	while (li->w != -1)
-		li = li->next;
-	printf("-%s", li->room->name);
-	display_paths(li->room, end);
-}
 
 static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end, int i)
 {

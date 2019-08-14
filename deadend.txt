@@ -1,0 +1,58 @@
+20
+##start
+start 0 0
+##end
+end 99 99
+a 1 1
+b 2 2
+c 3 3
+d 4 4
+e 5 5
+f 6 6
+g 7 7
+h 8 8
+i 9 9
+dead 7 7
+deader 666 666
+deadest 666 666
+deadliest 6666 6666
+j 0 0
+k 0 0
+l 0 0
+m 0 0
+n 9 9
+o 9 9
+p 9 9
+start-a
+start-e
+start-g
+a-b
+b-c
+c-d
+d-dead
+e-f
+g-h
+start-n
+n-o
+deadliest-d
+o-p
+p-end
+h-i
+i-deader
+d-end
+f-end
+i-end
+start-j
+j-k
+k-l
+l-m
+m-end
+m-deadest
+
+path1: start-a-b-c-d-dead
+path2: start-e-f-end
+path3: start-g-h-i-end
+path4: start-j-k-l-m-end
+path5: start-n-o-p-end
+
+extra: i-deader && d-dead

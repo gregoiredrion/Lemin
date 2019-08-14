@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 23:16:24 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:33:28 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_rooms	**small_tab(t_hill *anthill)
 	{
 		if (anthill->rooms[i])
 		{
-			//anthill->rooms[i]->next = NULL; Pourquoi c'est en commentaire ?
+			anthill->rooms[i]->next = NULL;
 			anthill->rooms[i]->index = j;
 			anthill->rooms[i]->stend == -1 ? anthill->end = j : 0;
 			anthill->rooms[i]->stend == 1 ? anthill->start = j : 0;
@@ -85,23 +85,27 @@ static int		parser(t_hill *hill, char *line)
 	while (get_next_line(0, &line) == 1 && (ft_strchr((const char *)line, ' ')
 	|| line[0] == '#'))
 	{
-		if (!(last = parse_rooms(line, last)))
-			return (0);
+		if ((line[0] == '#' && line[1] == '#') || line[0] != '#')
+		{
+			if (!(last = parse_rooms(line, last)))
+				return (0);
+			if (!begin)
+				begin = last;
+			hill->size++;
+		}
 		//Badant car hashmap et du coup free_hill a ameliorer ou bien faire
 		//Une nouvelle fonction pour free hill quand c'est la hashmap
-		if (!begin)
-			begin = last;
-		hill->size++;
 	}
 	if (!(hashmap(hill, begin)) || !(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
 	parse_links(hill, tab, line);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
-		if (!(parse_links(hill, tab, line)))
-			return (0);
-	//from_map_to_tab(hill, tab); 
-	////ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
-	////Je crois que c'est parce que tu free les rooms
+		if (line[0] != '#')
+			if (!(parse_links(hill, tab, line)))
+				break ;
+//from_map_to_tab(hill, tab); 
+////ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
+////Je crois que c'est parce que tu free les rooms
 	hill->rooms = tab;
 	short_path(hill, tab);
 	return (1);

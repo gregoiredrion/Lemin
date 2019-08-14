@@ -1,0 +1,148 @@
+10
+##start
+start 0 0
+##end
+end 99 99
+a 1 1
+b 2 2
+c 3 3
+d 4 4
+e 5 5
+f 6 6
+g 7 7
+h 8 8
+i 9 9
+j 10 10
+k 11 11
+l 12 12
+m 13 13
+n 14 14
+o 15 15
+p 16 16
+q 17 17
+r 18 18
+s 19 19
+t 20 20
+u 21 21
+v 22 22
+w 23 23
+x 24 24
+y 25 25
+z 26 26
+room1 55 55
+room2 55 55
+room3 55 55
+room4 55 55
+room5 55 55
+room6 55 55
+room7 55 55
+room8 55 55
+room9 55 55
+room10 55 55
+room11 55 55
+room12 55 55
+room13 55 55
+room14 55 55
+room15 55 55
+room16 55 55
+room17 55 55
+room18 55 55
+room19 55 55
+room20 55 55
+room21 55 55
+room22 55 55
+room23 55 55
+room24 55 55
+room25 55 55
+room26 55 55
+room27 55 55
+room28 55 55
+room29 55 55
+dead 55 55
+deader 55 55
+deadliest 55 55
+start-a
+a-b
+b-c
+c-d
+d-room1
+room1-room2
+room2-room3
+room3-room4
+room4-room5
+room5-end
+start-e
+e-room6
+room6-room7
+room7-room8
+room8-room9
+room9-room10
+room10-f
+f-end
+f-dead
+j-deader
+room18-deadliest
+start-g
+g-room11
+room11-room12
+room12-h
+h-i
+i-end
+start-j
+j-room13
+room13-room14
+room14-room15
+room15-k
+k-l
+l-m
+m-end
+start-n
+n-room16
+room16-room17
+room17-room18
+room18-o
+o-p
+p-q
+q-end
+start-r
+r-room19
+room19-room20
+room20-room21
+room21-s
+s-t
+t-end
+start-u
+u-room22
+room22-room23
+room23-v
+v-w
+w-end
+start-x
+x-room24
+room24-room25
+room25-room26
+room26-room27
+room27-room28
+room28-room29
+room29-y
+y-z
+z-end
+
+
+
+
+path1 = len10 : start-a-b-c-d-room1-room2-room3-room4-room5-end
+path2 = len8  : start-e-room6-room7-room8-room9-room10-f-end
+path3 = len6  : start-g-room11-room12-h-i-end
+path4 = len8  : start-j-room13-room14-room15-k-l-m-end
+path5 = len8  : start-n-room16-room17-room18-o-p-q-end
+path6 = len7  : start-r-room19-room20-room21-s-t-end
+path7 = len6  : start-u-room22-room23-v-w-end
+path8 = len9 : start-x-room24-room25-room26-room27-room28-y-z-end
+
+
+
+    deader
+      |
+start-j-room13-room14-room15-k-l-m-end
+

@@ -13,7 +13,9 @@ SRC = create_anthill.c\
 	  max_turns.c\
 	  sort_paths.c\
 	  check_errors.c\
-	  free_all.c
+	  free_all.c\
+	  delete_this_when_finish.c\
+	  dead_end.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/25 23:38:25 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:08:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int						hashmap(t_hill *anthill, t_rooms *begin)
 		hashed = hash(begin->name, anthill->size);
 		if (anthill->rooms[hashed])
 			hashed = collision(anthill->rooms, hashed, anthill->size);
-		if (anthill->rooms[hashed])
-			printf("Big error BOI\n");
 		anthill->rooms[hashed] = begin;
 		begin = begin->next;
 	}

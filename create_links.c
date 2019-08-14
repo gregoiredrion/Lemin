@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/08/04 23:15:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:49:11 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	t_rooms	*room2;
 	char	**lines;
 
-	if (!(lines = verif_links(line)))
+	if (!(lines = check_links(line)))
 		return (0);
 	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
 		return (0);

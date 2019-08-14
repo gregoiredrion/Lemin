@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/04 22:46:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:47:45 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	move_to_rooms(t_rooms **path, int j)
 static int	use_path(t_hill *hill, t_rooms ***paths, int i, int turns)
 {
 	if (!hill->rooms[0]->ants ||
-	(paths[i][0]->d + turns > (int)hill->turns &&
+	(paths[i][0]->d + turns  > (int)hill->turns &&
 	(!paths[i + 1] || paths[i][0]->d != paths[0][0]->d)))
 	{
 		paths[i][0]->ants = 0;
@@ -73,6 +73,7 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int				j;
 	int				turns;
 
+	printf("IN MOVE ANTS\n");
 	turns = 1;
 	i = 0;
 	while (paths[i])
@@ -97,4 +98,5 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 		}
 	}
 	printf("\n");
+	printf("%d turns for %d ants\n", turns, hill->ants);
 }
