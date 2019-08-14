@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 21:50:35 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:25:19 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	t_rooms		***tmp;
 	int			tmp2;
 
-	printf("IN SUURBALLE\n");
 	tab[hill->start]->ants = hill->ants;
 	tab[hill->end]->ants = hill->ants;
 	nb_paths = 1;
@@ -124,6 +123,5 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	//display_tab2(tab);
 	new_dists(paths);
 	display_paths(hill, paths);
-	printf("OUT SUURBALLE\n");
 	move_ants(hill, paths, tab);
 }

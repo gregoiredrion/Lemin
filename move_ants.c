@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 21:47:45 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:27:13 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int				j;
 	int				turns;
 
-	printf("IN MOVE ANTS\n");
 	turns = 1;
 	i = 0;
 	while (paths[i])
