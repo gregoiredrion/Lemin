@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 21:36:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/20 19:25:28 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 		}
 		li = li->next;
 	}
+	display_paths(hill, paths);
+	printf("=============\n");
 	return (paths);
 }

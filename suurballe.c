@@ -6,11 +6,32 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 22:25:19 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 12:50:08 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
+static void		init_weights(t_rooms **tab)
+{
+	t_links	*li;
+	int		i;
+
+	i = 0;
+	printf("in\n");
+	while (tab[i])
+	{
+		li = tab[i]->links;
+		while (li)
+		{
+			if (li->w != -1)
+				li->w = 1;
+			li = li->next;
+		}
+		i++;
+	}
+	printf("out\n");
+}
 
 static void		new_weights(t_hill *hill, t_rooms **tab)
 {
@@ -18,17 +39,21 @@ static void		new_weights(t_hill *hill, t_rooms **tab)
 	int		i;
 
 	i = 0;
+	init_weights(tab);
+	dijkstra(hill, tab);
+	printf("in2\n");
 	while (tab[i])
 	{
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->w > 0 && tab[i]->d != -1)
+			if (li->w > 0) //&& tab[i]->d != -1)
 				li->w = li->w - tab[li->room->index]->d + tab[i]->d;
 			li = li->next;
 		}
 		i++;
 	}
+	printf("out2\n");
 }
 
 static int		max_paths(t_hill *hill, t_rooms **tab)
@@ -56,7 +81,7 @@ static int		max_paths(t_hill *hill, t_rooms **tab)
 	return (start);
 }
 
-static void		dijkstra(t_hill *hill, t_rooms **tab)
+void			dijkstra(t_hill *hill, t_rooms **tab)
 {
 	t_links		*li;
 	int			i;
@@ -94,11 +119,14 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
 	tmp2 = 0;
-//	display_tab2(tab);
 	while (nb_paths < hill->max_paths)
 	{
 		new_weights(hill, tab);
+		printf("Weights\n");
+		display_tab2(tab);
 		dijkstra(hill, tab);
+		printf("Dijkstra\n");
+		display_tab2(tab);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
 		if (!(tmp = all_paths(hill, tab, nb_paths + 1)))
@@ -120,7 +148,6 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	}
 	nb_paths -= tmp2;
 	printf("Max paths == %d && paths == %d && max turns == %d\n", hill->max_paths, nb_paths, (int)hill->turns);
-	//display_tab2(tab);
 	new_dists(paths);
 	display_paths(hill, paths);
 	move_ants(hill, paths, tab);

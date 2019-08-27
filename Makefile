@@ -23,7 +23,7 @@ CC = gcc
 all: $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) -c -o $@ $^
 
 $(NAME): $(OBJ)
 	@make -C libft

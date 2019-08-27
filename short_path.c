@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 22:23:46 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 12:54:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ static int	arrange_tab(t_hill *hill, t_rooms **tab, int j, int room_ind)
 		swap_rooms(hill, tab, j, room_ind);
 	return (1);
 }
+void		display_room(t_rooms *room)
+{
+	t_links	*li;
+
+	li = room->links;
+	printf("%s: dist: %d\n", room->name, room->d);
+	while (li)
+	{
+		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
+		li = li->next;
+	}
+	printf("\n");
+}
 
 void		display_tab2(t_rooms **tab)
 {
@@ -52,7 +65,7 @@ void		display_tab2(t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			printf("%s-%s: %d\n", tab[i]->name, li->room->name, li->w);
+			printf("%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
 			li = li->next;
 		}
 		printf("\n");
@@ -60,7 +73,7 @@ void		display_tab2(t_rooms **tab)
 	}
 }
 
-static void	dijkstra(t_hill *hill, t_rooms **tab)
+static void	dijkstra_sort(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
 	int		i;
@@ -93,7 +106,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 
 	swap_rooms(hill, tab, 0, hill->start);
 	dead_end(hill, tab);
-	dijkstra(hill, tab);
+	dijkstra_sort(hill, tab);
 	find_path(tab, tab[hill->end], NULL);
 	if (tab[hill->end]->d == -1)
 	{

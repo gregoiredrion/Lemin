@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 12:56:27 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/11 19:41:12 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/20 19:13:31 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ double		max_turns(t_hill *hill, t_rooms ***paths, int nb_paths)
 
 	save = hill->ants + sum_paths(paths);
 	turns = (double)save / (double)nb_paths - 1;
+	printf("%lf\n", turns);
 	return (turns);
 }

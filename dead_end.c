@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 22:17:28 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:39:07 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static void		fix_tab(t_hill *hill, t_rooms **tab, int i)
 	hill->size -= 2;
 }
 
-static int	del_dead(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
+static t_links	*del_dead(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 {
 	t_rooms		*save;
 	t_links		*tmp;
 
 	if (room == tab[hill->start] || room == tab[hill->end])
-		return (1);
+		return (NULL);
 	save = li->out->room;
 	if (save->links == li)
 	{
@@ -57,29 +57,24 @@ static int	del_dead(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 	room = NULL;
 	if (!save->links->next)
 		return (del_dead(hill, tab, save->links->out, save));
-	return (1);
+	return (save->links->out);
 }
 
 void		dead_end(t_hill *hill, t_rooms **tab)
 {
 	int			i;
 	t_links		*li;
-	t_links		*tmp;
 
 	i = 0;
 	while (tab[i])
 	{
 		li = tab[i]->links;
+//		if (!li)			!!a faire!!
+//			delete_room;
 		while (li)
 		{
-			if (!li->room)
-				break ;
-			else if (!li->room->links->next)
-			{
-				tmp = li;
-				li = NULL;
-				del_dead(hill, tab, tmp, tmp->room);
-			}
+			if (!li->room->links->next)
+				li = del_dead(hill, tab, li, li->room);
 			else
 				li = li->next;
 		}

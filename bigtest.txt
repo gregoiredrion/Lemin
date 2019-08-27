@@ -131,18 +131,26 @@ z-end
 
 
 
-path1 = len10 : start-a-b-c-d-room1-room2-room3-room4-room5-end
-path2 = len8  : start-e-room6-room7-room8-room9-room10-f-end
-path3 = len6  : start-g-room11-room12-h-i-end
-path4 = len8  : start-j-room13-room14-room15-k-l-m-end
-path5 = len8  : start-n-room16-room17-room18-o-p-q-end
-path6 = len7  : start-r-room19-room20-room21-s-t-end
-path7 = len6  : start-u-room22-room23-v-w-end
-path8 = len9 : start-x-room24-room25-room26-room27-room28-y-z-end
+path1 = len6  : start-u-room22-room23-v-w-end
+
+path2 = len6  : start-g-room11-room12-h-i-end
+
+path3 = len7  : start-r-room19-room20-room21-s-t-end
+
+path4 = len8  : start-e-room6-room7-room8-room9-room10-f-end
+													   |
+													  dead
+
+path5 = len8  : start-j-room13-room14-room15-k-l-m-end
+					  |
+					deader
+
+path6 = len8  : start-n-room16-room17-room18-o-p-q-end
+										|
+									deadliest
 
 
+path7 = len9 : start-x-room24-room25-room26-room27-room28-y-z-end
 
-    deader
-      |
-start-j-room13-room14-room15-k-l-m-end
+path8 = len10 : start-a-b-c-d-room1-room2-room3-room4-room5-end
 

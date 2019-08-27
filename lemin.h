@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 18:39:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 12:48:42 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void				sort_paths(t_rooms ***paths, int start, int end);
 void				new_dists(t_rooms ***paths);
 void				from_map_to_tab(t_hill *hill, t_rooms **tab);
 void				dead_end(t_hill *hill, t_rooms **tab);
+void				dijkstra(t_hill *hill, t_rooms **tab);
 
 //delete + fonction!!
 void				display_tab2(t_rooms **tab);
@@ -90,6 +91,8 @@ void				display_tab2(t_rooms **tab);
 void				display_tab(t_rooms **tab, int size);
 //delete + fonction!!
 void				display_paths(t_hill *hill, t_rooms ***paths);
+//delete + fonction!!
+void				display_room(t_rooms *room);
 
 
 
