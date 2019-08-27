@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/20 19:25:28 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:54:59 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end, int i)
 	{
 		li = room->links;
 		tab[j++] = room;
+		room->d = 0;
 		while (li->w != -1)
 			li = li->next;
 		room = li->room;
@@ -47,6 +48,8 @@ static int		len(t_rooms *room, t_rooms *end)
 		}
 		else
 			li = li->next;
+		if (!li)
+			printf("Let's cry\n");
 	}
 	return (len + 1);
 }
@@ -59,11 +62,13 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 	int			i;
 
 	i = 0;
+	printf("ALLLLLLLLLLLLLLLLLLLLLLLl\n");
+//	display_tab2(tab);
 	if (!(paths = malloc(sizeof(t_rooms ***) * nb_paths + 1)))
 		return (NULL);
 	paths[nb_paths] = NULL;
 	li = tab[0]->links;
-	while (li)
+	while (li && i < nb_paths)
 	{
 		if (li->w == -1)
 		{
@@ -75,7 +80,7 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 		}
 		li = li->next;
 	}
-	display_paths(hill, paths);
+//	display_paths(hill, paths);
 	printf("=============\n");
 	return (paths);
 }

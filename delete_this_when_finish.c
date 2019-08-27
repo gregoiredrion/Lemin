@@ -17,7 +17,11 @@ void	display_paths(t_hill *hill, t_rooms ***paths)
 			printf("-%s", paths[i][j]->name);
 			j++;
 		}
-		printf("\n\n");
+		printf("\n");
+//	int r = 0;
+//	while (paths[r])
+//		display_tab2(paths[r++]);
+		printf("\n");
 		i++;
 	}
 }

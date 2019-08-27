@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/27 12:50:08 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:54:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void		init_weights(t_rooms **tab)
 	int		i;
 
 	i = 0;
-	printf("in\n");
 	while (tab[i])
 	{
 		li = tab[i]->links;
@@ -30,7 +29,6 @@ static void		init_weights(t_rooms **tab)
 		}
 		i++;
 	}
-	printf("out\n");
 }
 
 static void		new_weights(t_hill *hill, t_rooms **tab)
@@ -41,7 +39,11 @@ static void		new_weights(t_hill *hill, t_rooms **tab)
 	i = 0;
 	init_weights(tab);
 	dijkstra(hill, tab);
-	printf("in2\n");
+//	printf("INIT\n");
+//	display_tab2(tab);
+	printf("BEFORE weights\n");
+	printf("%s & %s\n===|%d| & |%d|===\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w);
+	printf("\n\nw = %d - %d + %d\n\n", tab[35]->links->w, tab[27]->d, tab[35]->d);
 	while (tab[i])
 	{
 		li = tab[i]->links;
@@ -53,7 +55,8 @@ static void		new_weights(t_hill *hill, t_rooms **tab)
 		}
 		i++;
 	}
-	printf("out2\n");
+	printf("AFTER weights\n");
+	printf("%s & %s\n===|%d| & |%d|===\n\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w);
 }
 
 static int		max_paths(t_hill *hill, t_rooms **tab)
@@ -87,22 +90,26 @@ void			dijkstra(t_hill *hill, t_rooms **tab)
 	int			i;
 
 	i = 0;
+	printf("BEFORE dijkstra\n");
+	printf("%s & %s\n=wei==|%d| & |%d|===\n=dist==|%d| & |%d|===\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w, tab[27]->d, tab[35]->d);
 	while (tab[i])
 	{
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->w == -1 && li->w == li->out->w)
+			if (li->w == -1 && li->out->w == -1)
 			{
-				li->w = 0;
-				li->out->w = 0;
+				li->w = 1;
+				li->out->w = 1;
 			}
-			if (tab[i]->d + li->w < li->room->d && li->w != -1)
+			if (tab[i]->d + li->w < li->room->d && li->w != -1 && tab[i]->d != -1)
 				li->room->d = tab[i]->d + li->w;
 			li = li->next;
 		}
 		i++;
 	}
+	printf("AFTER dijkstra\n");
+	printf("%s & %s\n=wei==|%d| & |%d|===\n=dist==|%d| & |%d|===\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w, tab[27]->d, tab[35]->d);
 }
 
 void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
@@ -121,14 +128,22 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	tmp2 = 0;
 	while (nb_paths < hill->max_paths)
 	{
+	//	printf("BEFORE\n");
+	//	display_tab2(tab);
 		new_weights(hill, tab);
-		printf("Weights\n");
-		display_tab2(tab);
+	//	printf("Weights\n");
+	//	display_tab2(tab);
 		dijkstra(hill, tab);
-		printf("Dijkstra\n");
-		display_tab2(tab);
+	//	printf("Dijkstra\n");
+	//	display_tab2(tab);
+	//	exit (0);
+		printf("BEFORE find\n");
+		printf("%s & %s\n===|%d| & |%d|===\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
+		printf("AFTER find\n");
+		printf("%s & %s\n===%d & |%d|===\n\n", tab[27]->links->next->room->name, tab[35]->links->room->name, tab[27]->links->next->w, tab[35]->links->w);
+	//	display_tab2(tab);
 		if (!(tmp = all_paths(hill, tab, nb_paths + 1)))
 		// write error?
 			return ;
@@ -147,8 +162,8 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		nb_paths++;
 	}
 	nb_paths -= tmp2;
-	printf("Max paths == %d && paths == %d && max turns == %d\n", hill->max_paths, nb_paths, (int)hill->turns);
+//	printf("Max paths == %d && paths == %d && max turns == %d\n", hill->max_paths, nb_paths, (int)hill->turns);
 	new_dists(paths);
-	display_paths(hill, paths);
+//	display_paths(hill, paths);
 	move_ants(hill, paths, tab);
 }

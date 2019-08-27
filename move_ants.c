@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 22:27:13 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:38:03 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	move_to_rooms(t_rooms **path, int j)
 }
 
 /*
-** Are there still ants that need to be moved, is using this paths at this
+** Are there still ants that need to be moved, is using this path at this
 ** moment the fastest way and are there leftover ants that need te be send
 */
 
