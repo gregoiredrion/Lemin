@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/28 16:02:55 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:17:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		display_room(t_rooms *room)
 	printf("%s: dist: %d\n", room->name, room->d);
 	while (li)
 	{
-		printf("	%s-%s: %d\n", li->room->name, room->name, li->out->w);
+		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
 		li = li->next;
 	}
 	printf("\n");
