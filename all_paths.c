@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/27 15:54:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:06:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static int		len(t_rooms *room, t_rooms *end)
 		}
 		else
 			li = li->next;
-		if (!li)
-			printf("Let's cry\n");
 	}
 	return (len + 1);
 }
@@ -62,8 +60,6 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 	int			i;
 
 	i = 0;
-	printf("ALLLLLLLLLLLLLLLLLLLLLLLl\n");
-//	display_tab2(tab);
 	if (!(paths = malloc(sizeof(t_rooms ***) * nb_paths + 1)))
 		return (NULL);
 	paths[nb_paths] = NULL;
@@ -80,7 +76,7 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 		}
 		li = li->next;
 	}
-//	display_paths(hill, paths);
-	printf("=============\n");
+	display_paths(hill, paths);
+	printf("\n\n\n");
 	return (paths);
 }

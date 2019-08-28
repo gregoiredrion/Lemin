@@ -150,7 +150,7 @@ path6 = len8  : start-n-room16-room17-room18-o-p-q-end
 									deadliest
 
 
-path7 = len9 : start-x-room24-room25-room26-room27-room28-y-z-end
+path7 = len10 : start-x-room24-room25-room26-room27-room28-room29y-z-end
 
 path8 = len10 : start-a-b-c-d-room1-room2-room3-room4-room5-end
 

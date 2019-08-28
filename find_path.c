@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/08/27 14:10:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/28 16:13:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 		if (((li->room->d < save->room->d && li->out->w != -1) ||
 		save->out->w == -1) && li != out)
 			save = li;
+		else if (li->room->d == save->room->d)
+		{
+			if (li->out->w < save->out->w)
+				save = li;
+		}
 		else if (save == out)
 			save = li;
 		li = li->next;

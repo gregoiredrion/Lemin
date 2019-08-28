@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/27 15:54:47 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/28 16:02:55 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		display_room(t_rooms *room)
 	printf("%s: dist: %d\n", room->name, room->d);
 	while (li)
 	{
-		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
+		printf("	%s-%s: %d\n", li->room->name, room->name, li->out->w);
 		li = li->next;
 	}
 	printf("\n");
@@ -73,7 +73,7 @@ void		display_tab2(t_rooms **tab)
 	}
 }
 
-static void	dijkstra_sort(t_hill *hill, t_rooms **tab)
+static void	dijkstra_sort(t_hill *hill, t_rooms **tab, t_rooms *end)
 {
 	t_links	*li;
 	int		i;
@@ -83,6 +83,8 @@ static void	dijkstra_sort(t_hill *hill, t_rooms **tab)
 	j = i;
 	while (tab[i])
 	{
+		if (i == hill->end)
+			i++;
 		li = tab[i]->links;
 		while (li)
 		{
@@ -106,7 +108,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 
 	swap_rooms(hill, tab, 0, hill->start);
 	dead_end(hill, tab);
-	dijkstra_sort(hill, tab);
+	dijkstra_sort(hill, tab, tab[hill->end]);
 	find_path(tab, tab[hill->end], NULL);
 	if (tab[hill->end]->d == -1)
 	{
