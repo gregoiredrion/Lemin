@@ -1,0 +1,18 @@
+15
+##start
+start 0 0
+##end
+end 99 99
+a 2 2
+b 3 3
+c 4 4
+d 4 4
+start-a
+start-b
+start-c
+start-d
+a-end
+b-end
+c-end
+d-end
+

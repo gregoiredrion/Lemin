@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/28 18:34:50 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/08/29 12:53:13 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		nb_paths++;
 	}
 	nb_paths -= tmp2;
-	printf("Max paths == %d && paths == %d && max turns == %d\n", hill->max_paths, nb_paths, (int)hill->turns);
 	new_dists(paths);
 //	display_paths(hill, paths);
 	move_ants(hill, paths, tab);

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:13:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/14 21:38:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:02:05 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void			new_dists(t_rooms ***paths)
 		j = 0;
 		while (paths[i][j])
 			j++;
+	printf("%d\n", j);
 		paths[i][0]->d = j - 1;
 		i++;
 	}
