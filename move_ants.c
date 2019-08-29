@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/29 14:13:39 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:38:34 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	use_path(t_hill *hill, t_rooms ***paths, int i, int turns)
 {
 //	printf("room: %s = turn: %d = dist: %d\n", paths[i][0]->name, turns, paths[i][0]->d);
 	if (hill->rooms[0]->ants && (paths[i][0]->d + turns < (int)hill->turns
-	|| paths[i][0]->d != paths[0][0]->d))
+	|| paths[i][0]->d == paths[0][0]->d))
 		return (1);
 	paths[i][0]->ants = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:36:47 by gdrion            #+#    #+#             */
-/*   Updated: 2019/08/28 18:02:37 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/08/29 15:37:36 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void		init_dists(t_hill *hill, t_rooms **tab)
 	i = 0;
 	while (tab[i])
 	{
-		if (i == hill->end)
-			i++;
 		li = tab[i]->links;
 		while (li)
 		{
@@ -34,5 +32,7 @@ void		init_dists(t_hill *hill, t_rooms **tab)
 			li = li->next;
 		}
 		i++;
+		if (i == hill->end)
+			i++;
 	}
 }

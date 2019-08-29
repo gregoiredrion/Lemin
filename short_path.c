@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/28 18:17:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/08/29 15:41:47 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,11 @@ static void	dijkstra_sort(t_hill *hill, t_rooms **tab, t_rooms *end)
 	t_links	*li;
 	int		i;
 	int		j;
-
+int t = 1;
 	i = 0;
-	j = i;
 	while (tab[i])
 	{
-		if (i == hill->end)
-			i++;
+		j = i;
 		li = tab[i]->links;
 		while (li)
 		{

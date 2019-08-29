@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/29 12:53:13 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:42:01 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void			dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 	i = 0;
 	while (tab[i])
 	{
-		if (i == hill->end)
-			i++;
 		li = tab[i]->links;
 		while (li)
 		{
@@ -98,6 +96,8 @@ void			dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 			li = li->next;
 		}
 		i++;
+		if (i == hill->end)
+			i++;
 	}
 }
 
