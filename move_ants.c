@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/29 15:38:34 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/02 17:57:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	move_to_rooms(t_rooms **path, int j)
 static int	use_path(t_hill *hill, t_rooms ***paths, int i, int turns)
 {
 //	printf("room: %s = turn: %d = dist: %d\n", paths[i][0]->name, turns, paths[i][0]->d);
-	if (hill->rooms[0]->ants && (paths[i][0]->d + turns < (int)hill->turns
+	if (hill->rooms[0]->ants && (paths[i][0]->d + turns - 1 < (int)hill->turns
 	|| paths[i][0]->d == paths[0][0]->d))
 		return (1);
 	paths[i][0]->ants = 0;
@@ -72,7 +72,7 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int				turns;
 
 //	display_paths(hill, paths);
-	turns = 1;
+	turns = 0;
 	i = 0;
 	printf("MAX: %lf\n", hill->turns);
 	while (paths[i])
@@ -97,7 +97,7 @@ void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 		}
 	}
 	printf("\n");
-	display_paths(hill, paths);
+//	display_paths(hill, paths);
 	printf("\n");
-	printf("%d turns for %d ants\n", turns, hill->ants);
+	printf("%d turns for %d ants\n", turns + 1, hill->ants);
 }

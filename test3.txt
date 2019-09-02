@@ -1,14 +1,14 @@
 19
 ##start
 start 0 0
-a 1 1
-b 2 2
-c 3 3
-d 4 4
-e 5 5
+a 2 1
+b 0 1
+c 4 3
+d 2 3
+e 0 3
 ##end
-end 99 99
-f 6 6
+end 3 5
+f 0 5
 start-a
 start-b
 a-c
@@ -19,3 +19,7 @@ d-e
 d-end
 e-f
 f-end
+
+
+start-a-c-d-end
+start-b-e-f-end

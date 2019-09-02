@@ -1,0 +1,26 @@
+33
+##start
+start 0 0
+##end
+end 99 99
+a 1 1
+1 1 1
+2 2 2
+3 3 3
+4 4 4
+start-a
+a-end
+start-1
+1-2
+2-3
+2-4
+
+
+
+		start-a-end
+		  |
+		  1
+		  |
+		  2
+		/	\
+		3	 4

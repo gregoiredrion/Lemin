@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/29 13:18:01 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:37:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void				display_paths(t_hill *hill, t_rooms ***paths);
 void				display_room(t_rooms *room);
 
 
+void				mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
 
 #endif

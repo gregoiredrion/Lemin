@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/28 18:27:25 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/02 15:33:12 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end)
 	j = 0;
 	while (room != end)
 	{
-	//	printf("IN\n");
-	//	printf("%s\n", room->name);
 		li = room->links;
 		tab[j++] = room;
 		room->d = 0;
 		while (li->w != -1)
 			li = li->next;
 		room = li->room;
-		//display_room(room);
 	}
 	tab[j++] = room;
 	tab[j] = NULL;
