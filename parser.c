@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 18:26:27 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/04 18:41:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 			if (!begin)
 				begin = last;
 			hill->size++;
-			*str = join_and_free_newline(*str, *line);
+			if (!(*str = join_and_free_newline(*str, *line)))
+				return (NULL);
 		}
 	}
 	if (!hashmap(hill, begin))
@@ -116,18 +117,18 @@ int				parser(t_hill *hill, char *line)
 		return (0);
 	if (!(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
-	parse_links(hill, tab, line);
-	str = join_and_free_newline(str, line);
+	if (!(parse_links(hill, tab, line)))
+		return (0);
+	if (!(str = join_and_free_newline(str, line)))
+		return (0);
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 	{
 		if (line[0] != '#')
 			if (!(parse_links(hill, tab, line)))
 				break ;
-		str = join_and_free_newline(str, line);
+		if (!(str = join_and_free_newline(str, line)))
+			return (0);
 	}
-	//from_map_to_tab(hill, tab);
-////ça fonctionne mais je sais pas pourquoi ça segfault plus tard dans ta partie
-////Je crois que c'est parce que tu free les rooms
 	hill->rooms = tab;
 	printf("%s\n\n", str);
 	short_path(hill, tab);
