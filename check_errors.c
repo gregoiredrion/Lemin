@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:33:02 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/06 16:58:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:03:57 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,37 @@ static char	**room_errors(char **infos)
 		while (infos[i][j])
 		{
 			j++;
-			if (j - sign > 10)
-				return (NULL); // and free;
+			//if (j - sign > 10)
+			//	return (NULL); // and free;
 		}
 		i++;
 	}
 	return (infos);
+}
+
+char		**check_coords(char *line, int i, int space)
+{
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]))
+		{
+			if (line[i] == ' ')
+			{
+				space++;
+				if (line[i] == '-' || line[i] == '+')
+					i++;
+				if (space > 2 || !ft_isdigit(line[i + 1]))
+					return (NULL);
+			}
+			else
+				return (NULL);
+		}
+		else
+			i++;
+	}
+	if (space != 2)
+		return (NULL);
+	return (room_errors(ft_strsplit(line, ' ')));
 }
 
 char		**check_rooms(char *line)
@@ -74,31 +99,13 @@ char		**check_rooms(char *line)
 			space++;
 			if (line[i] == '-' || line[i] == '+')
 				i++;
-			if (!ft_isdigit(line[i]))
-				return (NULL);
 		}
-		i++;
+		else
+			i++;
 	}
-	while (line[i])
-	{
-		if (!ft_isdigit(line[i]))
-		{
-			if (line[i] == ' ')
-			{
-				space++;
-				if (line[i] == '-' || line[i] == '+')
-					i++;
-				if (space > 2 || !ft_isdigit(line[i + 1]))
-					return (NULL);
-			}
-			else
-				return (NULL);
-		}
-		i++;
-	}
-	if (space != 2)
+	if (!ft_isdigit(line[i]))
 		return (NULL);
-	return (room_errors(ft_strsplit(line, ' ')));
+	return (check_coords(line, i, space));
 }
 
 char		**check_links(char *line)
