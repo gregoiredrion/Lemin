@@ -6,13 +6,13 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:14:39 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/04 15:08:58 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:54:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void			check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
+static void		check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
 {
 	static int	id = 1;
 	t_rooms		*start;
@@ -32,7 +32,7 @@ void			check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
 		paths[i][0]->ants = 0;
 }
 
-void			room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
+static void		room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
 {
 	while (j > 0)
 	{
@@ -45,13 +45,13 @@ void			room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
 		{
 			if (path[j - 1]->ants)
 				printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
-			path[j]->ants = path[j  - 1]->ants;
+			path[j]->ants = path[j - 1]->ants;
 		}
 		j--;
 	}
 }
 
-int			find_empty(t_rooms **path)
+static int		find_empty(t_rooms **path)
 {
 	int		j;
 
@@ -61,7 +61,7 @@ int			find_empty(t_rooms **path)
 	return (j);
 }
 
-void		mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
+void			mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 {
 	int		i;
 	int		lines;

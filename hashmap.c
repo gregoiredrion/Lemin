@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/08/20 19:13:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:55:14 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,4 @@ void					from_map_to_tab(t_hill *hill, t_rooms **tab)
 	tmp_tab = hill->rooms;
 	ft_memdel((void**)tmp_tab);
 	hill->rooms = tab;
-	//hill->size /= 2;
 }
-
-
