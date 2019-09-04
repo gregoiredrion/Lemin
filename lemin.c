@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 16:48:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:52:05 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				main(void)
 	}
 	free(line);
 	if (!(parser(anthill, line)))
-		return (free_error(anthill));
+		return (0);
 //	free_hill(anthill);
 	return (0);
 }
