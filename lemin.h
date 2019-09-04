@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 15:10:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:29:18 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,42 +50,62 @@ typedef struct	s_hill
 }				t_hill;
 
 /*
-** stock infos anthill
+** Stock infos anthill
+*/
+t_hill				*create_anthill(void);
+t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
+int					parse_links(t_hill *hill, t_rooms **tab, char *line);
+unsigned int		hash(char *str, int size);
+int					hashmap(t_hill *anthill, t_rooms *begin);
+int					parser(t_hill *hill, char *line);
+void				from_map_to_tab(t_hill *hill, t_rooms **tab);
+double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
+t_rooms				***all_paths(t_hill *hill, t_rooms **tab, int paths);
+void				dead_end(t_hill *hill, t_rooms **tab);
+
+/*
+** Infos validity
 */
 int					check_ants(char *line);
 char				**check_links(char *line);
 char				**check_rooms(char *line);
-unsigned int		hash(char *str, int size);
-t_hill				*create_anthill(void);
-t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
-int					hashmap(t_hill *anthill, t_rooms *begin);
-int					parser(t_hill *hill, char *line);
 
 /*
-** free
+** Free
 */
 void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);
 int					free_error(t_hill *hill);
+
 /*
-**
+** Sort
 */
-int					parse_links(t_hill *hill, t_rooms **tab, char *line);
 void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int r_ind);
 void				q_sort(t_hill *hill, t_rooms **tab, int start, int end);
-void				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
+void				sort_start(t_rooms *start);
+void				sort_paths(t_rooms ***paths, int start, int end);
+
+
+/*
+** Dijkstra
+*/
+void				init_dists(t_hill *hill, t_rooms **tab);
+void				init_weights(t_rooms **tab);
 void				short_path(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
-void				sort_start(t_rooms *start);
-void				move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
-t_rooms				***all_paths(t_hill *hill, t_rooms **tab, int paths);
-double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
-void				sort_paths(t_rooms ***paths, int start, int end);
+
+/*
+** Suurballe
+*/
+void				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
 void				new_dists(t_rooms ***paths);
-void				from_map_to_tab(t_hill *hill, t_rooms **tab);
-void				dead_end(t_hill *hill, t_rooms **tab);
-void				dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end);
-void				init_dists(t_hill *hill, t_rooms **tab);
+
+/*
+** Move_ants
+*/
+void				move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
+void				mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
+
 //delete + fonction!!
 void				display_tab2(t_rooms **tab);
 //delete + fonction!!
@@ -94,8 +114,5 @@ void				display_tab(t_rooms **tab, int size);
 void				display_paths(t_hill *hill, t_rooms ***paths);
 //delete + fonction!!
 void				display_room(t_rooms *room);
-
-
-void				mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
 
 #endif

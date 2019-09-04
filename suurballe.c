@@ -6,30 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 14:39:36 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:29:15 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-static void		init_weights(t_rooms **tab)
-{
-	t_links	*li;
-	int		i;
-
-	i = 0;
-	while (tab[i])
-	{
-		li = tab[i]->links;
-		while (li)
-		{
-			if (li->w != -1)
-				li->w = 1;
-			li = li->next;
-		}
-		i++;
-	}
-}
 
 static void		new_weights(t_hill *hill, t_rooms **tab)
 {
@@ -79,7 +60,7 @@ static int		max_paths(t_hill *hill, t_rooms **tab)
 	return (start);
 }
 
-void			dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
+static void			dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 {
 	t_links		*li;
 	int			i;
