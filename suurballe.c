@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 16:16:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:25:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ static void		dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 	i = 0;
 	while (tab[i])
 	{
-		if (i == hill->end)
-			i++;
+		if (i == hill->end && !tab[++i])
+			return ;
 		li = tab[i]->links;
 		while (li)
 		{

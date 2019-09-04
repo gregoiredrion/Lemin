@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 17:30:11 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/04 18:13:45 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		display_tab2(t_rooms **tab)
 	i = 0;
 	while (tab[i])
 	{
-		printf("%d. %s: dist: %d\n", i, tab[i]->name, tab[i]->d);
+		printf("%d.%d %s: dist: %d\n", i,tab[i]->index,  tab[i]->name, tab[i]->d);
 		li = tab[i]->links;
 		while (li)
 		{
@@ -106,7 +106,6 @@ void		short_path(t_hill *hill, t_rooms **tab)
 {
 	t_rooms		***paths;
 
-	printf("in\n");
 	swap_rooms(hill, tab, 0, hill->start);
 	dead_end(hill, tab);
 	dijkstra_sort(hill, tab, tab[hill->end]);
@@ -121,6 +120,5 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	hill->turns = max_turns(hill, paths, 1);
 	tab[hill->start]->ants = hill->ants;
 	tab[hill->end]->ants = hill->ants;
-	printf("out\n");
 	suurballe(hill, tab, paths);
 }
