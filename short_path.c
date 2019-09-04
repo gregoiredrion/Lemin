@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 15:59:11 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:26:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	arrange_tab(t_hill *hill, t_rooms **tab, int j, int room_ind)
 		swap_rooms(hill, tab, j, room_ind);
 	return (1);
 }
+
 void		display_room(t_rooms *room)
 {
 	t_links	*li;
@@ -84,7 +85,7 @@ static void	dijkstra_sort(t_hill *hill, t_rooms **tab, t_rooms *end)
 	while (tab[i])
 	{
 		if (i == hill->end && !tab[++i])
-			break;
+			break ;
 		li = tab[i]->links;
 		while (li)
 		{
