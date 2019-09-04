@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 14:58:22 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:59:11 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	}
 	paths = all_paths(hill, tab, 1);
 	hill->turns = max_turns(hill, paths, 1);
+	tab[hill->start]->ants = hill->ants;
+	tab[hill->end]->ants = hill->ants;
 	suurballe(hill, tab, paths);
 }

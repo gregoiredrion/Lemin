@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:13:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 15:00:33 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:58:37 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void			new_dists(t_rooms ***paths)
 
 static void		swap_paths(t_rooms ***paths, int i, int j)
 {
-	t_rooms **tmp;
+	t_rooms		**tmp;
 
 	tmp = paths[i];
 	paths[i] = paths[j];
 	paths[j] = tmp;
 }
-
 
 static int		partition(t_rooms ***paths, int start, int end)
 {

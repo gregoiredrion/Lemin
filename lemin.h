@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 15:29:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:48:20 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct	s_rooms
 	int				d;
 	int				index;
 	int				ants;
-	int				x;
-	int				y;
+	intmax_t		x;
+	intmax_t		y;
 	int				stend;
 	t_links			*links;
 	struct s_rooms	*next;
