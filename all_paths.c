@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/02 15:33:12 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:15:11 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end)
 	return (tab);
 }
 
+
+////// len a 1 ou 0??
 static int		len(t_rooms *room, t_rooms *end)
 {
 	t_links		*li;
@@ -39,6 +41,8 @@ static int		len(t_rooms *room, t_rooms *end)
 
 	len = 1;
 	li = room->links;
+	if (room == end)
+		return (len);
 	while (li->room != end)
 	{
 		if (li->w == -1)

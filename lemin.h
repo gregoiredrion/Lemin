@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/02 15:37:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:10:43 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ unsigned int		hash(char *str, int size);
 t_hill				*create_anthill(void);
 t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
 int					hashmap(t_hill *anthill, t_rooms *begin);
+int					parser(t_hill *hill, char *line);
 
 /*
 ** free
 */
 void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);
-
+int					free_error(t_hill *hill);
 /*
 **
 */

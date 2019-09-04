@@ -17,7 +17,8 @@ SRC = create_anthill.c\
 	  delete_this_when_finish.c\
 	  dead_end.c\
 	  init.c\
-	  path_use.c
+	  path_use.c\
+	  parser.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc

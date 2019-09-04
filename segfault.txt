@@ -40,7 +40,7 @@ l-m
 m-end
 m-deadest
 
-path1: start-a-b-c-d-dead
+path1: start-a-b-c-d-end
 path2: start-e-f-end
 path3: start-g-h-i-end
 path4: start-j-k-l-m-end

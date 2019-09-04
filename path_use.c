@@ -6,13 +6,13 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:14:39 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/02 18:24:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:08:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void			check_use(t_rooms ***paths, t_hill *hill, int i, int lines)
+void			check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
 {
 	static int	id = 1;
 	t_rooms		*start;
@@ -32,7 +32,7 @@ void			check_use(t_rooms ***paths, t_hill *hill, int i, int lines)
 		paths[i][0]->ants = 0;
 }
 
-void			room_to_room(t_rooms **path, t_hill *hill, t_rooms *end, int j)
+void			room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
 {
 	while (j > 0)
 	{
@@ -67,23 +67,19 @@ void		mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int		lines;
 	int		j;
 
-	printf("Max turns = %f\n", hill->turns);
 	i = 0;
 	lines = 0;
 	while (paths[i])
 	{
 		j = find_empty(paths[i]);
-		room_to_room(paths[i], hill, tab[hill->end], j);
-		check_use(paths, hill, i, lines);
+		room_to_room(hill, paths[i], tab[hill->end], j);
+		check_use(hill, paths, i, lines);
 		if (!paths[++i] && tab[hill->end]->ants)
 		{
 			i = 0;
-			printf("\n");
 			lines++;
+			printf("\n");
 		}
 	}
 	printf("\n");
-//	display_paths(hill, paths);
-	printf("\n");
-	printf("%d turns for %d ants\n", lines + 1, hill->ants);
 }
