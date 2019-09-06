@@ -6,7 +6,7 @@
 #    By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 15:38:46 by wdeltenr          #+#    #+#              #
-#    Updated: 2019/09/06 23:09:37 by gdrion           ###   ########.fr        #
+#    Updated: 2019/09/06 23:29:58 by gdrion           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,16 +38,16 @@ all: $(NAME)
 	@$(CC) $(CFLAGS) -c -o $@ $^
 
 $(NAME): $(OBJ)
-	make -C ft_printf
+	make -C ftprintf
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	make clean -C ft_printf
+	make clean -C ftprintf
 	rm -f $(OBJ)
 
 fclean: clean
-	make fclean -C ft_printf
+	make fclean -C ftprintf
 	rm -f $(NAME)
 
 re: fclean all
