@@ -29,7 +29,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $(CFLAGS) $(OBJ) libft/libft.a libft/ft_printf/libftprintf.a lemin.c -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) libft/libft.a libft/ftprintf/libftprintf.a lemin.c -o $(NAME)
 
 clean:
 	make clean -C libft
