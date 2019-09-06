@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:09:33 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/04 18:32:19 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 19:37:16 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void		delete_unused(t_rooms *start)
 			else
 				prev->next = li;
 			tmp->next = NULL;
-			free(tmp);
-			tmp = NULL;
+			ft_memdel((void **)tmp);
 		}
 		else
 		{
@@ -64,7 +63,6 @@ void			sort_start(t_rooms *start)
 
 	last = NULL;
 	delete_unused(start);
-	li = start->links;
 	while (start->links->next != last)
 	{
 		prev = NULL;
@@ -75,8 +73,7 @@ void			sort_start(t_rooms *start)
 			if (li->room->d > next->room->d)
 			{
 				swap_links(li, next, prev);
-				if (!prev)
-					start->links = next;
+				prev == NULL ? start->links = next : 0;
 				prev = next;
 			}
 			else
