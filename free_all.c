@@ -6,11 +6,18 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 17:13:16 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 14:36:17 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
+int				free_error(t_hill *hill)
+{
+	free(hill);
+	write(2, "Error\n", 6);
+	return (0);
+}
 
 static void		del_link(t_links **link)
 {

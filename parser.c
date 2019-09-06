@@ -6,19 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 18:41:52 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 14:41:44 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-//Pourquoi dans ce fichier ?
-int				free_error(t_hill *hill)
-{
-	free_hill(hill);
-	write(2, "Error\n", 6);
-	return (0);
-}
 
 static t_rooms	**small_tab(t_hill *hill)
 {
@@ -83,7 +75,8 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 
 	begin = NULL;
 	last = NULL;
-	while (get_next_line(0, line) == 1 && (ft_strchr(*line, ' ') || *line[0] == '#'))
+	while (get_next_line(0, line) == 1 && (ft_strchr(*line, ' ')
+	|| *line[0] == '#'))
 	{
 		if (((*line)[0] == '#' && (*line)[1] == '#') || *line[0] != '#')
 		{
@@ -101,8 +94,19 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 	return (last);
 }
 
-static char		*read_link(t_rooms *last, char *line, char *str)
+static char		*read_link(t_hill *hill, t_rooms **tab, char *line, char *str)
 {
+	while (get_next_line(0, &line) == 1 && line[0] != '\0')
+	{
+		if (line[0] != '#')
+			if (!(parse_links(hill, tab, line)))
+			{
+				printf("We breaking :%s:\n", line);
+				break ;
+			}
+		if (!(str = join_and_free_newline(str, line)))
+			return (0);
+	}
 	return (str);
 }
 
@@ -121,14 +125,8 @@ int				parser(t_hill *hill, char *line)
 		return (0);
 	if (!(str = join_and_free_newline(str, line)))
 		return (0);
-	while (get_next_line(0, &line) == 1 && line[0] != '\0')
-	{
-		if (line[0] != '#')
-			if (!(parse_links(hill, tab, line)))
-				break ;
-		if (!(str = join_and_free_newline(str, line)))
-			return (0);
-	}
+	if (!(str = read_link(hill, tab, line, str)))
+		return (0);
 	hill->rooms = tab;
 	printf("%s\n\n", str);
 	short_path(hill, tab);
