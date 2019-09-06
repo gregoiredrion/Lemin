@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 16:45:24 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 17:27:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,6 @@ static int	arrange_tab(t_hill *hill, t_rooms **tab, int j, int room_ind)
 	if (tab[j]->d == -1)
 		swap_rooms(hill, tab, j, room_ind);
 	return (1);
-}
-
-void		display_room(t_rooms *room)
-{
-	t_links	*li;
-
-	li = room->links;
-	printf("%s: dist: %d\n", room->name, room->d);
-	while (li)
-	{
-		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
-		li = li->next;
-	}
-	printf("\n");
-}
-
-void		display_tab2(t_rooms **tab)
-{
-	t_links	*li;
-	int		i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("%d.%d %s: dist: %d\n", i,tab[i]->index,  tab[i]->name, tab[i]->d);
-		li = tab[i]->links;
-		while (li)
-		{
-			printf("%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
-			li = li->next;
-		}
-		printf("\n");
-		i++;
-	}
 }
 
 static void	dijkstra_sort(t_hill *hill, t_rooms **tab, t_rooms *end)
@@ -112,7 +78,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	if (find_path(tab, tab[hill->end], NULL) == -1)
 	{
 		write(2, "Error no path\n", 15);
-		//free_hill(hill);
+		free_hill(hill);
 		return ;
 	}
 	paths = all_paths(hill, tab, 1);

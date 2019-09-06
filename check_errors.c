@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:33:02 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 17:06:24 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 17:30:51 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	**coords_errors(char **infos)
 		if (infos[i][0] == '-' || infos[i][0] == '+')
 			sign = 1;
 		if (ft_strlen(infos[i]) - sign > 10)
-			return (NULL); //and free infos
+			return (NULL);
 		i++;
 	}
 	return (infos);

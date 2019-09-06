@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 14:41:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 17:16:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,7 @@ static char		*read_link(t_hill *hill, t_rooms **tab, char *line, char *str)
 	{
 		if (line[0] != '#')
 			if (!(parse_links(hill, tab, line)))
-			{
-				printf("We breaking :%s:\n", line);
 				break ;
-			}
 		if (!(str = join_and_free_newline(str, line)))
 			return (0);
 	}
@@ -118,15 +115,15 @@ int				parser(t_hill *hill, char *line)
 
 	str = ft_itoa(hill->ants);
 	if (!(last = read_rooms(hill, &str, &line)))
-		return (0);
+		return (free_error(hill));
 	if (!(tab = small_tab(hill)) || line[0] == '\0')
-		return (0);
+		return (free_error(hill));
 	if (!(parse_links(hill, tab, line)))
-		return (0);
+		return (free_error(hill));
 	if (!(str = join_and_free_newline(str, line)))
-		return (0);
+		return (free_error(hill));
 	if (!(str = read_link(hill, tab, line, str)))
-		return (0);
+		return (free_error(hill));
 	hill->rooms = tab;
 	printf("%s\n\n", str);
 	short_path(hill, tab);
