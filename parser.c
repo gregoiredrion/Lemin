@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 17:16:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 19:39:56 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,16 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 
 static char		*read_link(t_hill *hill, t_rooms **tab, char *line, char *str)
 {
+	int ret;
+
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 	{
 		if (line[0] != '#')
-			if (!(parse_links(hill, tab, line)))
-				break ;
+			ret = parse_links(hill, tab, line);
+		if (ret == -1)
+			break ;
+		if (!ret)
+			return (0);
 		if (!(str = join_and_free_newline(str, line)))
 			return (0);
 	}
@@ -112,18 +117,23 @@ int				parser(t_hill *hill, char *line)
 	t_rooms		**tab;
 	t_rooms		*last;
 	char		*str;
+	int			ret;
 
 	str = ft_itoa(hill->ants);
 	if (!(last = read_rooms(hill, &str, &line)))
 		return (free_error(hill));
 	if (!(tab = small_tab(hill)) || line[0] == '\0')
 		return (free_error(hill));
-	if (!(parse_links(hill, tab, line)))
+	ret = parse_links(hill, tab, line);
+	if (ret == -1)
 		return (free_error(hill));
-	if (!(str = join_and_free_newline(str, line)))
-		return (free_error(hill));
-	if (!(str = read_link(hill, tab, line, str)))
-		return (free_error(hill));
+	if (ret != 0)
+	{
+		if (!(str = join_and_free_newline(str, line)))
+			return (free_error(hill));
+		if (!(str = read_link(hill, tab, line, str)))
+			return (free_error(hill));
+	}
 	hill->rooms = tab;
 	printf("%s\n\n", str);
 	short_path(hill, tab);
