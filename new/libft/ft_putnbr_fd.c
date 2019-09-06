@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/26 12:36:16 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/07/03 12:57:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char		*line;
-	t_hill		*anthill;
-
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	if (n == -2147483648)
 	{
-		free(line);
-		return (free_error(anthill));
+		write(fd, "-2", 2);
+		n = 147483648;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (9 < n)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + 48, fd);
+	}
+	if (n >= 0 && n <= 9)
+		ft_putchar_fd(n + 48, fd);
 }

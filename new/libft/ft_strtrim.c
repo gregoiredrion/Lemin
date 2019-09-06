@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/24 15:51:14 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/07/03 17:53:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+char	*ft_strtrim(char const *s)
 {
-	char		*line;
-	t_hill		*anthill;
+	int		i;
+	int		n;
+	int		t;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	t = 0;
+	if (!s)
+		return (NULL);
+	t = ft_strlen(s);
+	i = t - 1;
+	n = 0;
+	while (s[n] == '\n' || s[n] == ' ' || s[n] == '\t')
 	{
-		free(line);
-		return (free_error(anthill));
+		n++;
+		t--;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	while ((s[i] == '\n' || s[i] == ' ' || s[i] == '\t') && t > 0)
+	{
+		i--;
+		t--;
+	}
+	return (ft_strsub(s, n, t));
 }

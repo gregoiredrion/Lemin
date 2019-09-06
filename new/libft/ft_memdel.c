@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/24 11:24:46 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/09/06 17:35:32 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+void	ft_memdel(void **ap)
 {
-	char		*line;
-	t_hill		*anthill;
-
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
-	{
-		free(line);
-		return (free_error(anthill));
-	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	if (!ap || !(*ap))
+		return ;
+	free(*ap);
+	*ap = NULL;
 }

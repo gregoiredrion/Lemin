@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_putstnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/09/20 14:09:12 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/09/25 14:40:08 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+void	ft_putstnbr(size_t n)
 {
-	char		*line;
-	t_hill		*anthill;
-
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	if (9 < n)
 	{
-		free(line);
-		return (free_error(anthill));
+		ft_putstnbr(n / 10);
+		ft_putchar(n % 10 + 48);
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	if (n <= 9)
+		ft_putchar(n + 48);
 }

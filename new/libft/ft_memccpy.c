@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   memccpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/18 17:23:10 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/06/20 14:18:15 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	char		*line;
-	t_hill		*anthill;
+	size_t				i;
+	unsigned char		*dst2;
+	unsigned const char	*src2;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	i = 0;
+	dst2 = (unsigned char *)dst;
+	src2 = (unsigned const char *)src;
+	while (i < n)
 	{
-		free(line);
-		return (free_error(anthill));
+		dst2[i] = src2[i];
+		if (dst2[i] == (unsigned char)c)
+			return (&dst[i + 1]);
+		i++;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	return (NULL);
 }

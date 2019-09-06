@@ -1,0 +1,7 @@
+*.o
+*.out
+*.txt
+.DS_Store
+*.swp
+lem-in
+libft/libft.a

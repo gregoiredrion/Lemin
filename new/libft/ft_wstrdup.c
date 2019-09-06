@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_wstrdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/11/16 14:03:10 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/11/16 16:20:06 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+wchar_t	*ft_wstrdup(const wchar_t *s)
 {
-	char		*line;
-	t_hill		*anthill;
+	int		i;
+	wchar_t	*s2;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
-	{
-		free(line);
-		return (free_error(anthill));
-	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	if (s == NULL)
+		return (ft_wstrdup(L"(null)"));
+	i = ft_wstrlen(s);
+	if (!(s2 = (wchar_t *)malloc(sizeof(wchar_t) * (i + 1))))
+		return (NULL);
+	s2[i] = '\0';
+	while (i--)
+		s2[i] = s[i];
+	return (s2);
 }

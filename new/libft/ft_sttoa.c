@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_sttoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/09/20 14:04:58 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/10/07 16:10:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+static int	count_numbers(size_t n)
 {
-	char		*line;
-	t_hill		*anthill;
+	int		i;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	i = 1;
+	while (9 < n)
 	{
-		free(line);
-		return (free_error(anthill));
+		n = n / 10;
+		i++;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	return (i);
+}
+
+char		*ft_sttoa(size_t n)
+{
+	int		i;
+	char	*str;
+
+	str = NULL;
+	i = count_numbers(n);
+	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	str[i] = '\0';
+	i--;
+	while (n > 9)
+	{
+		str[i--] = (n % 10) + 48;
+		n = n / 10;
+	}
+	if (n <= 9)
+		str[i] = n + 48;
+	return (str);
 }

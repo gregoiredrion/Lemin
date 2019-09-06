@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/24 15:33:41 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/06/24 16:52:39 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char		*line;
-	t_hill		*anthill;
+	int		i;
+	int		n;
+	char	*s_join;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
-	{
-		free(line);
-		return (free_error(anthill));
-	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1);
+	n = 0;
+	if (!(s_join = (char *)malloc(sizeof(char) * (i + ft_strlen(s2) + 1))))
+		return (NULL);
+	i = 0;
+	while (s1[n])
+		s_join[i++] = s1[n++];
+	n = 0;
+	while (s2[n])
+		s_join[i++] = s2[n++];
+	s_join[i] = '\0';
+	return (s_join);
 }

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/20 14:03:01 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/07/04 10:02:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+char	*ft_strdup(const char *s)
 {
-	char		*line;
-	t_hill		*anthill;
+	int		i;
+	char	*s2;
 
-	if (!(anthill = create_anthill()))
-		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	i = ft_strlen(s);
+	if (!(s2 = (char *)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		free(line);
-		return (free_error(anthill));
+		s2[i] = s[i];
+		i++;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
-	return (0);
+	s2[i] = '\0';
+	return (s2);
 }

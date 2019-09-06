@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:32:26 by wdeltenr         ###   ########.fr       */
+/*   Created: 2018/06/24 15:05:33 by wdeltenr          #+#    #+#             */
+/*   Updated: 2018/06/24 15:12:35 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int				main(void)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	char		*line;
-	t_hill		*anthill;
-
-	if (!(anthill = create_anthill()))
+	if (!s1 || !s2)
 		return (0);
-	if (get_next_line(0, &line) != 1)
-		return (0);
-	if ((anthill->ants = check_ants(line)) <= 0)
+	while (*s1 == *s2 && *s1)
 	{
-		free(line);
-		return (free_error(anthill));
+		s1++;
+		s2++;
 	}
-	free(line);
-	if (!(parser(anthill, line)))
-		return (0);
-//	free_hill(anthill);
+	if (*s1 == '\0' && *s2 == '\0')
+		return (1);
 	return (0);
 }

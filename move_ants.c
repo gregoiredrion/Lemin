@@ -5,99 +5,81 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 17:30:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/02 17:57:38 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/09/06 19:38:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	move_to_end(t_hill *hill, t_rooms **tab, t_rooms **path)
+static void		check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
+{
+	static int	id = 1;
+	t_rooms		*start;
+	int			max;
+
+	max = hill->turns;
+	start = hill->rooms[0];
+	if (hill->turns > (double)(int)hill->turns)
+		lines--;
+	if ((paths[i][0]->d + lines < max || paths[i][0]->d == paths[0][0]->d)
+	&& id <= start->ants)
+	{
+		printf("L%d-%s ", id, paths[i][0]->name);
+		paths[i][0]->ants = id++;
+	}
+	else
+		paths[i][0]->ants = 0;
+}
+
+static void		room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
+{
+	while (j > 0)
+	{
+		if (path[j] == end)
+		{
+			printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
+			end->ants--;
+		}
+		else
+		{
+			if (path[j - 1]->ants)
+				printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
+			path[j]->ants = path[j - 1]->ants;
+		}
+		j--;
+	}
+}
+
+static int		find_empty(t_rooms **path)
 {
 	int		j;
 
 	j = path[0]->d;
-	if (j == 0 || path[j - 1]->ants != 0)
-	{
-		tab[hill->end]->ants--;
-		printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
-		path[j - 1]->ants = 0;
-		j--;
-	}
-	if (!tab[hill->end]->ants)
-		return (-1);
-	while (j > 0 && path[j - 1]->ants == 0)
+	while (j > 0 && !path[j - 1]->ants)
 		j--;
 	return (j);
 }
 
-static int	move_to_rooms(t_rooms **path, int j)
+void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 {
-	path[j]->ants = path[j - 1]->ants;
-	if (path[j - 1]->ants)
-		printf("L%d-%s ", path[j]->ants, path[j]->name);
-	else
-		return (0);
-	return (1);
-}
+	int		i;
+	int		lines;
+	int		j;
 
-/*
-** Are there still ants that need to be moved, is using this path at this
-** moment the fastest way and are there leftover ants that need te be send
-*/
-
-static int	use_path(t_hill *hill, t_rooms ***paths, int i, int turns)
-{
-//	printf("room: %s = turn: %d = dist: %d\n", paths[i][0]->name, turns, paths[i][0]->d);
-	if (hill->rooms[0]->ants && (paths[i][0]->d + turns - 1 < (int)hill->turns
-	|| paths[i][0]->d == paths[0][0]->d))
-		return (1);
-	paths[i][0]->ants = 0;
-	return (0);
-}
-
-static void	move_from_start(t_hill *hill, t_rooms ***paths, int i, int turns)
-{
-	if (!(use_path(hill, paths, i, turns)))
-		return ;
-	hill->rooms[0]->ants--;
-	paths[i][0]->ants = hill->ants - hill->rooms[0]->ants;
-	printf("L%d-%s ", paths[i][0]->ants, paths[i][0]->name);
-}
-
-void		move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
-{
-	int				i;
-	int				j;
-	int				turns;
-
-//	display_paths(hill, paths);
-	turns = 0;
 	i = 0;
-	printf("MAX: %lf\n", hill->turns);
+	lines = 0;
 	while (paths[i])
 	{
-		j = move_to_end(hill, tab, paths[i]);
-		while (j >= 0)
-		{
-			if (j == 0)
-				move_from_start(hill, paths, i, turns);
-			else
-			{
-				if (!move_to_rooms(paths[i], j))
-					break ;
-			}
-			j--;
-		}
+		j = find_empty(paths[i]);
+		room_to_room(hill, paths[i], tab[hill->end], j);
+		check_use(hill, paths, i, lines);
 		if (!paths[++i] && tab[hill->end]->ants)
 		{
-			turns++;
-			printf("\n");
 			i = 0;
+			lines++;
+			printf("\n");
 		}
 	}
 	printf("\n");
-//	display_paths(hill, paths);
-	printf("\n");
-	printf("%d turns for %d ants\n", turns + 1, hill->ants);
 }
