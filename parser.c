@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 21:35:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 21:38:14 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int				parser(t_hill *hill, char *line)
 		return (free_error(hill));
 	if (!(tab = small_tab(hill)) || line[0] == '\0')
 		return (free_error(hill));
-	ret  = parse_links(hill, tab, line);
+	ret = parse_links(hill, tab, line);
 	if (ret == -1)
 		return (0);
 	if (ret != 0)
