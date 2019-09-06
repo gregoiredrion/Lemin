@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/06 19:39:39 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 21:35:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,12 @@ static int		store_links2(t_rooms *room1, t_rooms *room2)
 	if (!(out = init_links(room1, in)))
 		return (-1);
 	in->out = out;
-	if (!(stock_links(room1, in)))
+	if (!(stock_links(room1, in)) || !(stock_links(room2, out)))
+	{
+		free_links(in);
+		free_links(out);
 		return (0);
-	if (!(stock_links(room2, out)))
-		return (0);
-	//en fonction du retour du premier stock_links, ne pas appeler le deuxieme et free
+	}
 	return (1);
 }
 
@@ -106,11 +107,9 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	ret = store_links2(room1, room2);
 	if (!ret || ret == -1)
 		return (ret);
-	/*	free(lines[0]) YOU NEED TO FREE LINES;
-	lines[0]=NULL;
-	free(lines[1]);
-	lines[1]=NULL;
-	free(lines);
-	lines=NULL;*/
+	ret = 0;
+	while (lines[ret])
+		ft_strdel(&lines[ret++]);
+	ft_memdel((void **)lines);
 	return (1);
 }

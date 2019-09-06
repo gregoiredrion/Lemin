@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 18:55:54 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 21:28:51 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		del_link(t_links **link)
 	ft_memdel((void **)link);
 }
 
-static void		free_links(t_links *links)
+void			free_links(t_links *links)
 {
 	t_links *tmp;
 

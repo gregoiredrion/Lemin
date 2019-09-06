@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 18:43:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 21:28:53 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char				**check_rooms(char *line);
 /*
 ** Free
 */
+void				free_links(t_links *link);
 void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);
 int					free_error(t_hill *hill);
@@ -104,7 +105,6 @@ void				new_dists(t_rooms ***paths);
 ** Move_ants
 */
 void				move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
-void				mmove_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab);
 
 //delete + fonction!!
 void				display_tab2(t_rooms **tab);
