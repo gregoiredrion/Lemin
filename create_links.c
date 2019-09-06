@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/06 18:34:09 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 19:39:39 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int		stock_links(t_rooms *room, t_links *new)
 	if (!tmp)
 	{
 		room->links = new;
-		return (0);
+		return (1);
 	}
 	while (tmp->next)
 	{
@@ -78,12 +78,14 @@ static int		store_links2(t_rooms *room1, t_rooms *room2)
 	t_links	*out;
 
 	if (!(in = init_links(room2, NULL)))
-		return (0);
+		return (-1);
 	if (!(out = init_links(room1, in)))
-		return (0);
+		return (-1);
 	in->out = out;
-	stock_links(room1, in);
-	stock_links(room2, out);
+	if (!(stock_links(room1, in)))
+		return (0);
+	if (!(stock_links(room2, out)))
+		return (0);
 	//en fonction du retour du premier stock_links, ne pas appeler le deuxieme et free
 	return (1);
 }
@@ -93,6 +95,7 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	t_rooms	*room1;
 	t_rooms	*room2;
 	char	**lines;
+	int		ret;
 
 	if (!(lines = check_links(line)))
 		return (0);
@@ -100,9 +103,10 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 		return (0);
 	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
 		return (0);
-	if (!(store_links2(room1, room2)))
-		return (0);
-/*	free(lines[0]) YOU NEED TO FREE LINES;
+	ret = store_links2(room1, room2);
+	if (!ret || ret == -1)
+		return (ret);
+	/*	free(lines[0]) YOU NEED TO FREE LINES;
 	lines[0]=NULL;
 	free(lines[1]);
 	lines[1]=NULL;
