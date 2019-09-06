@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/06 18:24:40 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/06 18:34:09 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ static int		store_links2(t_rooms *room1, t_rooms *room2)
 	if (!(out = init_links(room1, in)))
 		return (0);
 	in->out = out;
-	if (!(stock_links(room1, in)))
-		return (0);
-	if (!(stock_links(room2, out)))
-		return (0);
+	stock_links(room1, in);
+	stock_links(room2, out);
 	//en fonction du retour du premier stock_links, ne pas appeler le deuxieme et free
 	return (1);
 }

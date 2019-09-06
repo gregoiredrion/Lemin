@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 16:30:17 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 20:09:33 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,24 @@ t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
 {
 	t_rooms		***tmp;
 	double		turns;
+	int			i;
 
+	i = 0;
 	if (!(tmp = all_paths(h, tab, nb + 1)))
 		return (NULL);
 	if (h->turns > (turns = max_turns(h, tmp, nb + 1)))
 	{
-		//free (paths)
+		while (paths[i])
+			free(paths[i++]);
 		h->turns = turns;
 		return (tmp);
 	}
 	else
-		free(tmp);//meilleur free necessaire
+	{
+		while (tmp[i])
+			free(tmp[i++]);
+		free(tmp);
+	}
 	return (paths);
 }
 
