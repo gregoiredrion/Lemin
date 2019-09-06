@@ -28,16 +28,16 @@ all: $(NAME)
 	@$(CC) -c -o $@ $^
 
 $(NAME): $(OBJ)
-	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) libft/libft.a lemin.c -o $(NAME)
+	make -C libft
+	$(CC) $(CFLAGS) $(OBJ) libft/libft.a libft/ft_printf/libftprintf.a lemin.c -o $(NAME)
 
 clean:
-	@make clean -C libft
-	@rm -f $(OBJ)
+	make clean -C libft
+	rm -f $(OBJ)
 
 fclean: clean
-	@make fclean -C libft
-	@rm -f $(NAME) $(NAME2)
+	make fclean -C libft
+	rm -f $(NAME) $(NAME2)
 
 re: fclean all
 

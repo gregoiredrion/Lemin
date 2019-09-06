@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/02 17:24:57 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 23:13:10 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <limits.h>
+# include <string.h>
 # include <wchar.h>
+# include "ft_printf/ft_printf.h"
 
 # define BUFF_SIZE_GNL 100
 
@@ -90,7 +91,7 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
-int				ft_count_digits(long double n);
+int				ft_count_digit(int n);
 int				get_next_line(const int fd, char **line);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_sign(long long int n);
@@ -114,6 +115,7 @@ void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr(intmax_t n);
 void			ft_putunbr(uintmax_t n);
 void			ft_putnbr_fd(int n, int fd);
+int				ft_printf(const char *format, ...);
 
 /*
 **Calcul
