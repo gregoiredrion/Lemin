@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 16:48:20 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:43:43 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
 /*
 ** Suurballe
 */
-void				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
+int					suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
 void				new_dists(t_rooms ***paths);
 
 /*

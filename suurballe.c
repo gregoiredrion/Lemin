@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 18:25:52 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/04 18:43:41 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ static void		dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 	}
 }
 
-void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
+int				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 {
 	t_links		*li;
 	double		turns;
-	int			nb_paths;
 	t_rooms		***tmp;
+	int			nb_paths;
 	int			unused;
 
 	nb_paths = 1;
@@ -105,8 +105,7 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
 		if (!(tmp = all_paths(hill, tab, nb_paths + 1)))
-		// write error?
-			return ;
+			return (0);
 		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths + 1)))
 		{
 			//free (paths)
@@ -124,4 +123,5 @@ void			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	nb_paths -= unused;
 	new_dists(paths);
 	mmove_ants(hill, paths, tab);
+	return (1);
 }
