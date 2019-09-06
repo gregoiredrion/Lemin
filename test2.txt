@@ -13,7 +13,7 @@ start-a
 start-c
 end-e
 d-end
-b-e
+b- e
 
 
 1 path

@@ -6,13 +6,13 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 18:43:41 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 15:02:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void		new_weights(t_hill *hill, t_rooms **tab)
+static void	new_weights(t_hill *hill, t_rooms **tab)
 {
 	t_links	*li;
 	int		i;
@@ -35,7 +35,7 @@ static void		new_weights(t_hill *hill, t_rooms **tab)
 	}
 }
 
-static int		max_paths(t_hill *hill, t_rooms **tab)
+static int	max_paths(t_hill *hill, t_rooms **tab)
 {
 	int			start;
 	int			end;
@@ -60,7 +60,7 @@ static int		max_paths(t_hill *hill, t_rooms **tab)
 	return (start);
 }
 
-static void		dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
+static void	dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 {
 	t_links		*li;
 	int			i;
@@ -87,16 +87,30 @@ static void		dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 	}
 }
 
-int				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
+t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
+{
+	t_rooms		***tmp;
+	double		turns;
+
+	if (!(tmp = all_paths(h, tab, nb + 1)))
+		return (NULL);
+	if (h->turns > (turns = max_turns(h, tmp, nb + 1)))
+	{
+		//free (paths)
+		h->turns = turns;
+		return (tmp);
+	}
+	else
+		free(tmp);//meilleur free necessaire
+	return (paths);
+}
+
+int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 {
 	t_links		*li;
-	double		turns;
-	t_rooms		***tmp;
 	int			nb_paths;
-	int			unused;
 
 	nb_paths = 1;
-	unused = 0;
 	hill->max_paths = max_paths(hill, tab);
 	while (nb_paths < hill->max_paths)
 	{
@@ -104,23 +118,10 @@ int				suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		dijkstra(hill, tab, tab[hill->end]);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
-		if (!(tmp = all_paths(hill, tab, nb_paths + 1)))
+		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
 			return (0);
-		if (hill->turns > (turns = max_turns(hill, tmp, nb_paths + 1)))
-		{
-			//free (paths)
-			unused = 0;
-			paths = tmp;
-			hill->turns = turns;
-		}
-		else
-		{
-			free(tmp);//meilleur free necessaire
-			unused++;
-		}
 		nb_paths++;
 	}
-	nb_paths -= unused;
 	new_dists(paths);
 	mmove_ants(hill, paths, tab);
 	return (1);
