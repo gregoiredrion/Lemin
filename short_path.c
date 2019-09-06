@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 15:16:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:45:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void		short_path(t_hill *hill, t_rooms **tab)
 {
 	t_rooms		***paths;
 
-	display_tab2(tab);
 	swap_rooms(hill, tab, 0, hill->start);
 	dead_end(hill, tab);
 	dijkstra_sort(hill, tab, tab[hill->end]);
