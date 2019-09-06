@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 21:38:14 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/06 21:42:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,18 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 
 static char		*read_link(t_hill *hill, t_rooms **tab, char *line, char *str)
 {
+	int		ret;
+
 	while (get_next_line(0, &line) == 1 && line[0] != '\0')
 	{
 		if (line[0] != '#')
-			if (!(parse_links(hill, tab, line)))
+			ret = parse_links(hill, tab, line);
+			if (!ret)
 				break ;
+			if (ret == -1)
+				return (NULL);
 		if (!(str = join_and_free_newline(str, line)))
-			return (0);
+			return (NULL);
 	}
 	return (str);
 }
