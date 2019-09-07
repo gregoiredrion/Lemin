@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 17:27:40 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/07 19:10:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	dijkstra_sort(hill, tab, tab[hill->end]);
 	if (find_path(tab, tab[hill->end], NULL) == -1)
 	{
-		write(2, "Error no path\n", 15);
+		write(2, "Error\n", 15);
 		free_hill(hill);
 		return ;
 	}
