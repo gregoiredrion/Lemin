@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 23:14:47 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/07 18:37:58 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
 	if ((paths[i][0]->d + lines < max || paths[i][0]->d == paths[0][0]->d)
 	&& id <= start->ants)
 	{
-		printf("L%d-%s ", id, paths[i][0]->name);
+		ft_printf("L%d-%s ", id, paths[i][0]->name);
 		paths[i][0]->ants = id++;
 	}
 	else
@@ -38,13 +38,13 @@ static void		room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
 	{
 		if (path[j] == end)
 		{
-			printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
+			ft_printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
 			end->ants--;
 		}
 		else
 		{
 			if (path[j - 1]->ants)
-				printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
+				ft_printf("L%d-%s ", path[j - 1]->ants, path[j]->name);
 			path[j]->ants = path[j - 1]->ants;
 		}
 		j--;
@@ -78,8 +78,8 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 		{
 			i = 0;
 			lines++;
-			printf("\n");
+			ft_printf("\n");
 		}
 	}
-	printf("\n");
+	ft_printf("\n");
 }

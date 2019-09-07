@@ -137,7 +137,7 @@ int				parser(t_hill *hill, char *line)
 			return (free_error(hill));
 	}
 	hill->rooms = tab;
-	printf("%s\n\n", str);
+	ft_printf("%s\n\n", str);
 	short_path(hill, tab);
 	return (1);
 }
