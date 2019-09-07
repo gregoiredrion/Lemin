@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 14:25:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2018/09/25 14:25:12 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/07 18:18:47 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*ft_isminimum(char *str)
 	return (str);
 }
 
-char		*ft_lltoa(long long int n)
+char		*ft_lltoa_tumsoules(long long int n)
 {
 	int		i;
 	char	*str;

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 23:30:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/07 18:19:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char			*ft_uitoa_base(uintmax_t nb, intmax_t base);
 char			*ft_itoa(intmax_t n);
 char			*ft_dtoa(long double n, int prec);
 char			*ft_uitoa(uintmax_t n);
+char			*ft_lltoa_tumsoules(long long int n);
 
 /*
 **Trouver une valeur
