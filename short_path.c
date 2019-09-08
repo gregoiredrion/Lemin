@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/07 19:10:40 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 14:19:06 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,18 @@ void		short_path(t_hill *hill, t_rooms **tab)
 {
 	t_rooms		***paths;
 
+	if (!ft_strcmp(tab[hill->start]->name, tab[hill->end]->name))
+		return ;
 	swap_rooms(hill, tab, 0, hill->start);
-	dead_end(hill, tab);
 	dijkstra_sort(hill, tab, tab[hill->end]);
+//	display_tab2(tab);
+	dead_end(hill, tab);
+	display_room(tab[hill->end]);
+	printf("%d\n", hill->size);
 	if (find_path(tab, tab[hill->end], NULL) == -1)
 	{
+		printf("Heyo\n");
 		write(2, "Error\n", 15);
-		free_hill(hill);
 		return ;
 	}
 	paths = all_paths(hill, tab, 1);

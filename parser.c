@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/07 18:02:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/08 11:58:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static t_rooms	**small_tab(t_hill *hill)
 
 static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 {
-	if (*line[0] == 'L')
-		return (NULL);
 	if ((*line)[0] != '#')
 	{
 		if (!(last = create_rooms(last, *line, 0)))
@@ -51,16 +49,16 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 	}
 	else if (!(ft_strcmp(*line, "##start")))
 	{
-		*str = join_and_free_newline(*str, *line);
-		if ((get_next_line(0, line) != 1))
+		if ((!(*str = join_and_free_newline(*str, *line)) ||
+		((get_next_line(0, line) != 1))))
 			return (NULL);
 		if (!(last = create_rooms(last, *line, 1)))
 			return (NULL);
 	}
 	else if (!(ft_strcmp(*line, "##end")))
 	{
-		*str = join_and_free_newline(*str, *line);
-		if ((get_next_line(0, line) != 1))
+		if (!(*str = join_and_free_newline(*str, *line)) ||
+		((get_next_line(0, line) != 1)))
 			return (NULL);
 		if (!(last = create_rooms(last, *line, -1)))
 			return (NULL);
@@ -78,6 +76,8 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 	while (get_next_line(0, line) == 1 && (ft_strchr(*line, ' ')
 	|| *line[0] == '#'))
 	{
+		if (*line[0] == 'L')
+			return (NULL);
 		if (((*line)[0] == '#' && (*line)[1] == '#') || *line[0] != '#')
 		{
 			if (!(last = parse_rooms(line, last, str)))

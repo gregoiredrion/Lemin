@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 21:28:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 14:13:04 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			free_hill(t_hill *hill)
 
 	i = 0;
 	tab = hill->rooms;
-	while (i < hill->size && tab)
+	while (i < hill->size / 2 && tab)
 	{
 		if (tab[i])
 		{

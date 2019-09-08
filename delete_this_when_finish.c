@@ -48,14 +48,14 @@ void		display_tab2(t_rooms **tab)
 	i = 0;
 	while (tab[i])
 	{
-		printf("%d.%d %s: dist: %d\n", i,tab[i]->index,  tab[i]->name, tab[i]->d);
+		printf("%d. %s: dist: %d\n", i, tab[i]->name, tab[i]->d);
 		li = tab[i]->links;
 		while (li)
 		{
 			printf("%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
 			li = li->next;
 		}
-		printf("\n");
 		i++;
 	}
+	printf("NTM\n");
 }
