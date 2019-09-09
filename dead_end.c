@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 19:40:38 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:33:15 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,31 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 	return (save->links->out);
 }
 
-static void		end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
+void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 {
 	t_links		*li;
 	t_links		*next;
+	int			i;
 
 	li = (*end)->links;
 	while (li && li->room->d == -1)
 	{
+		printf("%d\n", li->room->index);
 		next = li->next;
 		(*end)->links = next;
-		fix_tab(hill, tab, next->room->index);
+		fix_tab(hill, tab, li->room->index);
 		li->next = NULL;
 		free_room(&li->room);
 		del_link(&li);
 		li = next;
+		display_tab2(tab);
 	}
 	while (li->next)
 	{
 		next = li->next;
 		if (next && next->room->d == -1)
 		{
+			printf("%d\n", li->room->index);
 			li->next = next->next;
 			next->next = NULL;
 			fix_tab(hill, tab, next->room->index);
@@ -83,6 +87,14 @@ static void		end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 		else
 			li = li->next;
 	}
+	i = hill->size / 2 - 1;
+	printf("%d\n", i);
+	while (tab[i] && tab[i]->d == -1)
+	{
+		free_room(&tab[i--]);
+		hill->size -= 2;
+	}
+	printf("%d\n", i);
 }
 
 static t_links	*no_link(t_hill *hill, t_rooms **tab, int i)
@@ -101,13 +113,7 @@ void			dead_end(t_hill *hill, t_rooms **tab)
 	t_links		*debugz;
 
 	dead = 0;
-	end_links(hill, tab, &tab[hill->end]);
-	i = hill->size / 2 - 1;
-	while (tab[i] && tab[i]->d == -1)
-	{
-		free_room(&tab[i--]);
-		hill->size -= 2;
-	}
+//	end_links(hill, tab, &tab[hill->end]);
 	i = 0;
 	while (i < hill->size / 2 - 1)
 	{

@@ -30,13 +30,13 @@ void	display_room(t_rooms *room)
 {
 	t_links		*li;
 	int i = 0;
-//	li = room->links;
+	li = room->links;
 	printf("%s: dist: %d\n", room->name, room->d);
-//	while (li)
-//	{
-//		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
-//		li = li->next;
-//	}
+	while (li)
+	{
+		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
+		li = li->next;
+	}
 	printf("\n");
 }
 

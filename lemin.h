@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 16:41:23 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/09 15:49:18 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int					parser(t_hill *hill, char *line);
 void				from_map_to_tab(t_hill *hill, t_rooms **tab);
 double				max_turns(t_hill *hill, t_rooms ***paths, int nb_paths);
 t_rooms				***all_paths(t_hill *hill, t_rooms **tab, int paths);
-void				dead_end(t_hill *hill, t_rooms **tab);
 
 /*
 ** Infos validity
@@ -69,7 +68,11 @@ void				dead_end(t_hill *hill, t_rooms **tab);
 int					check_ants(char *line);
 char				**check_links(char *line);
 char				**check_rooms(char *line);
-
+/*
+**
+*/
+void				end_links(t_hill *hill, t_rooms **tab, t_rooms **end);
+void				dead_end(t_hill *hill, t_rooms **tab);
 /*
 ** Free
 */
