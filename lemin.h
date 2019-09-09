@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/07 18:08:50 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/08 16:41:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char				**check_rooms(char *line);
 /*
 ** Free
 */
+void				del_link(t_links **link);
 void				free_links(t_links *link);
 void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);

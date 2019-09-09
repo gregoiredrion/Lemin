@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 14:13:04 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 19:20:36 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				free_error(t_hill *hill)
 	return (0);
 }
 
-static void		del_link(t_links **link)
+void			del_link(t_links **link)
 {
 	t_links	*li;
 

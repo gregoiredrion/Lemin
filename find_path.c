@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/08 12:53:02 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 18:26:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 	if (!save)
 	{
 		display_room(room);
-		printf("?????????????\n");
 		return (-1);
 	}
 	li = room->links;

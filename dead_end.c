@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 15:06:39 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 19:40:38 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,43 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 	return (save->links->out);
 }
 
-static t_links	*neg_dist(t_hill *hill, t_rooms **tab, t_rooms *room)
+static void		end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 {
-	t_links		*tmp;
 	t_links		*li;
+	t_links		*next;
 
-	li = room->links;
-	printf("I'm going in\n");
-	tmp = tab[li->room->index]->links;
-	if (li->out->room == room)
-		tab[li->room->index]->links = tab[li->room->index]->links->next;
-	else
+	li = (*end)->links;
+	while (li && li->room->d == -1)
 	{
-		while (li->next->room != room)
-			li = li->next;
-		li->next = li->next->next;
+		next = li->next;
+		(*end)->links = next;
+		fix_tab(hill, tab, next->room->index);
+		li->next = NULL;
+		free_room(&li->room);
+		del_link(&li);
+		li = next;
 	}
-	tmp->next = NULL;
-	free_links(tmp);
-	fix_tab(hill, tab, room->index);
-	free_room(&room);
-	printf("I'm out\n");
-	return (NULL);
+	while (li->next)
+	{
+		next = li->next;
+		if (next && next->room->d == -1)
+		{
+			li->next = next->next;
+			next->next = NULL;
+			fix_tab(hill, tab, next->room->index);
+			free_room(&next->room);
+			del_link(&next);
+		}
+		else
+			li = li->next;
+	}
 }
 
-static void		no_link(t_hill *hill, t_rooms **tab, int i)
+static t_links	*no_link(t_hill *hill, t_rooms **tab, int i)
 {
 	free_room(&tab[i]);
 	fix_tab(hill, tab, i);
+	return (NULL);
 }
 
 void			dead_end(t_hill *hill, t_rooms **tab)
@@ -89,15 +98,22 @@ void			dead_end(t_hill *hill, t_rooms **tab)
 	int			dead;
 	t_links		*li;
 
-	i = 0;
+	t_links		*debugz;
+
 	dead = 0;
-	while (tab[i])
+	end_links(hill, tab, &tab[hill->end]);
+	i = hill->size / 2 - 1;
+	while (tab[i] && tab[i]->d == -1)
+	{
+		free_room(&tab[i--]);
+		hill->size -= 2;
+	}
+	i = 0;
+	while (i < hill->size / 2 - 1)
 	{
 		li = tab[i]->links;
 		if (!li && i != hill->end && i != hill->start)
 			no_link(hill, tab, i--);
-		else if (tab[i]->d == -1 && i != hill->end && i--)
-			li = neg_dist(hill, tab, tab[i]);
 		while (li)
 		{
 			if (li->room->links->room != tab[hill->start]

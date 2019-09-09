@@ -29,14 +29,14 @@ void	display_paths(t_hill *hill, t_rooms ***paths)
 void	display_room(t_rooms *room)
 {
 	t_links		*li;
-
-	li = room->links;
+	int i = 0;
+//	li = room->links;
 	printf("%s: dist: %d\n", room->name, room->d);
-	while (li)
-	{
-		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
-		li = li->next;
-	}
+//	while (li)
+//	{
+//		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
+//		li = li->next;
+//	}
 	printf("\n");
 }
 
@@ -49,13 +49,13 @@ void		display_tab2(t_rooms **tab)
 	while (tab[i])
 	{
 		printf("%d. %s: dist: %d\n", i, tab[i]->name, tab[i]->d);
-		li = tab[i]->links;
-		while (li)
-		{
-			printf("%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
-			li = li->next;
-		}
+//		li = tab[i]->links;
+//		while (li)
+//		{
+//			printf("	%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
+//			li = li->next;
+//		}
 		i++;
 	}
-	printf("NTM\n");
+	printf("\n");
 }

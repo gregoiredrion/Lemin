@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 11:58:50 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 19:38:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ static t_rooms	**small_tab(t_hill *hill)
 
 static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 {
+	static int	check = 1;
+
 	if ((*line)[0] != '#')
 	{
 		if (!(last = create_rooms(last, *line, 0)))
 			return (NULL);
 	}
-	else if (!(ft_strcmp(*line, "##start")))
+	else if (!(ft_strcmp(*line, "##start") && check > 0 && (check *= -1)))
 	{
 		if ((!(*str = join_and_free_newline(*str, *line)) ||
 		((get_next_line(0, line) != 1))))
@@ -55,7 +57,7 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 		if (!(last = create_rooms(last, *line, 1)))
 			return (NULL);
 	}
-	else if (!(ft_strcmp(*line, "##end")))
+	else if (!(ft_strcmp(*line, "##end")) && (check % 2) != 0 && (check *= 2))
 	{
 		if (!(*str = join_and_free_newline(*str, *line)) ||
 		((get_next_line(0, line) != 1)))

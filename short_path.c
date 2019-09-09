@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 14:19:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/08 19:40:40 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,9 @@ void		short_path(t_hill *hill, t_rooms **tab)
 		return ;
 	swap_rooms(hill, tab, 0, hill->start);
 	dijkstra_sort(hill, tab, tab[hill->end]);
-//	display_tab2(tab);
 	dead_end(hill, tab);
-	display_room(tab[hill->end]);
-	printf("%d\n", hill->size);
 	if (find_path(tab, tab[hill->end], NULL) == -1)
 	{
-		printf("Heyo\n");
 		write(2, "Error\n", 15);
 		return ;
 	}
@@ -90,5 +86,6 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	hill->turns = max_turns(hill, paths, 1);
 	tab[hill->start]->ants = hill->ants;
 	tab[hill->end]->ants = hill->ants;
+	printf("Oyeh\n");
 	suurballe(hill, tab, paths);
 }
