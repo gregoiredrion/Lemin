@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/10 16:09:13 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/10 19:01:51 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	new_weights(t_hill *hill, t_rooms **tab)
 	int		save;
 
 	i = 0;
-	init_weights(tab);
+//	init_weights(tab);
 	init_dists(hill, tab);
 //	display_tab2(tab);
 	while (tab[i])
@@ -27,8 +27,8 @@ static void	new_weights(t_hill *hill, t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->w > 0 && tab[li->room->index]->d != -1)
-				if ((save = li->w - tab[li->room->index]->d + tab[i]->d) >= 0)
+			if (li->w > 0)
+				if ((save = 1 - tab[li->room->index]->d + tab[i]->d) >= 0)
 					li->w = save;
 			li = li->next;
 		}
@@ -83,6 +83,7 @@ static void	dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 	}
 }
 
+//static?
 t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
 {
 	t_rooms		***tmp;
@@ -94,6 +95,7 @@ t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
 		return (NULL);
 	if (h->turns > (turns = max_turns(h, tmp, nb + 1)))
 	{
+	printf("Truns: %f\n", turns);
 		while (paths[i])
 			free(paths[i++]);
 		h->turns = turns;
@@ -105,6 +107,7 @@ t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
 			free(tmp[i++]);
 		free(tmp);
 	}
+	printf("Truns: %f\n", turns);
 	return (paths);
 }
 
@@ -117,11 +120,8 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	hill->max_paths = max_paths(hill, tab);
 	while (nb_paths < hill->max_paths)
 	{
-		printf("Boucle %d\n", nb_paths);
 		new_weights(hill, tab);
 		dijkstra(hill, tab, tab[hill->end]);
-		if (nb_paths == 7)
-			display_tab2(tab);
 		if (find_path(tab, tab[hill->end], NULL, 0) == -1)
 			break ;
 		if (!(paths = store_paths(hill, tab, paths, nb_paths)))

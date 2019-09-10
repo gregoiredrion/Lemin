@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/09 19:08:45 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/10 17:57:41 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out, int b)
 	}
 	if (save->out->w == -1 || save == out)
 		return (-1);
-	if (find_path(tab, save->room, save->out, ++b) == -1)
+	if (find_path(tab, save->room, save->out, b) == -1)
 		return (-1);
 	update_w(save);
 	return (0);

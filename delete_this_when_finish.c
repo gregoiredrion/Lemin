@@ -52,7 +52,7 @@ void		display_tab2(t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			printf("	%s-%s: weight: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->room->d);
+			printf("	%s-%s: weight: %d && out: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->out->w, li->room->d);
 			li = li->next;
 		}
 		i++;
