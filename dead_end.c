@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/09 16:33:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/09 19:08:46 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 	li = (*end)->links;
 	while (li && li->room->d == -1)
 	{
-		printf("%d\n", li->room->index);
 		next = li->next;
 		(*end)->links = next;
 		fix_tab(hill, tab, li->room->index);
@@ -70,14 +69,12 @@ void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 		free_room(&li->room);
 		del_link(&li);
 		li = next;
-		display_tab2(tab);
 	}
 	while (li->next)
 	{
 		next = li->next;
 		if (next && next->room->d == -1)
 		{
-			printf("%d\n", li->room->index);
 			li->next = next->next;
 			next->next = NULL;
 			fix_tab(hill, tab, next->room->index);
@@ -88,13 +85,11 @@ void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
 			li = li->next;
 	}
 	i = hill->size / 2 - 1;
-	printf("%d\n", i);
 	while (tab[i] && tab[i]->d == -1)
 	{
 		free_room(&tab[i--]);
 		hill->size -= 2;
 	}
-	printf("%d\n", i);
 }
 
 static t_links	*no_link(t_hill *hill, t_rooms **tab, int i)
@@ -113,17 +108,14 @@ void			dead_end(t_hill *hill, t_rooms **tab)
 	t_links		*debugz;
 
 	dead = 0;
-//	end_links(hill, tab, &tab[hill->end]);
 	i = 0;
 	while (i < hill->size / 2 - 1)
 	{
 		li = tab[i]->links;
-		if (!li && i != hill->end && i != hill->start)
-			no_link(hill, tab, i--);
 		while (li)
 		{
-			if (li->room->links->room != tab[hill->start]
-			&& li->room->links->room != tab[hill->end]
+			if (li->room != tab[hill->start]
+			&& li->room != tab[hill->end]
 			&& !li->room->links->next && (dead = 1))
 				li = del(hill, tab, li, li->room);
 			else

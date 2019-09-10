@@ -5,6 +5,7 @@ SRC = create_anthill.c\
 	  create_links.c\
 	  short_path.c\
 	  find_path.c\
+	  find_path2.c\
 	  suurballe.c\
 	  q_sort.c\
 	  all_paths.c\

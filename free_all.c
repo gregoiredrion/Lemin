@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/08 19:20:36 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:11:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void			free_links(t_links *links)
 
 	while (links)
 	{
-		tmp = links;
-		links = links->next;
-		del_link(&tmp);
+		tmp = links->next;
+		del_link(&links);
+		links = tmp;
 	}
 }
 

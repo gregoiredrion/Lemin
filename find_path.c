@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/08 18:26:23 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:08:45 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,40 +41,27 @@ static t_links	*update_room(t_links *li, t_links *save, t_links *out)
 	return (save);
 }
 
-int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
+int				find_path(t_rooms **tab, t_rooms *room, t_links *out, int b)
 {
 	t_links		*li;
 	t_links		*save;
 
+	if (b > tab[0]->ants)
+		return (-1);
 	if (room->index == 0)
 		return (1);
 	save = room->links;
 	if (!save)
-	{
-		display_room(room);
 		return (-1);
-	}
 	li = room->links;
 	while (li)
 	{
-	//printf("li: %s, save: %s, out: %s\n", li->room->name, save->room->name, out->room->name);
-//		printf("li: %s,\n", li->room->name);
-//		printf("save: %s\n", save->room->name);
-//		if (out)
-//			printf("out: %s\n\n", out->room->name);
 		save = update_room(li, save, out);
 		li = li->next;
 	}
 	if (save->out->w == -1 || save == out)
-	{
-		printf("%d:\n", save->room->index);
-		display_room(save->room);
-		printf("%d:\n", save->out->room->index);
-		display_room(save->out->room);
-		display_tab2(tab);
 		return (-1);
-	}
-	if (find_path(tab, save->room, save->out) == -1)
+	if (find_path(tab, save->room, save->out, ++b) == -1)
 		return (-1);
 	update_w(save);
 	return (0);

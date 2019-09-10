@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 19:52:03 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:09:13 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	new_weights(t_hill *hill, t_rooms **tab)
 	i = 0;
 	init_weights(tab);
 	init_dists(hill, tab);
+//	display_tab2(tab);
 	while (tab[i])
 	{
 		li = tab[i]->links;
@@ -73,13 +74,8 @@ static void	dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->w == -1 && li->out->w == -1)
-			{
-				li->w = 1;
-				li->out->w = 1;
-			}
 			if (tab[i]->d + li->w < li->room->d && li->w != -1
-			&& tab[i]->d != -1 && li->room != end)
+			&& li->room != end)
 				li->room->d = tab[i]->d + li->w;
 			li = li->next;
 		}
@@ -121,9 +117,12 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	hill->max_paths = max_paths(hill, tab);
 	while (nb_paths < hill->max_paths)
 	{
+		printf("Boucle %d\n", nb_paths);
 		new_weights(hill, tab);
 		dijkstra(hill, tab, tab[hill->end]);
-		if (find_path(tab, tab[hill->end], NULL) == -1)
+		if (nb_paths == 7)
+			display_tab2(tab);
+		if (find_path(tab, tab[hill->end], NULL, 0) == -1)
 			break ;
 		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
 			return (0);
