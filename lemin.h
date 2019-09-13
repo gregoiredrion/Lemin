@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/13 17:14:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/13 17:20:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ void				init_dists(t_hill *hill, t_rooms **tab);
 void				init_weights(t_rooms **tab);
 void				short_path(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
-int					bfs(t_hill *hill, t_rooms **tab);
+
+
+
+
+int					bfs(t_hill *hill);
 
 /*
 ** Suurballe

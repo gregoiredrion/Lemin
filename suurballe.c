@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/13 14:53:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:26:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ static void	new_weights(t_hill *hill, t_rooms **tab)
 
 //	init_weights(tab);
 //	init_dists(hill, tab);
-	i = 1;
-		while (tab[i])
-				tab[i++]->d = -1;
-	bfs(tab[0]);
 	i = 0;
 	while (tab[i])
 	{
@@ -116,18 +112,18 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 {
 	t_links		*li;
 	int			nb_paths;
+	int			i;
 
 	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
 	while (nb_paths < hill->max_paths)
 	{
-		new_weights(hill, tab);
-		dijkstra(hill, tab, tab[hill->end]);
-		//bfs(tab[0]);
-			display_tab2(tab);
+		i = 1;
+		while (tab[i])
+				tab[i++]->d = -1;
+		bfs(hill);
 		if (find_path(tab, tab[hill->end], NULL) == -1)
 			break ;
-			display_tab2(tab);
 		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
 			return (0);
 //	display_paths(hill, paths);
@@ -135,6 +131,6 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 		nb_paths++;
 	}
 	new_dists(paths);
-//	move_ants(hill, paths, tab);
+	move_ants(hill, paths, tab);
 	return (1);
 }
