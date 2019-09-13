@@ -6,27 +6,37 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 14:36:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/13 14:55:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/13 17:13:32 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void		bfs(t_rooms *room)
+int				bfs(t_hill *hill, t_rooms **tab)
 {
 	t_links		*li;
-	
-	li = room->links;
+	t_rooms		**queue;
+	int			i;
+	int			j;
 
-	while (li)
+	i = 0;
+	if (!(queue = ft_memalloc(sizeof(t_rooms *) * (hill->size / 2 + 1))))
+		return (0);
+	queue[i] = tab[i];
+	while (queue[i])
 	{
-		while (li->w == -1)
-			li = li->next;
-		if (room->d + 1 < li->room->d || li->room->d == -1)
+		li = queue[i]->links;
+		while (li)
 		{
-			li->room->d = room->d + 1;
-			bfs(li->room);
+			j = i;
+			if (li->room->d == -1)
+			{
+				li->room->d = queue[i]->d + 1;
+				queue[j++] = li->room;
+			}
 		}
-		li = li->next;
+		i++;
 	}
+	free(queue);
+	return (1);
 }
