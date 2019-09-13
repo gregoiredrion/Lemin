@@ -31,10 +31,10 @@ void	display_room(t_rooms *room)
 	t_links		*li;
 	int i = 0;
 	li = room->links;
-	printf("%s: dist: %d\n", room->name, room->d);
+	printf("%d. %s: dist: %d\n", room->index, room->name, room->d);
 	while (li)
 	{
-		printf("	%s-%s: %d\n", room->name, li->room->name, li->w);
+			printf("	%d. %s-%s: weight: %d && out: %d && dist: %d\n", li->room->index, room->name, li->room->name, li->w, li->out->w, li->room->d);
 		li = li->next;
 	}
 	printf("\n");
@@ -52,7 +52,7 @@ void		display_tab2(t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			printf("	%s-%s: weight: %d && out: %d && dist: %d\n", tab[i]->name, li->room->name, li->w, li->out->w, li->room->d);
+			printf("	%s-%s: weight: %d && out: %d && dist: %d\n",  tab[i]->name, li->room->name, li->w, li->out->w, li->room->d);
 			li = li->next;
 		}
 		i++;

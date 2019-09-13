@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 17:01:21 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:59:59 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end)
 	{
 		li = room->links;
 		tab[j++] = room;
-		room->d = 0;
 		while (li->w != -1)
 			li = li->next;
 		room = li->room;

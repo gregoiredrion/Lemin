@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/10 17:57:41 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:28:48 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static void		update_w(t_links *li)
 
 static t_links	*update_room(t_links *li, t_links *save, t_links *out)
 {
-	if ((((li->room->d < save->room->d && li->out->w != -1) ||
-	save->out->w == -1) && li != out) || save == out)
+	if (((((li->room->d < save->room->d) || save->out->w == -1) && li != out)
+	|| save == out || save->room->d < 0) && li->out->w != -1 && li->room->d >= 0)
 		save = li;
-	else if (li->room->d == save->room->d)
+	else if (li->room->d == save->room->d && li != out)
 	{
-		if (li->out->w < save->out->w)
+		if (li->out->w < save->out->w && li->out->w != -1)
 			save = li;
 	}
 	else if (save == out)
@@ -41,13 +41,13 @@ static t_links	*update_room(t_links *li, t_links *save, t_links *out)
 	return (save);
 }
 
-int				find_path(t_rooms **tab, t_rooms *room, t_links *out, int b)
+int				find_path(t_rooms **tab, t_rooms *room, t_links *out)
 {
 	t_links		*li;
 	t_links		*save;
 
-	if (b > tab[0]->ants)
-		return (-1);
+	static int check = 1;
+printf("iter: %d\n", check++);
 	if (room->index == 0)
 		return (1);
 	save = room->links;
@@ -59,9 +59,10 @@ int				find_path(t_rooms **tab, t_rooms *room, t_links *out, int b)
 		save = update_room(li, save, out);
 		li = li->next;
 	}
-	if (save->out->w == -1 || save == out)
+//	display_room(save->out->room);
+	if (save->out->w == -1 || save == out || save->out->room->d == -1)
 		return (-1);
-	if (find_path(tab, save->room, save->out, b) == -1)
+	if (find_path(tab, save->room, save->out) == -1)
 		return (-1);
 	update_w(save);
 	return (0);

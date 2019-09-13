@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/10 17:40:37 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:14:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	dead_end(hill, tab);
 	tab[hill->start]->ants = hill->ants;
 	tab[hill->end]->ants = hill->ants;
-	if (find_path(tab, tab[hill->end], NULL, 0) == -1)
+	if (find_path(tab, tab[hill->end], NULL) == -1)
 	{
 		write(2, "Error\n", 15);
 		return ;

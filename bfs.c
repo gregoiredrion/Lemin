@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max_turn.c                                         :+:      :+:    :+:   */
+/*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/30 12:56:27 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/12 17:07:34 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/09/13 14:36:34 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/09/13 14:55:34 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	sum_paths(t_rooms ***paths)
+void		bfs(t_rooms *room)
 {
-	int		i;
-	int		j;
-	int		len;
+	t_links		*li;
+	
+	li = room->links;
 
-	len = 0;
-	i = 0;
-	while (paths[i])
+	while (li)
 	{
-		j = 0;
-		while (paths[i][j])
+		while (li->w == -1)
+			li = li->next;
+		if (room->d + 1 < li->room->d || li->room->d == -1)
 		{
-			j++;
-			len++;
+			li->room->d = room->d + 1;
+			bfs(li->room);
 		}
-		i++;
+		li = li->next;
 	}
-	return (len);
-}
-
-double		max_turns(t_hill *hill, t_rooms ***paths, int nb_paths)
-{
-	double		turns;
-	int			save;
-
-	save = hill->ants + sum_paths(paths);
-	turns = (double)save / (double)nb_paths - 1;
-	printf("Turns = %f - paths: %d\n", turns, nb_paths);
-	return (turns);
 }

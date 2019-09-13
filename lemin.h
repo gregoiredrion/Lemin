@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/09 19:04:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/13 14:42:16 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct	s_rooms
 	int				ants;
 	intmax_t		x;
 	intmax_t		y;
+	int				in;
+	int				out;
 	int				stend;
 	t_links			*links;
 	struct s_rooms	*next;
@@ -97,7 +99,8 @@ void				sort_paths(t_rooms ***paths, int start, int end);
 void				init_dists(t_hill *hill, t_rooms **tab);
 void				init_weights(t_rooms **tab);
 void				short_path(t_hill *hill, t_rooms **tab);
-int					find_path(t_rooms **tab, t_rooms *room, t_links *out, int b);
+int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
+void				bfs(t_rooms *room);
 
 /*
 ** Suurballe
