@@ -5,8 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/19 13:26:17 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/10/01 13:18:06 by wdeltenr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   short_path.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:23:40 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:14:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/19 13:25:34 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +87,16 @@ void		short_path(t_hill *hill, t_rooms **tab)
 	if (!ft_strcmp(tab[hill->start]->name, tab[hill->end]->name))
 		return ;
 	swap_rooms(hill, tab, 0, hill->start);
-	dijkstra_sort(hill, tab, tab[hill->end]);
-	end_links(hill, tab, &tab[hill->end]);
-	dead_end(hill, tab);
-	tab[hill->start]->ants = hill->ants;
-	tab[hill->end]->ants = hill->ants;
-	if (find_path(tab, tab[hill->end], NULL) == -1)
+	swap_rooms(hill, tab, 1, hill->end);
+	if (!bfs(hill))
 	{
 		write(2, "Error\n", 15);
 		return ;
 	}
+	end_links(hill, tab, &tab[hill->end]);
+	dead_end(hill, tab);
+	tab[hill->start]->ants = hill->ants;
+	tab[hill->end]->ants = hill->ants;
 	paths = all_paths(hill, tab, 1);
 	hill->turns = max_turns(hill, paths, 1);
 	suurballe(hill, tab, paths);

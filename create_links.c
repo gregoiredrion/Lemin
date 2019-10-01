@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/08 17:11:50 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/18 14:20:45 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
 	return (NULL);
 }
 
-static t_links	*init_links(t_rooms *room, t_links *out)
+static t_links	*init_links(t_rooms *room, t_links *opp)
 {
 	t_links	*new;
 
@@ -45,8 +45,11 @@ static t_links	*init_links(t_rooms *room, t_links *out)
 		return (NULL);
 	new->room = room;
 	new->w = 1;
+	new->in = 0;
+	new->out = 0;
+	new->used = 0;
 	new->next = NULL;
-	new->out = out;
+	new->opp = opp;
 	return (new);
 }
 
@@ -75,17 +78,17 @@ static int		stock_links(t_rooms *room, t_links *new)
 static int		store_links2(t_rooms *room1, t_rooms *room2)
 {
 	t_links	*in;
-	t_links	*out;
+	t_links	*opp;
 
 	if (!(in = init_links(room2, NULL)))
 		return (-1);
-	if (!(out = init_links(room1, in)))
+	if (!(opp = init_links(room1, in)))
 		return (-1);
-	in->out = out;
-	if (!(stock_links(room1, in)) || !(stock_links(room2, out)))
+	in->opp = opp;
+	if (!(stock_links(room1, in)) || !(stock_links(room2, opp)))
 	{
 		free_links(in);
-		free_links(out);
+		free_links(opp);
 		return (0);
 	}
 	return (1);

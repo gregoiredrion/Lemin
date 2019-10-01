@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/13 18:26:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/01 13:49:38 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	new_weights(t_hill *hill, t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->w > 0 && tab[i]->d >= 0)
+			if (li->used)
 				if ((save = li->w - tab[li->room->index]->d + tab[i]->d) >= 0)
 					li->w = save;
 			li = li->next;
@@ -83,20 +83,20 @@ static void	dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
 }
 
 //static?
-t_rooms		***store_paths(t_hill *h, t_rooms **tab, t_rooms ***paths, int nb)
+t_rooms		***store_paths(t_hill *hill, t_rooms **tab, t_rooms ***paths, int nb)
 {
 	t_rooms		***tmp;
 	double		turns;
 	int			i;
 
 	i = 0;
-	if (!(tmp = all_paths(h, tab, nb + 1)))
+	if (!(tmp = all_paths(hill, tab, nb + 1)))
 		return (NULL);
-	if (h->turns > (turns = max_turns(h, tmp, nb + 1)))
+	if (hill->turns > (turns = max_turns(hill, tmp, nb + 1)))
 	{
 		while (paths[i])
 			free(paths[i++]);
-		h->turns = turns;
+		hill->turns = turns;
 		return (tmp);
 	}
 	else
@@ -112,25 +112,23 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 {
 	t_links		*li;
 	int			nb_paths;
-	int			i;
+	int			*pred;
 
 	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
 	while (nb_paths < hill->max_paths)
 	{
-		i = 1;
-		while (tab[i])
-				tab[i++]->d = -1;
-		bfs(hill);
-		if (find_path(tab, tab[hill->end], NULL) == -1)
+		bellman_ford(tab, hill->size / 2 - 1);
+	//	display_tab2(tab);
+		if (!find_path(tab, hill->end))
 			break ;
 		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
 			return (0);
-//	display_paths(hill, paths);
-//	printf("\n\n\n");
 		nb_paths++;
 	}
 	new_dists(paths);
+	display_paths(hill, paths);
+	checker(paths, tab[0], tab[hill->end]);
 	move_ants(hill, paths, tab);
 	return (1);
 }

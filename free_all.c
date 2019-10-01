@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/09 16:11:23 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/09/16 17:07:03 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			del_link(t_links **link)
 	li->room = NULL;
 	li->w = 0;
 	li->next = NULL;
-	li->out = NULL;
+	li->opp = NULL;
 	ft_memdel((void **)link);
 }
 

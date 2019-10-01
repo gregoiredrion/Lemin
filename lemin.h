@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/13 17:20:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:05:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 
 # include "libft/libft.h"
 
+# define IN 1
+# define OUT 2
+# define IN_OUT 3
+
 typedef struct	s_rooms t_rooms;
 
 typedef struct	s_links
 {
 	t_rooms			*room;
 	int				w;
+	int				in;
+	int				out;
+	int				used;
 	struct s_links	*next;
-	struct s_links	*out;
+	struct s_links	*opp;
 }				t_links;
 
 typedef struct	s_rooms
@@ -33,6 +40,8 @@ typedef struct	s_rooms
 	int				ants;
 	intmax_t		x;
 	intmax_t		y;
+	int				used;
+	int				pred;
 	int				in;
 	int				out;
 	int				stend;
@@ -46,6 +55,7 @@ typedef struct	s_hill
 	int				start;
 	int				end;
 	int				ants;
+	int				used;
 	int				size;
 	double			turns;
 	int				max_paths;
@@ -96,14 +106,14 @@ void				sort_paths(t_rooms ***paths, int start, int end);
 /*
 ** Dijkstra
 */
-void				init_dists(t_hill *hill, t_rooms **tab);
+void				init_dists(t_rooms **tab);
 void				init_weights(t_rooms **tab);
 void				short_path(t_hill *hill, t_rooms **tab);
-int					find_path(t_rooms **tab, t_rooms *room, t_links *out);
+int					find_path(t_rooms **tab, int end);
 
 
 
-
+void				bellman_ford(t_rooms **tab, int size);
 int					bfs(t_hill *hill);
 
 /*
@@ -125,5 +135,7 @@ void				display_tab(t_rooms **tab, int size);
 void				display_paths(t_hill *hill, t_rooms ***paths);
 //delete + fonction!!
 void				display_room(t_rooms *room);
+//delete + fonction!!
+void				checker(t_rooms ***paths, t_rooms *start, t_rooms *end);
 
 #endif

@@ -18,7 +18,9 @@ SRC = create_anthill.c\
 	  dead_end.c\
 	  init.c\
 	  parser.c\
-	  bfs.c
+	  bfs.c\
+	  checker.c\
+	  bellman_ford.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/11 18:58:17 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/09/16 17:08:32 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 
 	if (room->index == hill->start || room->index == hill->end)
 		return (NULL);
-	save = li->out->room;
+	save = li->opp->room;
 	if (save->links == li)
 		save->links = li->next;
 	else
@@ -44,13 +44,13 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 		tmp->next = li->next;
 	}
 	fix_tab(hill, tab, room->index);
-	li->out->next = NULL;
+	li->opp->next = NULL;
 	free_room(&room);
 	if (save->links && !save->links->next)
-		return (del(hill, tab, save->links->out, save));
+		return (del(hill, tab, save->links->opp, save));
 	else if (!save->links)
 		return (NULL);
-	return (save->links->out);
+	return (save->links->opp);
 }
 
 void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
