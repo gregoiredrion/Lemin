@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/01 10:55:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/03 15:17:28 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <wchar.h>
 # include "ftprintf/ft_printf.h"
 
-# define BUFF_SIZE_GNL 100
+# define BUFF_SIZE 256
 
 typedef struct	s_list
 {
@@ -28,6 +28,16 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct		s_line
+{
+	int				fd;
+	char			*str;
+	size_t			size;
+	size_t			remaining;
+}					t_line;
+
+int					get_next_line(const int fd, char **line);
 
 /*
 **Changement valeur/copy sans malloc
@@ -76,6 +86,7 @@ char			*ft_lltoa_tumsoules(long long int n);
 /*
 **Trouver une valeur
 */
+size_t			ft_strfind(const char *str, char c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haysack, const char *needle);
@@ -150,5 +161,6 @@ void			ft_lstadd(t_list **alst, t_list *new_elem);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t			ft_lstlen(t_list *lst);
-
+void			ft_lstpushback(t_list **alst, const void *, size_t s);
+void			ft_lstremoveif(t_list **alst, void *data_ref, int (*cmp)());
 #endif

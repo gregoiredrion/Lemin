@@ -6,7 +6,7 @@
 #    By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 15:38:46 by wdeltenr          #+#    #+#              #
-#    Updated: 2019/09/06 23:29:58 by gdrion           ###   ########.fr        #
+#    Updated: 2019/10/03 15:08:38 by gdrion           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,10 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	  get_next_line.c ft_atoi_base.c ft_wstrlen.c ft_wstrdup.c ft_uitoa.c\
 	  ft_putwchar.c ft_itoa_base.c ft_str_to_upper.c ft_uitoa_base.c\
 	  ft_putunbr.c ft_dtoa.c ft_count_digits.c ft_absolut.c ft_strcdup.c\
-	  ft_strndup.c join_and_free.c
+	  ft_strndup.c join_and_free.c ft_lstremoveif.c ft_strfind.c\
+	  ft_lstpushback.c
 OBJ = $(SRC:.c=.o)
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 CC = gcc
 
 all: $(NAME)
