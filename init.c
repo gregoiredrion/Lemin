@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:36:47 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/30 15:50:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/03 17:47:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ void		init_dists(t_rooms **tab)
 	i = 1;
 	while (tab[i])
 	{
-		if (tab[i]->used)
-		{
-			tab[i]->in = -1;
-			tab[i]->out = -1;
-		}
+		tab[i]->in = -1;
+		tab[i]->out = -1;
 		tab[i]->pred = -1;
 		tab[i++]->d = -1;
 	}

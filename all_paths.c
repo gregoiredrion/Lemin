@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/01 11:29:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/11 14:17:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void		dupe_rooms(t_rooms ***paths)
 			if (!paths[i][j]->used)
 			{
 				paths[i][j]->used = 1;
-				set_links(paths[i][j]);
+			//	set_links(paths[i][j]);
 			}
 			j++;
 		}
@@ -65,7 +65,7 @@ static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end)
 	{
 		li = room->links;
 		tab[j++] = room;
-		while (!li->used || (prev && prev == li->room))
+		while (!li->used || (li->used && li->opp->used))
 			li = li->next;
 		prev = room;
 		room = li->room;
@@ -86,12 +86,7 @@ static int		len(t_rooms *room, t_rooms *end)
 		return (len);
 	while (li->room != end)
 	{
-		if (li->used && li->opp->used)
-		{
-			li->used = 0;
-			li->opp->used = 0;
-		}
-		if (li->used)
+		if (li->used && !li->opp->used)
 		{
 			len++;
 			li = li->room->links;

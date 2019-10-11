@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/01 13:49:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/11 14:38:23 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	while (nb_paths < hill->max_paths)
 	{
 		bellman_ford(tab, hill->size / 2 - 1);
-	//	display_tab2(tab);
 		if (!find_path(tab, hill->end))
 			break ;
 		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
@@ -129,6 +128,6 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	new_dists(paths);
 	display_paths(hill, paths);
 	checker(paths, tab[0], tab[hill->end]);
-	move_ants(hill, paths, tab);
+	//move_ants(hill, paths, tab);
 	return (1);
 }

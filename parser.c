@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/01 13:31:36 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/03 15:40:37 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 	}
 	else if (!(ft_strcmp(*line, "##start") && check > 0 && (check *= -1)))
 	{
-		if ((!(*str = join_and_free_newline(*str, *line)) ||
-		((get_next_line(0, line) != 1))))
+		if (get_next_line(0, line) != 1)
 			return (NULL);
 		if (!(last = create_rooms(last, *line, 1)))
 			return (NULL);
 	}
 	else if (!(ft_strcmp(*line, "##end")) && (check % 2) != 0 && (check *= 2))
 	{
-		if (!(*str = join_and_free_newline(*str, *line)) ||
-		((get_next_line(0, line) != 1)))
+		if (get_next_line(0, line) != 1)
 			return (NULL);
 		if (!(last = create_rooms(last, *line, -1)))
 			return (NULL);
@@ -87,8 +85,6 @@ static t_rooms	*read_rooms(t_hill *hill, char **str, char **line)
 			if (!begin)
 				begin = last;
 			hill->size++;
-			if (!(*str = join_and_free_newline(*str, *line)))
-				return (NULL);
 		}
 	}
 	if (!hashmap(hill, begin))
@@ -110,8 +106,6 @@ static char		*read_link(t_hill *hill, t_rooms **tab, char *line, char *str)
 			if (ret == -1)
 				return (NULL);
 		}
-		if (!(str = join_and_free_newline(str, line)))
-			return (NULL);
 	}
 	return (str);
 }
@@ -133,13 +127,10 @@ int				parser(t_hill *hill, char *line)
 		return (0);
 	if (ret != 0)
 	{
-		if (!(str = join_and_free_newline(str, line)))
-			return (free_error(hill));
 		if (!(str = read_link(hill, tab, line, str)))
 			return (free_error(hill));
 	}
 	hill->rooms = tab;
-	ft_printf("%s\n\n", str);
 	short_path(hill, tab);
 	return (1);
 }

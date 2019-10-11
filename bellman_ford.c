@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 14:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/03 17:05:21 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/11 14:38:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	update_dist(t_rooms *room, t_rooms *pred, int i)
 				updated = 1;
 		}
 		else if ((room->d + li->w < li->room->d || li->room->d == -1)
-		&& li->room->index != 0 && !li->used && room->d != -1)
+		&& li->room->index != 0 && room->d != -1)
 		{
 			li->room->d = room->d + li->w;
 			li->room->pred = i;
@@ -122,4 +122,5 @@ void		bellman_ford(t_rooms **tab, int size)
 			break ;
 		k++;
 	}
+	display_room(tab[392]);
 }
