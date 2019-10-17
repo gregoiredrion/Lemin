@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/09/18 14:20:45 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:26:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static t_links	*init_links(t_rooms *room, t_links *opp)
 		return (NULL);
 	new->room = room;
 	new->w = 1;
-	new->in = 0;
-	new->out = 0;
 	new->used = 0;
 	new->next = NULL;
 	new->opp = opp;

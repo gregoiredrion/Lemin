@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/03 18:35:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:38:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # include "libft/libft.h"
 
-# define IN 1
-# define OUT 2
-# define IN_OUT 3
+# define END 1
 
 typedef struct	s_rooms t_rooms;
 
@@ -25,15 +23,13 @@ typedef struct	s_links
 {
 	t_rooms			*room;
 	int				w;
-	int				in;
-	int				out;
 	int				used;
 	struct s_links	*next;
 	struct s_links	*opp;
 }				t_links;
 
 typedef struct	s_rooms
-{
+ {
 	char			*name;
 	int				d;
 	int				index;
@@ -42,8 +38,6 @@ typedef struct	s_rooms
 	intmax_t		y;
 	int				used;
 	int				pred;
-	int				in;
-	int				out;
 	int				stend;
 	t_links			*links;
 	struct s_rooms	*next;
@@ -120,6 +114,7 @@ int					bfs(t_hill *hill);
 */
 int					suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
 void				new_dists(t_rooms ***paths);
+void				dupe_rooms(t_rooms ***paths);
 
 /*
 ** Move_ants

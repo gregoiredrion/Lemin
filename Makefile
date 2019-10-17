@@ -20,7 +20,8 @@ SRC = create_anthill.c\
 	  parser.c\
 	  bfs.c\
 	  checker.c\
-	  bellman_ford.c
+	  bellman_ford.c\
+	  dupe_rooms.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc

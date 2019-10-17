@@ -6,78 +6,43 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/11 14:17:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:54:07 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void		set_links(t_rooms *room)
+static t_rooms	**store_path(t_rooms **tab, t_rooms **path, t_rooms *room)
 {
 	t_links		*li;
-
-	li = room->links;
-	while (li)
-	{
-		if (li->used)
-			li->opp->in = 1;
-		else if (li->opp->used)
-			li->in = 1;
-		else
-		{
-			li->out = 1;
-			li->opp->in = 1;
-		}
-		li = li->next;
-	}
-}
-
-static void		dupe_rooms(t_rooms ***paths)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (paths[i])
-	{
-		j = 0;
-		while (paths[i][j + 1])
-		{
-			if (!paths[i][j]->used)
-			{
-				paths[i][j]->used = 1;
-			//	set_links(paths[i][j]);
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-static t_rooms	**store_paths(t_rooms **tab, t_rooms *room, t_rooms *end)
-{
-	t_links		*li;
+	t_links		*save;
 	int			j;
-	t_rooms		*prev;
 
 	j = 0;
-	while (room != end)
+	li = room->links;
+	path[j++] = room;
+	while (li->room != tab[END])
 	{
-		li = room->links;
-		tab[j++] = room;
-		while (!li->used || (li->used && li->opp->used))
+		if (li->used && !li->opp->used)
+		{
+			path[j++] = li->room;
+			save = li;
+			li = li->room->links;
+		}
+		else
 			li = li->next;
-		prev = room;
-		room = li->room;
+		if (!li)
+			li = tab[-save->room->index]->links;
 	}
-	tab[j++] = room;
-	tab[j] = NULL;
-	return (tab);
+	path[j++] = tab[END];
+	path[j] = NULL;
+	return (path);
 }
 
-static int		len(t_rooms *room, t_rooms *end)
+static int		len(t_rooms **tab, t_rooms *room, t_rooms *end)
 {
 	t_links		*li;
+	t_links		*save;
 	int			len;
 
 	len = 1;
@@ -89,10 +54,13 @@ static int		len(t_rooms *room, t_rooms *end)
 		if (li->used && !li->opp->used)
 		{
 			len++;
+			save = li;
 			li = li->room->links;
 		}
 		else
 			li = li->next;
+		if (!li)
+			li = tab[-save->room->index]->links;
 	}
 	return (len + 1);
 }
@@ -114,12 +82,12 @@ t_rooms			***all_paths(t_hill *hill, t_rooms **tab, int nb_paths)
 	{
 		if (li->used)
 		{
-			len_path = len(li->room, tab[hill->end]) + 1;
+			len_path = len(tab, li->room, tab[hill->end]) + 1;
 			if (!(tmp = ft_memalloc(sizeof(t_rooms *) * len_path)))
 				return (NULL);
 			tmp[len_path - 1] = NULL;
 			tmp[0] = li->room;
-			paths[i++] = store_paths(tmp, li->room, tab[hill->end]);
+			paths[i++] = store_path(tab, tmp, li->room);
 		}
 		li = li->next;
 	}

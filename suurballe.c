@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/11 14:38:23 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 13:40:39 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_rooms		***store_paths(t_hill *hill, t_rooms **tab, t_rooms ***paths, int nb)
 	i = 0;
 	if (!(tmp = all_paths(hill, tab, nb + 1)))
 		return (NULL);
+//	display_paths(hill, tmp);
 	if (hill->turns > (turns = max_turns(hill, tmp, nb + 1)))
 	{
 		while (paths[i])
@@ -127,7 +128,7 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	}
 	new_dists(paths);
 	display_paths(hill, paths);
-	checker(paths, tab[0], tab[hill->end]);
-	//move_ants(hill, paths, tab);
+	//checker(paths, tab[0], tab[hill->end]);
+	move_ants(hill, paths, tab);
 	return (1);
 }

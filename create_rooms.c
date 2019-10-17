@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/20 15:19:13 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/14 19:58:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_rooms		*create_rooms(t_rooms *last, char *line, int stend)
 	new->index = -1;
 	new->used = 0;
 	new->pred = -1;
-	new->in = -1;
-	new->out = -1;
 	new->links = NULL;
 	if ((new->x = ft_atoi(tab[1])) > INT_MAX || new->x < INT_MIN)
 		return (NULL);

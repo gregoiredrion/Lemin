@@ -6,31 +6,54 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/11 14:21:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/15 20:41:42 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int				find_path(t_rooms **tab, int end)
+static int	check_pred(t_rooms **tab, int pred)
+{
+	if (pred == -1)
+		return (0);
+	if (pred >= 0 && !tab[pred])
+		return (0);
+	if (pred < 0 && !tab[-pred]->next)
+		return (0);
+	return (1);
+}
+
+static t_rooms	*assign_pred(t_rooms **tab, t_rooms *room)
+{
+	if (room->pred == -1)
+		return (NULL);
+	if (room->pred >= 0)
+		return (tab[room->pred]);
+	else
+		return (tab[-room->pred]->next);
+
+}
+
+int			find_path(t_rooms **tab, int end)
 {
 	t_links		*li;
-	t_links		*save;
-	int			pred;
+	int			room;
+	t_rooms		*pred;
 
-	save = tab[end]->links;
-	pred = tab[end]->pred;
-	if (pred == -1 || tab[pred]->d == -1)
+	pred = tab[tab[end]->pred];
+	room = END;
+	if (!check_pred(tab, tab[end]->pred))
 		return (0);
-	while (pred != -1)
+	while (pred)
 	{
-		li = save;
-		while (li->room->index != pred)
+		li = pred->links;
+		while (li && li->room->index != room)
 			li = li->next;
-		pred = li->room->pred;
-		save = li->room->links;
-		li->opp->used = 1;
-		li->w = -1;
+		li->used = 1;
+		if (li->opp)
+			li->opp->w = -1;
+		room = pred->index;
+		pred = assign_pred(tab, pred);
 	}
 	return (1);
 }

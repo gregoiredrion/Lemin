@@ -31,10 +31,13 @@ void	display_room(t_rooms *room)
 	t_links		*li;
 	int i = 0;
 	li = room->links;
-	ft_printf("%d. %s: dist: %d (in: %d - out: %d) && used: %d && pred: %d\n", room->index, room->name, room->d, room->in, room->out, room->used, room->pred);
+	ft_printf("%d. %s: dist: %d && used: %d && pred: %d\n", room->index, room->name, room->d, room->used, room->pred);
 	while (li)
 	{
-			ft_printf("	%d. %s-%s: weight: %d && out: %d && dist: %d (in: %d - out: %d) && used: %d && opp used: %d && pred: %d\n", li->room->index, room->name, li->room->name, li->w, li->opp->w, li->room->d, li->room->in, li->room->out, li->used, li->opp->used, li->room->pred);
+		if (!room->used)
+			ft_printf("	%d. %s-%s: weight: %d && out: %d && dist: %d && used: %d && opp used: %d && pred: %d\n", li->room->index, room->name, li->room->name, li->w, li->opp->w, li->room->d, li->used, li->opp->used, li->room->pred);
+		else
+			ft_printf("	%d. %s-%s: weight: %d && dist: %d && used: %d && pred: %d\n", li->room->index, room->name, li->room->name, li->w, li->room->d, li->used, li->room->pred);
 		li = li->next;
 	}
 	ft_printf("\n");
@@ -43,17 +46,30 @@ void	display_room(t_rooms *room)
 void		display_tab2(t_rooms **tab)
 {
 	t_links		*li;
+	t_rooms		*room;
 	int			i;
+	int			ay;
 
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("%d. %s: dist: %d (in: %d - out: %d) && pred: %d && used: %d\n", i, tab[i]->name, tab[i]->d, tab[i]->in, tab[i]->out, tab[i]->pred, tab[i]->used);
-		li = tab[i]->links;
-		while (li)
+		room = tab[i];
+		ay = 0;
+		if (room->next)
+			ay = 1;
+		while (room)
 		{
-			ft_printf("	%s-%s: weight: %d && out: %d && dist: %d (in: %d - out: %d) && used: %d && opp used: %d && pred: %d\n",  tab[i]->name, li->room->name, li->w, li->opp->w, li->room->d, li->room->in, li->room->out, li->used, li->opp->used, li->room->pred);
-			li = li->next;
+			ft_printf("%d. %s: dist: %d && pred: %d && used: %d\n", room->index, room->name, room->d, room->pred, room->used);
+			li = room->links;
+			while (li)
+			{
+				if (!ay)
+					ft_printf("	%6d. %s-%s: weight: %d && out: %d && dist: %d && used: %d && opp used: %d && pred: %d\n",li->room->index, room->name, li->room->name, li->w, li->opp->w, li->room->d, li->used, li->opp->used, li->room->pred);
+				else
+					ft_printf("	%6d. %s-%s: weight: %d && dist: %d && used: %d && pred: %d\n",li->room->index, room->name, li->room->name, li->w, li->room->d, li->used, li->room->pred);
+				li = li->next;
+			}
+			room = room->next;
 		}
 		i++;
 	}
