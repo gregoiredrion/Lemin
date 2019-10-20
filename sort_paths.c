@@ -6,28 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:13:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/15 19:24:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 19:07:51 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-void			new_dists(t_rooms ***paths)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (paths[i])
-	{
-		j = 0;
-		while (paths[i][j])
-			j++;
-		paths[i][0]->d = j - 1;
-		i++;
-	}
-	sort_paths(paths, 0, i - 1);
-}
 
 static void		swap_paths(t_rooms ***paths, int i, int j)
 {
@@ -60,7 +43,7 @@ static int		partition(t_rooms ***paths, int start, int end)
 	return (i + 1);
 }
 
-void			sort_paths(t_rooms ***paths, int start, int end)
+static void		sort_paths(t_rooms ***paths, int start, int end)
 {
 	int pivot;
 
@@ -70,4 +53,21 @@ void			sort_paths(t_rooms ***paths, int start, int end)
 		sort_paths(paths, start, pivot - 1);
 		sort_paths(paths, pivot + 1, end);
 	}
+}
+
+void			new_dists(t_rooms ***paths)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (paths[i])
+	{
+		j = 0;
+		while (paths[i][j])
+			j++;
+		paths[i][0]->d = j - 1;
+		i++;
+	}
+	sort_paths(paths, 0, i - 1);
 }

@@ -6,13 +6,13 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/15 20:41:42 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:38:44 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	check_pred(t_rooms **tab, int pred)
+static int		check_pred(t_rooms **tab, int pred)
 {
 	if (pred == -1)
 		return (0);
@@ -31,18 +31,17 @@ static t_rooms	*assign_pred(t_rooms **tab, t_rooms *room)
 		return (tab[room->pred]);
 	else
 		return (tab[-room->pred]->next);
-
 }
 
-int			find_path(t_rooms **tab, int end)
+int				find_path(t_rooms **tab)
 {
 	t_links		*li;
-	int			room;
 	t_rooms		*pred;
+	int			room;
 
-	pred = tab[tab[end]->pred];
+	pred = tab[tab[END]->pred];
 	room = END;
-	if (!check_pred(tab, tab[end]->pred))
+	if (!check_pred(tab, tab[END]->pred))
 		return (0);
 	while (pred)
 	{

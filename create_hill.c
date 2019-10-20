@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_anthill.c                                   :+:      :+:    :+:   */
+/*   create_hill.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 17:53:54 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/07/30 14:09:45 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/10/17 18:44:26 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/10/17 18:44:28 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-t_hill			*create_anthill(void)
+t_hill			*create_hill(void)
 {
-	t_hill		*anthill;
+	t_hill		*hill;
 
-	if (!(anthill = malloc(sizeof(t_hill))))
+	if (!(hill = malloc(sizeof(t_hill))))
 		return (NULL);
-	anthill->size = 0;
-	anthill->rooms = NULL;
-	anthill->start = -1;
-	anthill->end = -1;
-	anthill->turns = -1;
-	return (anthill);
+	hill->size = 0;
+	hill->rooms = NULL;
+	hill->start = -1;
+	hill->end = -1;
+	hill->turns = -1;
+	return (hill);
 }

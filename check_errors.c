@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:33:02 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/06 17:30:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:24:16 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ int			check_ants(char *line)
 	return (ret);
 }
 
-static char	**coords_errors(char **infos)
+static char	**coords_errors(char **room_infos)
 {
 	int		i;
 	int		sign;
 
-	if (!infos)
+	if (!room_infos)
 		return (NULL);
 	i = 1;
 	while (i < 3)
 	{
 		sign = 0;
-		if (infos[i][0] == '-' || infos[i][0] == '+')
+		if (room_infos[i][0] == '-' || room_infos[i][0] == '+')
 			sign = 1;
-		if (ft_strlen(infos[i]) - sign > 10)
+		if (ft_strlen(room_infos[i]) - sign > 10)
 			return (NULL);
 		i++;
 	}
-	return (infos);
+	return (room_infos);
 }
 
 char		**check_coords(char *line, int i, int space)

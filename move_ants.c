@@ -6,13 +6,14 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/12 17:28:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:58:32 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void		check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
+//paths[i][0]->d == paths[0][0]->d dans if, certainement meilleure condition
+static void		use_path(t_hill *hill, t_rooms ***paths, int i, int lines)
 {
 	static int	id = 1;
 	t_rooms		*start;
@@ -32,7 +33,7 @@ static void		check_use(t_hill *hill, t_rooms ***paths, int i, int lines)
 		paths[i][0]->ants = 0;
 }
 
-static void		room_to_room(t_hill *hill, t_rooms **path, t_rooms *end, int j)
+static void		print_move(t_hill *hill, t_rooms **path, t_rooms *end, int j)
 {
 	while (j > 0)
 	{
@@ -72,8 +73,8 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	while (paths[i])
 	{
 		j = find_empty(paths[i]);
-		room_to_room(hill, paths[i], tab[hill->end], j);
-		check_use(hill, paths, i, lines);
+		print_move(hill, paths[i], tab[hill->end], j);
+		use_path(hill, paths, i, lines);
 		if (!paths[++i] && tab[hill->end]->ants)
 		{
 			i = 0;
@@ -82,5 +83,5 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 		}
 	}
 	ft_printf("\n");
-	display_paths(hill, paths);
+	//display_paths(hill, paths);
 }

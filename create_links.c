@@ -6,13 +6,13 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/15 16:26:58 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:33:32 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
+static t_rooms	*get_room(t_hill *hill, char *name, int size)
 {
 	int				left;
 	int				right;
@@ -37,7 +37,7 @@ static t_rooms	*get_room_add(t_hill *hill, char *name, int size)
 	return (NULL);
 }
 
-static t_links	*init_links(t_rooms *room, t_links *opp)
+t_links			*create_link(t_rooms *room, t_links *opp)
 {
 	t_links	*new;
 
@@ -73,14 +73,14 @@ static int		stock_links(t_rooms *room, t_links *new)
 	return (1);
 }
 
-static int		store_links2(t_rooms *room1, t_rooms *room2)
+static int		store_links(t_rooms *room1, t_rooms *room2)
 {
 	t_links	*in;
 	t_links	*opp;
 
-	if (!(in = init_links(room2, NULL)))
+	if (!(in = create_link(room2, NULL)))
 		return (-1);
-	if (!(opp = init_links(room1, in)))
+	if (!(opp = create_link(room1, in)))
 		return (-1);
 	in->opp = opp;
 	if (!(stock_links(room1, in)) || !(stock_links(room2, opp)))
@@ -98,19 +98,19 @@ int				parse_links(t_hill *hill, t_rooms **tab, char *line)
 	t_rooms	*room2;
 	char	**lines;
 	int		ret;
+	int		i;
 
+	i = 0;
 	if (!(lines = check_links(line)))
 		return (0);
-	if (!(room1 = get_room_add(hill, lines[0], hill->size)))
+	if (!(room1 = get_room(hill, lines[0], hill->size)))
 		return (0);
-	if (!(room2 = get_room_add(hill, lines[1], hill->size)))
+	if (!(room2 = get_room(hill, lines[1], hill->size)))
 		return (0);
-	ret = store_links2(room1, room2);
-	if (!ret || ret == -1)
+	if ((ret = store_links(room1, room2) != 1))
 		return (ret);
-	ret = 0;
-	while (lines[ret])
-		ft_strdel(&lines[ret++]);
+	while (lines[i])
+		ft_strdel(&lines[i++]);
 	ft_memdel((void **)lines);
 	return (1);
 }

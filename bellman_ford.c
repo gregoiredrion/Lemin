@@ -6,13 +6,30 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 14:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/15 20:41:35 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/18 15:07:39 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	update_dist(t_rooms *room, int i)
+static void		init_dists(t_rooms **tab)
+{
+	int		i;
+
+	i = 1;
+	while (tab[i])
+	{
+		tab[i]->pred = -1;
+		if (tab[i]->used)
+		{
+			tab[i]->next->pred = -1;
+			tab[i]->next->d = -1;
+		}
+		tab[i++]->d = -1;
+	}
+}
+
+static int		update_dist(t_rooms *room, int i)
 {
 	int			updated;
 	int			tmp;
@@ -24,8 +41,9 @@ static int	update_dist(t_rooms *room, int i)
 		li = room->links;
 		while (li)
 		{
-			if ((room->d + li->w < li->room->d || li->room->d == -1)
-			&& li->room->index != 0 && !li->used && room->d != -1)
+			if (li->room->index == 0 || li->used || room->d == -1)
+				;
+			else if (room->d + li->w < li->room->d || li->room->d == -1)
 			{
 				li->room->d = room->d + li->w;
 				li->room->pred = room->index;
@@ -38,7 +56,7 @@ static int	update_dist(t_rooms *room, int i)
 	return (updated);
 }
 
-void		bellman_ford(t_rooms **tab, int size)
+void			bellman_ford(t_rooms **tab, int size)
 {
 	int			k;
 	int			i;
@@ -54,8 +72,6 @@ void		bellman_ford(t_rooms **tab, int size)
 		{
 			if (i == 1)
 				i++;
-//			while (tab[i] && tab[i]->d == -1)
-//				i++;
 			if (!tab[i])
 				break ;
 			updated += update_dist(tab[i], i);

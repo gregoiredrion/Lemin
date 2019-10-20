@@ -6,13 +6,41 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/04 16:55:14 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 19:00:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_rooms			**create_hash(int size)
+t_rooms					**small_tab(t_hill *hill)
+{
+	t_rooms		**new;
+	int			i;
+	int			j;
+	int			size;
+
+	size = hill->size / 2;
+	j = 0;
+	i = 0;
+	if (!(new = malloc(sizeof(t_rooms *) * (size + 1))))
+		return (0);
+	new[size] = NULL;
+	while (i < hill->size)
+	{
+		if (hill->rooms[i])
+		{
+			hill->rooms[i]->next = NULL;
+			hill->rooms[i]->index = j;
+			hill->rooms[i]->stend == -1 ? hill->end = j : 0;
+			hill->rooms[i]->stend == 1 ? hill->start = j : 0;
+			new[j++] = hill->rooms[i];
+		}
+		i++;
+	}
+	return (new);
+}
+
+static t_rooms			**create_hashmap(int size)
 {
 	t_rooms		**hashmap;
 	int			i;
@@ -47,7 +75,7 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 /*
 ** (hash << 5) + hash + c == hash * 33 + c
 */
-
+// find better hash
 unsigned int			hash(char *str, int size)
 {
 	unsigned long	hash;
@@ -59,31 +87,22 @@ unsigned int			hash(char *str, int size)
 	return (hash % size);
 }
 
-int						hashmap(t_hill *anthill, t_rooms *begin)
+int						hashmap(t_hill *hill, t_rooms *begin)
 {
 	t_rooms		*save;
 	int			hashed;
 
 	save = begin;
-	anthill->size *= 2;
-	if (!(anthill->rooms = create_hash(anthill->size)))
+	hill->size *= 2;
+	if (!(hill->rooms = create_hashmap(hill->size)))
 		return (0);
 	while (begin)
 	{
-		hashed = hash(begin->name, anthill->size);
-		if (anthill->rooms[hashed])
-			hashed = collision(anthill->rooms, hashed, anthill->size);
-		anthill->rooms[hashed] = begin;
+		hashed = hash(begin->name, hill->size);
+		if (hill->rooms[hashed])
+			hashed = collision(hill->rooms, hashed, hill->size);
+		hill->rooms[hashed] = begin;
 		begin = begin->next;
 	}
 	return (1);
-}
-
-void					from_map_to_tab(t_hill *hill, t_rooms **tab)
-{
-	t_rooms		**tmp_tab;
-
-	tmp_tab = hill->rooms;
-	ft_memdel((void**)tmp_tab);
-	hill->rooms = tab;
 }

@@ -6,39 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/14 18:56:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 19:01:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-static t_rooms	**small_tab(t_hill *hill)
-{
-	t_rooms		**new;
-	int			i;
-	int			j;
-	int			size;
-
-	size = hill->size / 2;
-	j = 0;
-	i = 0;
-	if (!(new = malloc(sizeof(t_rooms *) * (size + 1))))
-		return (0);
-	new[size] = NULL;
-	while (i < hill->size)
-	{
-		if (hill->rooms[i])
-		{
-			hill->rooms[i]->next = NULL;
-			hill->rooms[i]->index = j;
-			hill->rooms[i]->stend == -1 ? hill->end = j : 0;
-			hill->rooms[i]->stend == 1 ? hill->start = j : 0;
-			new[j++] = hill->rooms[i];
-		}
-		i++;
-	}
-	return (new);
-}
 
 static t_rooms	*parse_rooms(char **line, t_rooms *last, char **str)
 {
@@ -131,6 +103,6 @@ int				parser(t_hill *hill, char *line)
 			return (free_error(hill));
 	}
 	hill->rooms = tab;
-	short_path(hill, tab);
+	first_path(hill, tab);
 	return (1);
 }

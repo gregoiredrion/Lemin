@@ -6,13 +6,13 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 14:36:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/12 18:08:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:17:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void		path(t_hill *hill)
+static int		get_first_path(t_hill *hill)
 {
 	t_rooms		**tab;
 	t_rooms		*room;
@@ -34,6 +34,7 @@ static void		path(t_hill *hill)
 		li->w = -1;
 		room = li->room;
 	}
+	return (1);
 }
 
 int				bfs(t_hill *hill)
@@ -43,12 +44,12 @@ int				bfs(t_hill *hill)
 	int			i;
 	int			j;
 
-	i = 0;
-	if (!(queue = ft_memalloc(sizeof(t_rooms *) * (hill->size * 2))))
-		return (0);
-	queue[i] = hill->rooms[0];
+	i = -1;
 	j = 1;
-	while (queue[i])
+	if (!(queue = ft_memalloc(sizeof(t_rooms *) * (hill->size * 2))))
+		return (-1);
+	queue[i + 1] = hill->rooms[START];
+	while (queue[++i])
 	{
 		li = queue[i]->links;
 		while (li)
@@ -60,9 +61,7 @@ int				bfs(t_hill *hill)
 			}
 			li = li->next;
 		}
-		i++;
 	}
 	free(queue);
-	path(hill);
-	return (1);
+	return (get_first_path(hill));
 }

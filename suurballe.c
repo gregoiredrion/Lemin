@@ -6,34 +6,11 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/17 13:40:39 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/18 18:31:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-static void	new_weights(t_hill *hill, t_rooms **tab)
-{
-	t_links	*li;
-	int		i;
-	int		save;
-
-//	init_weights(tab);
-//	init_dists(hill, tab);
-	i = 0;
-	while (tab[i])
-	{
-		li = tab[i]->links;
-		while (li)
-		{
-			if (li->used)
-				if ((save = li->w - tab[li->room->index]->d + tab[i]->d) >= 0)
-					li->w = save;
-			li = li->next;
-		}
-		i++;
-	}
-}
 
 static int	max_paths(t_hill *hill, t_rooms **tab)
 {
@@ -60,53 +37,33 @@ static int	max_paths(t_hill *hill, t_rooms **tab)
 	return (start);
 }
 
-static void	dijkstra(t_hill *hill, t_rooms **tab, t_rooms *end)
-{
-	t_links		*li;
-	int			i;
-
-	i = 0;
-	while (tab[i])
-	{
-		if (i == hill->end && !tab[++i])
-			return ;
-		li = tab[i]->links;
-		while (li)
-		{
-			if (tab[i]->d + li->w < li->room->d && li->w != -1
-			&& li->room != end && tab[i]->d != -1)
-				li->room->d = tab[i]->d + li->w;
-			li = li->next;
-		}
-		i++;
-	}
-}
-
-//static?
-t_rooms		***store_paths(t_hill *hill, t_rooms **tab, t_rooms ***paths, int nb)
+static int	new_paths(t_hill *hill, t_rooms **tab, t_rooms ****paths, int nb)
 {
 	t_rooms		***tmp;
 	double		turns;
 	int			i;
+	t_rooms		***path;
 
+	path = *paths;
 	i = 0;
 	if (!(tmp = all_paths(hill, tab, nb + 1)))
-		return (NULL);
-//	display_paths(hill, tmp);
+		return (-1);
+	checker(tmp, tab[START], tab[END]);//DELETE AT END
 	if (hill->turns > (turns = max_turns(hill, tmp, nb + 1)))
 	{
-		while (paths[i])
-			free(paths[i++]);
+		while (path[i])
+			free(path[i++]);
 		hill->turns = turns;
-		return (tmp);
+		*paths = tmp;
+		return (1);
 	}
 	else
 	{
 		while (tmp[i])
 			free(tmp[i++]);
 		free(tmp);
+		return (0);
 	}
-	return (paths);
 }
 
 int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
@@ -114,21 +71,26 @@ int			suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths)
 	t_links		*li;
 	int			nb_paths;
 	int			*pred;
+	int			ret;
 
 	nb_paths = 1;
 	hill->max_paths = max_paths(hill, tab);
+	display_room(tab[1]);
 	while (nb_paths < hill->max_paths)
 	{
 		bellman_ford(tab, hill->size / 2 - 1);
-		if (!find_path(tab, hill->end))
+		if (!find_path(tab))
 			break ;
-		if (!(paths = store_paths(hill, tab, paths, nb_paths)))
-			return (0);
+		if ((ret = new_paths(hill, tab, &paths, nb_paths)) != 1)
+		{
+			if (!ret)
+				break ;
+			return (ret);
+		}
 		nb_paths++;
 	}
 	new_dists(paths);
-	display_paths(hill, paths);
-	//checker(paths, tab[0], tab[hill->end]);
-	move_ants(hill, paths, tab);
+	//display_paths(hill, paths);
+	//move_ants(hill, paths, tab);
 	return (1);
 }
