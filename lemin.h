@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/15 17:38:50 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/20 17:04:49 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int					free_error(t_hill *hill);
 ** Sort
 */
 void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int r_ind);
-void				q_sort(t_hill *hill, t_rooms **tab, int start, int end);
 void				sort_start(t_rooms *start);
 void				sort_paths(t_rooms ***paths, int start, int end);
 
@@ -100,8 +99,7 @@ void				sort_paths(t_rooms ***paths, int start, int end);
 /*
 ** Dijkstra
 */
-void				init_dists(t_rooms **tab);
-void				short_path(t_hill *hill, t_rooms **tab);
+void				first_path(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab, int end);
 
 
