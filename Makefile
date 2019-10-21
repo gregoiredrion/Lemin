@@ -1,14 +1,12 @@
 NAME = lem-in
-SRC = create_anthill.c\
+SRC = create_hill.c\
 	  create_rooms.c\
 	  hashmap.c\
 	  create_links.c\
-	  short_path.c\
+	  first_path.c\
 	  find_path.c\
 	  suurballe.c\
-	  q_sort.c\
 	  all_paths.c\
-	  sort_start.c\
 	  move_ants.c\
 	  max_turns.c\
 	  sort_paths.c\
@@ -16,12 +14,11 @@ SRC = create_anthill.c\
 	  free_all.c\
 	  delete_this_when_finish.c\
 	  dead_end.c\
-	  init.c\
 	  parser.c\
 	  bfs.c\
 	  checker.c\
 	  bellman_ford.c\
-	  dupe_rooms.c
+	  duplicate_rooms.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc
