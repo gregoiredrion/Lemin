@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/20 17:04:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/20 17:14:59 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 
 # define END 1
+# define START 0
 
 typedef struct	s_rooms t_rooms;
 
@@ -58,9 +59,11 @@ typedef struct	s_hill
 /*
 ** Stock infos anthill
 */
-t_hill				*create_anthill(void);
+t_links				*create_link(t_rooms *room, t_links *opp);
+t_hill				*create_hill(void);
 t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
 int					parse_links(t_hill *hill, t_rooms **tab, char *line);
+t_rooms				**small_tab(t_hill *hill);
 unsigned int		hash(char *str, int size);
 int					hashmap(t_hill *anthill, t_rooms *begin);
 int					parser(t_hill *hill, char *line);
@@ -91,16 +94,14 @@ int					free_error(t_hill *hill);
 /*
 ** Sort
 */
-void				swap_rooms(t_hill *hill, t_rooms **tab, int i, int r_ind);
 void				sort_start(t_rooms *start);
-void				sort_paths(t_rooms ***paths, int start, int end);
 
 
 /*
 ** Dijkstra
 */
-void				first_path(t_hill *hill, t_rooms **tab);
-int					find_path(t_rooms **tab, int end);
+int					first_path(t_hill *hill, t_rooms **tab);
+int					find_path(t_rooms **tab);
 
 
 
@@ -112,7 +113,7 @@ int					bfs(t_hill *hill);
 */
 int					suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
 void				new_dists(t_rooms ***paths);
-void				dupe_rooms(t_rooms ***paths);
+int					duplicate_rooms(t_rooms ***paths);
 
 /*
 ** Move_ants
