@@ -1,55 +1,57 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/06/18 15:38:46 by wdeltenr          #+#    #+#              #
-#    Updated: 2019/10/03 15:08:38 by gdrion           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
-SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
-	  ft_isdigit.c ft_print_node.c ft_isprint.c ft_print_list.c ft_lstlen.c\
-	  ft_itoa.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstadd_begin.c\
-	  ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_memalloc.c ft_memccpy.c\
-	  ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c ft_memmove.c ft_memset.c\
-	  ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putnbr.c\
-	  ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c\
-	  ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c\
-	  ft_striter.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlen.c\
-	  ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c\
-	  ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c ft_lstadd_end.c\
-	  ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c\
-	  ft_toupper.c ft_factorial.c ft_is_neg.c ft_sign.c ft_sqrt.c ft_power.c\
-	  get_next_line.c ft_atoi_base.c ft_wstrlen.c ft_wstrdup.c ft_uitoa.c\
-	  ft_putwchar.c ft_itoa_base.c ft_str_to_upper.c ft_uitoa_base.c\
-	  ft_putunbr.c ft_dtoa.c ft_count_digits.c ft_absolut.c ft_strcdup.c\
-	  ft_strndup.c join_and_free.c ft_lstremoveif.c ft_strfind.c\
-	  ft_lstpushback.c
-OBJ = $(SRC:.c=.o)
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
-CC = gcc
+INCLUDES = includes/
+SRCS_DIR = srcs/
+OBJ_DIR = obj/
+cc = gcc
+FLAGS = -Wall -Werror -Wextra
+
+FILES = $(shell find $(SRCS_DIR) -type f | grep -E ".c$$" | \
+		sed 's/srcs//g')
+SRCS = $(addprefix $(SRCS_DIR), $(FILES))
+OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
+SRCS_SUB = $(shell find ./srcs -type d)
+OBJ_SUB = $(SRCS_SUB:./srcs%=./obj%)#why %?
+WIDTH = $(shell echo $(notdir $(SRCS)) | tr " " "\n" | \
+	awk ' { if ( length > x ) { x = length; y = $$0 } }END{ print y }' | wc -c)
+
+ccRED = "\e[1;31m"
+ccGREEN = "\e[1;32m"
+ccBLUE = "\e[1;34m"
+ccWHITE = "\e[1;37m"
+ccRESET = "\e[0;0m"
 
 all: $(NAME)
 
-%.o:%.c
-	@$(CC) $(CFLAGS) -c -o $@ $^
+$(OBJ_SUB):
+	@mkdir $@
 
-$(NAME): $(OBJ)
-	make -C ftprintf
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
+	@tput civis
+	@printf $(ccBLUE)
+	@printf "Compiling %-$(WIDTH)s" $(notdir $<)
+	@$(cc) $(FLAGS) -o $@ -c $< -I$(INCLUDES)
+	@printf $(ccRESET)
+	@printf "\r"
+
+$(NAME): $(OBJ_SUB) $(OBJ)
+	@printf $(ccGREEN)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@printf "Successfully compiled %-$(WIDTH)s\n" $(NAME)
+	@printf $(ccRESET)
+	@tput cnorm
 
 clean:
-	make clean -C ftprintf
-	rm -f $(OBJ)
+	@printf $(ccRED)
+	@rm -rf $(OBJ_DIR)
+	@printf "Successfully deleted $(OBJ_DIR)\n"
+	@printf $(ccRESET)
 
 fclean: clean
-	make fclean -C ftprintf
-	rm -f $(NAME)
+	@printf $(ccRED)
+	@rm -f $(NAME)
+	@printf "Successfully deleted $(NAME)\n"
+	@printf $(ccRESET)
 
 re: fclean all
 
