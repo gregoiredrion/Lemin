@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 15:37:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:35:26 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ t_rooms				**small_tab(t_hill *hill);
 int					check_ants(char *line);
 char				**check_links(char *line);
 char				**check_rooms(char *line);
-/*
-** delete dead ends
-*/
-void				end_links(t_hill *hill, t_rooms **tab, t_rooms **end);
-void				dead_end(t_hill *hill, t_rooms **tab);
 /*
 ** free
 */

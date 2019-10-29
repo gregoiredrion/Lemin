@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 15:37:56 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:33:43 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			suurballe(t_hill *hill, t_rooms **tab)
 		nb_paths++;
 	}
 	new_dists(paths);
-//	move_ants(hill, paths, tab);
+	move_ants(hill, paths, tab);
 	free_paths(paths);
 	return (1);
 }

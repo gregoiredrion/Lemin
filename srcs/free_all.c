@@ -6,11 +6,12 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 16:08:32 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 17:46:50 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
 void			free_paths(t_rooms ***paths)
 {
 	int		i;
@@ -23,9 +24,6 @@ void			free_paths(t_rooms ***paths)
 
 void			del_link(t_links **link)
 {
-	//t_links	*li;
-
-	//li = *link;
 	(*link)->room = NULL;
 	(*link)->w = 0;
 	(*link)->next = NULL;

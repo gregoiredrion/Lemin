@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 15:29:19 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 17:41:20 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				main(void)
 		return (free_error(hill));
 	if ((hill->ants = check_ants(line)) <= 0)
 	{
-		free(line);
+		ft_strdel(&line);
 		return (free_error(hill));
 	}
 	ft_strdel(&line);

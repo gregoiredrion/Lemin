@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/23 17:40:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 18:09:46 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static unsigned int		collision(t_rooms **rooms, unsigned int hash, int size)
 /*
 ** (hash << 5) + hash + c == hash * 33 + c
 */
-// find better hash
+
 unsigned int			hash(char *str, int size)
 {
 	unsigned long	hash;
@@ -95,7 +95,7 @@ int						hashmap(t_hill *hill, t_rooms *begin)
 	save = begin;
 	hill->size *= 2;
 	if (!(hill->rooms = create_hashmap(hill->size)))
-		return (0);
+		return (-1);
 	while (begin)
 	{
 		hashed = hash(begin->name, hill->size);

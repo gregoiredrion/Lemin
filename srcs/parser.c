@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 16:29:19 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 18:09:55 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last)
 	return (last);
 }
 
-static t_rooms	*read_rooms(t_hill *hill, char **line)
+static int		read_rooms(t_hill *hill, char **line)
 {
 	t_rooms	*begin;
 	t_rooms *last;
@@ -53,22 +53,19 @@ static t_rooms	*read_rooms(t_hill *hill, char **line)
 		if (*line[0] == 'L')
 		{
 			ft_strdel(line);
-			return (NULL);
+			return (0);
 		}
 		if (((*line)[0] == '#' && (*line)[1] == '#') || *line[0] != '#')
 		{
 			if (!(last = parse_rooms(line, last)))
-				return (NULL);
-			if (!begin)
-				begin = last;
+				return (-1);
+			(begin == NULL) ? begin = last : begin;
 			hill->size++;
 		}
 		else
 			ft_strdel(line);
 	}
-	if (!hashmap(hill, begin))
-		return (NULL);
-	return (last);
+	return (hashmap(hill, begin));
 }
 
 static int		read_link(t_hill *hill, char *line)
@@ -87,20 +84,21 @@ static int		read_link(t_hill *hill, char *line)
 		}
 		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	return (1);
 }
 
 int				parser(t_hill *hill, char *line)
 {
 	t_rooms		**tab;
-	t_rooms		*last;
 
-	if (!(last = read_rooms(hill, &line)))
+	if (read_rooms(hill, &line) == -1)
 		return (0);
 	if (!(tab = small_tab(hill)) || line[0] == '\0')
 		return (0);
 	if (parse_links(hill, line) == -1)
 		return (0);
+	ft_strdel(&line);
 	read_link(hill, line);
 	free(hill->rooms);
 	hill->rooms = tab;
