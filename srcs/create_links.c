@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/23 17:21:54 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 11:04:01 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int		store_links(t_rooms *room1, t_rooms *room2)
 	return (1);
 }
 
-int				parse_links(t_hill *hill,char *line)
+int				parse_links(t_hill *hill, char *line)
 {
 	t_rooms	*room1;
 	t_rooms	*room2;

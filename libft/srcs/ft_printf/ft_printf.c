@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:45:10 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/23 13:57:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 10:55:28 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int			ft_printf(const char *format, ...)
 	t_flags	*flags;
 
 	flags = NULL;
-	if (!format || !(flags = ft_create_struct(flags)) || !(buf = ft_strnew(0)))
+	if (!format || !(flags = ft_create_struct(flags))
+		|| !(buf = ft_strnew(0)))
 		return (-1);
 	(i = -1) ? va_start(ap, format) : 1;
 	while (format[++i])

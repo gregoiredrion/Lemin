@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/23 13:55:22 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 10:54:01 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct		s_line
 	size_t			remaining;
 }					t_line;
 
-int					get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 /*
 **Changement valeur/copy sans malloc
