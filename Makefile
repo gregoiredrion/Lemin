@@ -41,6 +41,7 @@ $(NAME): $(OBJ_DIR) $(OBJ) Makefile
 	-o $(NAME)
 	@printf "Successfully compiled %-$(WIDTH)s" $(NAME)
 	@printf "                                                    \n"
+	@printf $(ccRESET)
 
 clean:
 	@printf $(ccRED)

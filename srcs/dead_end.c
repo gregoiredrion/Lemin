@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/23 17:23:28 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:53:31 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void		fix_tab(t_hill *hill, t_rooms **tab, int i)
 	{
 		tab[i] = tab[i + 1];
 		tab[i]->index--;
-		if (hill->end == i + 1)
-			hill->end = i;
 		i++;
 	}
 	tab[i] = NULL;
@@ -31,7 +29,7 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 	t_rooms		*save;
 	t_links		*tmp;
 
-	if (room->index == hill->start || room->index == hill->end)
+	if (room->index == START || room->index == END)
 		return (NULL);
 	save = li->opp->room;
 	if (save->links == li)
@@ -112,8 +110,8 @@ void			dead_end(t_hill *hill, t_rooms **tab)
 		li = tab[i]->links;
 		while (li)
 		{
-			if (li->room != tab[hill->start]
-			&& li->room != tab[hill->end]
+			if (li->room != tab[START]
+			&& li->room != tab[END]
 			&& !li->room->links->next && (dead = 1))
 				li = del(hill, tab, li, li->room);
 			else

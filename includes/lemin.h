@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/23 17:45:36 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:40:19 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);
 int					free_error(t_hill *hill);
 
-int					first_path(t_hill *hill, t_rooms **tab);
+int					prep_suurballe(t_hill *hill, t_rooms **tab);
 int					find_path(t_rooms **tab);
 
 
@@ -101,7 +101,7 @@ void				bellman_ford(t_rooms **tab, int size);
 /*
 ** Suurballe
 */
-int					suurballe(t_hill *hill, t_rooms **tab, t_rooms ***paths);
+int					suurballe(t_hill *hill, t_rooms **tab);
 void				new_dists(t_rooms ***paths);
 int					duplicate_rooms(t_rooms ***paths);
 

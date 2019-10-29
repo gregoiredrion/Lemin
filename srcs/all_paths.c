@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:18:57 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/23 17:16:45 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:49:08 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ static t_rooms	**store_path(t_rooms **tab, t_rooms **path, t_rooms *room)
 	{
 		if (li->used && !li->opp->used)
 		{
-			if (li->room->index < 0)
-				path[j++] = tab[-li->room->index];
-			else
-				path[j++] = li->room;
+			path[j++] = li->room;
 			save = li;
 			li = li->room->links;
 		}
@@ -92,7 +89,7 @@ t_rooms			***all_paths(t_rooms **tab, int nb_paths)
 	if (!(paths = ft_memalloc(sizeof(t_rooms **) * (nb_paths + 1))))
 		return (NULL);
 	paths[nb_paths] = NULL;
-	li = tab[0]->links;
+	li = tab[START]->links;
 	while (li && i < nb_paths)
 	{
 		if (li->used)
