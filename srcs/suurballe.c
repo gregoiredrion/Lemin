@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 12:36:54 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:02:45 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			suurballe(t_hill *hill, t_rooms **tab)
 
 	nb_paths = 1;
 	paths = NULL;
-	while (nb_paths < hill->max_paths)
+	while (nb_paths < hill->max_paths + 1)
 	{
 		bellman_ford(tab, hill->size - 1);
 		if (!find_path(tab))

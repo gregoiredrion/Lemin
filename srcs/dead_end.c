@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 12:33:46 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 12:50:04 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 		return (NULL);
 	return (save->links->opp);
 }
-
 
 static t_links	*no_link(t_hill *hill, t_rooms **tab, int i)
 {

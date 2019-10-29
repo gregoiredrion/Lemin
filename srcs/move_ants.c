@@ -6,13 +6,12 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/24 15:24:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:05:54 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-//paths[i][0]->d == paths[0][0]->d dans if, certainement meilleure condition
 static void		use_path(t_hill *hill, t_rooms ***paths, int i, int lines)
 {
 	static int	id = 1;
@@ -23,8 +22,7 @@ static void		use_path(t_hill *hill, t_rooms ***paths, int i, int lines)
 	start = hill->rooms[0];
 	if (hill->turns > (double)(int)hill->turns)
 		lines--;
-	if ((paths[i][0]->d + lines < max || paths[i][0]->d == paths[0][0]->d)
-	&& id <= start->ants)
+	if (paths[i][0]->d + lines < max && id <= start->ants)
 	{
 		ft_printf("L%d-%s ", id, paths[i][0]->name);
 		paths[i][0]->ants = id++;
