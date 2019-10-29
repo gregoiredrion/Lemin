@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:28:23 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/23 13:54:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 12:34:41 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			fill_flags(char *str, t_flags *f);
 /*
 **  create_struct.c
 */
-t_flags			*ft_create_struct(t_flags *f);
+t_flags			*ft_create_struct(void);
 void			init_flags(t_flags *f);
 /*
 **  ft_itoa_t.c

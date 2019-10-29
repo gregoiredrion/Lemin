@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:08:27 by gdrion            #+#    #+#             */
-/*   Updated: 2019/03/23 21:07:56 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 12:33:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void		init_flags(t_flags *flags)
 	flags->info2 = 1;
 }
 
-t_flags		*ft_create_struct(t_flags *flags)
+t_flags		*ft_create_struct(void)
 {
+	t_flags		*flags;
+
 	if (!(flags = malloc(sizeof(t_flags))))
 		return (NULL);
 	flags->info1 = 1;

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 10:54:01 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 12:44:17 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-typedef struct		s_line
+typedef struct	s_line
 {
 	int				fd;
 	char			*str;
 	size_t			size;
 	size_t			remaining;
-}					t_line;
+}				t_line;
 
 int				get_next_line(const int fd, char **line);
 
@@ -161,6 +161,6 @@ void			ft_lstadd(t_list **alst, t_list *new_elem);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t			ft_lstlen(t_list *lst);
-void			ft_lstpushback(t_list **alst, const void *, size_t s);
+void			ft_lstpushback(t_list **alst, const void *t, size_t s);
 void			ft_lstremoveif(t_list **alst, void *data_ref, int (*cmp)());
 #endif
