@@ -26,6 +26,7 @@ lib:
 	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES)/lemin.h Makefile
+	@tput civis
 	@printf $(ccBLUE)
 	@printf "Compiling %-$(WIDTH)s" $(notdir $<)
 	@$(cc) $(FLAGS) -o $@ -c $< -I$(INCLUDES) -I$(LIBFT_INCLUDES)
@@ -42,6 +43,7 @@ $(NAME): $(OBJ_DIR) $(OBJ) Makefile
 	@printf "Successfully compiled %-$(WIDTH)s" $(NAME)
 	@printf "                                                    \n"
 	@printf $(ccRESET)
+	@tput cnorm
 
 clean:
 	@printf $(ccRED)
