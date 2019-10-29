@@ -6,28 +6,30 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 12:42:03 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:08:32 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-int				free_error(t_hill *hill)
+void			free_paths(t_rooms ***paths)
 {
-	free_hill(hill);
-	write(2, "Error\n", 6);
-	return (0);
+	int		i;
+
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
 }
 
 void			del_link(t_links **link)
 {
-	t_links	*li;
+	//t_links	*li;
 
-	li = *link;
-	li->room = NULL;
-	li->w = 0;
-	li->next = NULL;
-	li->opp = NULL;
+	//li = *link;
+	(*link)->room = NULL;
+	(*link)->w = 0;
+	(*link)->next = NULL;
+	(*link)->opp = NULL;
 	ft_memdel((void **)link);
 }
 

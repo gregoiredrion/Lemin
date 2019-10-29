@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 13:02:45 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:37:56 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,13 @@ static int	new_paths(t_hill *hill, t_rooms **tab, t_rooms ****paths, int nb)
 	if (hill->turns > (turns = max_turns(hill, tmp, nb)) || hill->turns == -1)
 	{
 		if (*paths)
-			while (path[i])
-				free(path[i++]);
+			free_paths(*paths);
 		hill->turns = turns;
 		*paths = tmp;
 		return (1);
 	}
-	else
-	{
-		while (tmp[i])
-			free(tmp[i++]);
-		free(tmp);
-		return (0);
-	}
+	free_paths(tmp);
+	return (0);
 }
 
 int			suurballe(t_hill *hill, t_rooms **tab)
@@ -63,6 +57,7 @@ int			suurballe(t_hill *hill, t_rooms **tab)
 		nb_paths++;
 	}
 	new_dists(paths);
-	move_ants(hill, paths, tab);
+//	move_ants(hill, paths, tab);
+	free_paths(paths);
 	return (1);
 }

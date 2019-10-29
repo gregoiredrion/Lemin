@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 16:55:51 by wdeltenr          #+#    #+#             */
-/*   Updated: 2018/07/05 12:15:27 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:32:56 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ char		**ft_strsplit(char const *s, char c)
 		if (t != 0)
 			tab[n++][t] = '\0';
 	}
-	tab[n] = 0;
+	tab[n] = NULL;
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 11:38:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:37:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct	s_hill
 ** parse and create struct
 */
 t_hill				*create_hill(void);
-t_rooms				*create_rooms(t_rooms *last, char *info, int stend);
+t_rooms				*create_rooms(t_rooms *last, char **line, int stend);
 int					parse_links(t_hill *hill, char *line);
 unsigned int		hash(char *str, int size);
 int					hashmap(t_hill *anthill, t_rooms *begin);
@@ -85,7 +85,7 @@ void				del_link(t_links **link);
 void				free_links(t_links *link);
 void				free_room(t_rooms **room);
 void				free_hill(t_hill *anthill);
-int					free_error(t_hill *hill);
+void				free_paths(t_rooms ***paths);
 /*
 ** Algo
 */
