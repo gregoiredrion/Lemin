@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:22:55 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/24 15:53:31 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 11:50:48 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,44 +51,6 @@ static t_links	*del(t_hill *hill, t_rooms **tab, t_links *li, t_rooms *room)
 	return (save->links->opp);
 }
 
-void			end_links(t_hill *hill, t_rooms **tab, t_rooms **end)
-{
-	t_links		*li;
-	t_links		*next;
-	int			i;
-
-	li = (*end)->links;
-	while (li && li->room->d == -1)
-	{
-		next = li->next;
-		(*end)->links = next;
-		fix_tab(hill, tab, li->room->index);
-		li->next = NULL;
-		free_room(&li->room);
-		del_link(&li);
-		li = next;
-	}
-	while (li->next)
-	{
-		next = li->next;
-		if (next && next->room->d == -1)
-		{
-			li->next = next->next;
-			next->next = NULL;
-			fix_tab(hill, tab, next->room->index);
-			free_room(&next->room);
-			del_link(&next);
-		}
-		else
-			li = li->next;
-	}
-	i = hill->size / 2 - 1;
-	while (tab[i] && tab[i]->d == -1)
-	{
-		free_room(&tab[i--]);
-		hill->size -= 2;
-	}
-}
 /*
 static t_links	*no_link(t_hill *hill, t_rooms **tab, int i)
 {
@@ -108,12 +70,16 @@ void			dead_end(t_hill *hill, t_rooms **tab)
 	while (i < hill->size / 2 - 1)
 	{
 		li = tab[i]->links;
+		if (!li)
+			li = no_link(hill, tab, i);
 		while (li)
 		{
-			if (li->room != tab[START]
-			&& li->room != tab[END]
-			&& !li->room->links->next && (dead = 1))
+			if (li->room != tab[START] && li->room != tab[END]
+				&& !li->room->links->next)
+			{
+				dead = 1;
 				li = del(hill, tab, li, li->room);
+			}
 			else
 				li = li->next;
 		}

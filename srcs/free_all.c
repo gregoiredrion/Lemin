@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/09/16 17:07:03 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 11:43:02 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void			free_room(t_rooms **r)
 	room->stend = 0;
 	free_links(room->links);
 	room->links = NULL;
+	if (room->next)
+		(free_room(&room->next));
 	room->next = NULL;
 	ft_memdel((void **)r);
 }
@@ -72,9 +74,6 @@ void			free_hill(t_hill *hill)
 	{
 		if (tab[i])
 		{
-			//Ancien (grand) tableau existe toujours, ce qui cause un seffault
-			//vu qu'il veut free quelque chose qui existait a l'index x dans
-			//le grand mais il a deja ete free a l'index y dans le petit
 			free_room(&tab[i]);
 			tab[i] = NULL;
 		}
