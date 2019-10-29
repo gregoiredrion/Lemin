@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/29 16:08:13 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:12:26 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,14 @@ static int		store_links(t_rooms *room1, t_rooms *room2)
 		return (-1);
 	if (!(opp = create_link(room1, in)))
 	{
-		printf("Coucou ewr;ejworhjaewiorhpaiwho\n");
-		exit (0);
-		//free_links(in);
+		free_links(in);
 		return (-1);
 	}
 	in->opp = opp;
 	if (!(stock_links(room1, in)) || !(stock_links(room2, opp)))
 	{
-		printf("Cece fhewkligfoiaewgfiugahewilufgbhaeilw\n");
-		exit (0);
-		//free_links(in);
-		//free_links(opp);
+		free_links(in);
+		free_links(opp);
 		return (0);
 	}
 	return (1);
