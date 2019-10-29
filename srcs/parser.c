@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 11:32:57 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/29 12:42:14 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int				parser(t_hill *hill, char *line)
 		return (free_error(hill));
 	read_link(hill, line);
 	hill->rooms = tab;
-	prep_suurballe(hill, tab);//protect
+	hill->size /= 2;
+	if (prep_suurballe(hill, tab) == -1)
+		return (free_error(hill));
 	return (1);
 }
