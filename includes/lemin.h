@@ -6,14 +6,14 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/30 15:41:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:25:09 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
 
-# include "../libft/includes/libft.h"
+# include "libft.h"
 
 # define START 0
 # define END 1
