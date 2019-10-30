@@ -6,31 +6,29 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:01:24 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 16:35:26 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/10/30 15:41:34 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 
 # define START 0
 # define END 1
 
-typedef struct	s_rooms t_rooms;
-
-typedef struct	s_links
+typedef struct		s_links
 {
-	t_rooms			*room;
+	struct s_rooms	*room;
 	int				w;
 	int				used;
 	struct s_links	*next;
 	struct s_links	*opp;
-}				t_links;
+}					t_links;
 
-typedef struct	s_rooms
- {
+typedef struct		s_rooms
+{
 	char			*name;
 	int				d;
 	int				index;
@@ -42,9 +40,9 @@ typedef struct	s_rooms
 	int				stend;
 	t_links			*links;
 	struct s_rooms	*next;
-}				t_rooms;
+}					t_rooms;
 
-typedef struct	s_hill
+typedef struct		s_hill
 {
 	t_rooms			**rooms;
 	int				start;
@@ -53,7 +51,7 @@ typedef struct	s_hill
 	int				size;
 	double			turns;
 	int				max_paths;
-}				t_hill;
+}					t_hill;
 
 /*
 ** parse and create struct
