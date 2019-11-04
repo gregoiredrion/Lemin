@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 18:09:46 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/11/04 15:55:33 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_rooms					**small_tab(t_hill *hill)
 	size = hill->size / 2;
 	j = 0;
 	i = 0;
-	if (!(new = malloc(sizeof(t_rooms *) * (size + 1))))
-		return (0);
+	if (!size || !(new = malloc(sizeof(t_rooms *) * (size + 1))))
+		return (NULL);
 	new[size] = NULL;
 	while (i < hill->size)
 	{
