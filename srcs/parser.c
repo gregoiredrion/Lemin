@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/04 14:44:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:04:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last)
 	static int	check = 1;
 
 	if ((*line)[0] != '#')
-	{
-		if (!(last = create_rooms(last, line, 0)))
-			return (NULL);
-	}
-	else if (!(ft_strcmp(*line, "##start") && check > 0 && (check *= -1)))
+		return (create_rooms(last, line, 0));
+	if (!(ft_strcmp(*line, "##start") && check > 0 && (check *= -1)))
 	{
 		ft_strdel(line);
 		if (get_next_line(0, line) != 1)
@@ -37,6 +34,8 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last)
 		if (!(last = create_rooms(last, line, -1)))
 			return (NULL);
 	}
+	else
+		return (NULL);
 	return (last);
 }
 
