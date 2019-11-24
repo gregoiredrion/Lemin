@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/04 14:45:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/24 16:34:44 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,16 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 			ft_printf("\n");
 		}
 	}
+	ft_printf("\n");
+}
+
+int				print_direct_path(char *end, int ants)
+{
+	int		i;
+
+	i = 1;
+	while (i <= ants)
+		ft_printf("L%d-%s ", i++, end);
+	ft_printf("\n");
+	return (1);
 }
