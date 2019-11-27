@@ -75,7 +75,5 @@ int				prep_suurballe(t_hill *hill, t_rooms **tab)
 		return (0);
 	tab[START]->ants = hill->ants;
 	tab[END]->ants = hill->ants;
-	if (suurballe(hill, tab) == -1)
-		return (-1);
-	return (1);
+	return (suurballe(hill, tab));
 }

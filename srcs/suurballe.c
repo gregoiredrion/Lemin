@@ -56,6 +56,8 @@ int			suurballe(t_hill *hill, t_rooms **tab)
 		}
 		nb_paths++;
 	}
+	if (!paths)
+		return (0);
 	new_dists(paths);
 	move_ants(hill, paths, tab);
 	free_paths(paths);
