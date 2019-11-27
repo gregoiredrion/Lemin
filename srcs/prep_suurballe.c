@@ -63,6 +63,8 @@ static void		swap_rooms(t_hill *hill, t_rooms **tab, int i, int room_ind)
 
 int				prep_suurballe(t_hill *hill, t_rooms **tab)
 {
+	if (hill->start == -1 || hill->end == -1)
+		return (0);
 	if (!ft_strcmp(tab[hill->start]->name, tab[hill->end]->name))
 		return (1);
 	swap_rooms(hill, tab, START, hill->start);
