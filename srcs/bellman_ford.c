@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 14:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/30 17:41:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:02:10 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ static int		update_dist(t_rooms *room)
 	t_links		*li;
 
 	updated = 0;
+	while (room && room->d == -1)
+		room = room->next;
 	while (room)
 	{
 		li = room->links;
 		while (li)
 		{
-			if (li->room->index == 0 || li->used || room->d == -1)
+			if (li->room->index == 0 || li->used)
 				;
 			else if (room->d + li->w < li->room->d || li->room->d == -1)
 			{

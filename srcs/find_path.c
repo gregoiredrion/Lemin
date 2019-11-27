@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:12:55 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/30 16:36:27 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:29:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int				find_path(t_rooms **tab)
 	t_rooms		*pred;
 	int			room;
 
-	pred = tab[tab[END]->pred];
-	room = END;
 	if (!check_pred(tab, tab[END]->pred))
 		return (0);
+	pred = tab[tab[END]->pred];
+	room = END;
 	while (pred)
 	{
 		li = pred->links;

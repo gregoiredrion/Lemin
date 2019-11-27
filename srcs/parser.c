@@ -6,13 +6,13 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/04 15:04:15 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/11/27 12:58:13 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_rooms	*parse_rooms(char **line, t_rooms *last)
+static t_rooms	*parse_rooms(char **line, t_rooms *last, int *ret)
 {
 	static int	check = 1;
 
@@ -35,35 +35,53 @@ static t_rooms	*parse_rooms(char **line, t_rooms *last)
 			return (NULL);
 	}
 	else
-		return (NULL);
-	return (last);
+		*ret = 0;
+	return ((*ret == 0) ? NULL : last);
+}
+
+static int		free_return(char **line, t_rooms *room, int ret)
+{
+	t_rooms		*tmp;
+
+	tmp = NULL;
+	while (room)
+	{
+		tmp = room->next;
+		room->next = NULL;
+		ft_strdel(&room->name);
+		ft_memdel((void *)room);
+		room = tmp;
+	}
+	ft_strdel(line);
+	return (ret);
 }
 
 static int		read_rooms(t_hill *hill, char **line)
 {
 	t_rooms	*begin;
 	t_rooms *last;
+	int		ret;
 
 	begin = NULL;
 	last = NULL;
-	while (get_next_line(0, line) == 1 && (ft_strchr(*line, ' ')
+	while ((ret = (get_next_line(0, line) == 1)) && (ft_strchr(*line, ' ')
 	|| *line[0] == '#'))
 	{
 		if (*line[0] == 'L')
-		{
-			ft_strdel(line);
-			return (0);
-		}
+			return (free_return(line, begin, 0));
 		if (((*line)[0] == '#' && (*line)[1] == '#') || *line[0] != '#')
 		{
-			if (!(last = parse_rooms(line, last)))
-				return (-1);
+			if (!(last = parse_rooms(line, last, &ret)) && ret)
+				return (free_return(line, begin, -1));
+			if (!ret)
+				break ;
 			(begin == NULL) ? begin = last : begin;
 			hill->size++;
 		}
-		else
-			ft_strdel(line);
+		ft_strdel(line);//else?
 	}
+	if (ret == -1)
+		return (free_return(line, begin, -1));
 	return (hashmap(hill, begin));
 }
 
@@ -71,7 +89,7 @@ static int		read_link(t_hill *hill, char *line)
 {
 	int		ret;
 
-	while (get_next_line(0, &line) == 1 && line[0] != '\0')
+	while ((ret = (get_next_line(0, &line) == 1)) && line[0] != '\0')
 	{
 		if (line[0] != '#')
 		{
@@ -79,11 +97,16 @@ static int		read_link(t_hill *hill, char *line)
 			if (!ret)
 				break ;
 			if (ret == -1)
+			{
+				ft_strdel(&line);
 				return (-1);
+			}
 		}
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
+	if (ret == -1)
+		return (-1);
 	return (1);
 }
 
@@ -93,13 +116,14 @@ int				parser(t_hill *hill, char *line)
 	int			ret;
 
 	if (read_rooms(hill, &line) == -1)
-		return (0);
+		return (-1);
 	if (!(tab = small_tab(hill)) || !line || line[0] == '\0')
 		return (0);
 	if ((ret = parse_links(hill, line)) == -1 || !ret)
 		return (ret);
 	ft_strdel(&line);
-	read_link(hill, line);
+	if (read_link(hill, line) == -1)
+		return (-1);
 	free(hill->rooms);
 	hill->rooms = tab;
 	hill->size /= 2;
