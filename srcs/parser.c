@@ -49,6 +49,7 @@ static int		free_return(char **line, t_rooms *room, int ret)
 	while (room)
 	{
 		tmp = room->next;
+		room->next = NULL;
 		free_room(&room);
 		room = tmp;
 	}

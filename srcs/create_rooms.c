@@ -39,7 +39,7 @@ t_rooms			*create_rooms(t_rooms *last, char **line, int stend)
 	if (!(new = malloc(sizeof(t_rooms))))
 		return (free_tab(tab, NULL, line, NULL));
 	if (!(new->name = ft_strdup(tab[0])))
-		return (free_tab(tab, new, line, NULL));
+		return (free_tab(tab, new, line, NULL));//free new
 	new->stend = stend;
 	new->ants = 0;
 	new->d = (stend == 1) ? 0 : -1;
@@ -47,12 +47,12 @@ t_rooms			*create_rooms(t_rooms *last, char **line, int stend)
 	new->used = 0;
 	new->pred = -1;
 	new->links = NULL;
+	new->next = NULL;
 	if ((new->x = ft_atoi(tab[1])) > INT_MAX || new->x < INT_MIN)
 		return (free_tab(tab, new, line, NULL));
 	if ((new->y = ft_atoi(tab[2])) > INT_MAX || new->x < INT_MIN)
 		return (free_tab(tab, new, line, NULL));
 	if (last)
 		last->next = new;
-	new->next = NULL;
 	return (free_tab(tab, NULL, line, new));
 }

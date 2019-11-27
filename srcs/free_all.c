@@ -48,14 +48,16 @@ void			free_room(t_rooms **r)
 	t_rooms	*room;
 
 	room = *r;
-	ft_strdel(&(room->name));
+	if (room->name)
+		ft_strdel(&(room->name));
 	room->d = 0;
 	room->index = 0;
 	room->ants = 0;
 	room->x = 0;
 	room->y = 0;
 	room->stend = 0;
-	free_links(room->links);
+	if (room->links)
+		free_links(room->links);
 	room->links = NULL;
 	if (room->next)
 		(free_room(&room->next));

@@ -23,6 +23,7 @@ int				main(void)
 {
 	char		*line;
 	t_hill		*hill;
+	int			ret;
 
 	if (!(hill = create_hill()))
 		return (-1);
@@ -34,7 +35,7 @@ int				main(void)
 		return (free_error(hill));
 	}
 	ft_strdel(&line);
-	if (!(parser(hill, line)))
+	if (!(ret = parser(hill, line)) || ret == -1)
 		return (free_error(hill));
 	free_hill(hill);
 	return (0);

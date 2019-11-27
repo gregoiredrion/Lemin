@@ -14,7 +14,7 @@
 
 int			check_ants(char *line)
 {
-	int		ret;
+	long		ret;
 
 	ret = 0;
 	if (*line == '+')
@@ -26,6 +26,8 @@ int			check_ants(char *line)
 		if (!(*line >= '0' && *line <= '9'))
 			return (-1);
 		ret = ret * 10 + *(line)++ - 48;
+		if (ret > 2147483647)
+			return (-1);
 	}
 	return (ret);
 }
