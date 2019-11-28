@@ -65,9 +65,12 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int		i;
 	int		lines;
 	int		j;
+	char	*uwu;
 
 	i = 0;
 	lines = 0;
+	while (get_next_line(0, &uwu) > 0)
+		ft_strdel(&uwu);
 	while (paths[i])
 	{
 		j = find_empty(paths[i]);
