@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:32:01 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/28 13:33:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:35:05 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			free_hill(t_hill *hill)
 	{
 		if (tab[i])
 		{
-			free_room(&tab[i]);
+			free_room(&(tab[i]));
 			tab[i] = NULL;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/11/28 14:06:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:23:09 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int				parse_links(t_hill *hill, char *line)
 		ret = store_links(room1, room2);
 	while (lines && lines[i])
 		ft_strdel(&lines[i++]);
-	free(lines);
+	if (lines)
+		free(lines);
 	return (ret);
 }

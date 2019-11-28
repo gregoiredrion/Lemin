@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/27 18:16:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:34:33 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int						hashmap(t_hill *hill, t_rooms *begin)
 			hashed = collision(hill->rooms, hashed, hill->size);
 		hill->rooms[hashed] = begin;
 		begin = begin->next;
+		hill->rooms[hashed]->next = NULL;
 	}
 	return (1);
 }
