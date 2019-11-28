@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 16:04:42 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/26 16:09:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:15:59 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int				prep_suurballe(t_hill *hill, t_rooms **tab)
 		return (1);
 	swap_rooms(hill, tab, START, hill->start);
 	swap_rooms(hill, tab, END, hill->end);
+	display_room(tab[0]);
+	display_room(tab[1]);
 	if (direct_path(tab[0]->links))
 		return (print_direct_path(tab[1]->name, hill->ants));
 	if (!(hill->max_paths = max_paths(tab)))

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:38:37 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/25 14:53:35 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:12:16 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int		i;
 	int		lines;
 	int		j;
-	char	*uwu;
+	char	*line;
 
 	i = 0;
 	lines = 0;
-	while (get_next_line(0, &uwu) > 0)
-		ft_strdel(&uwu);
+	while (get_next_line(0, &line) > 0)
+		ft_strdel(&line);
 	while (paths[i])
 	{
 		j = find_empty(paths[i]);

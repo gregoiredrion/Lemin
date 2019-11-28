@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:44:48 by gdrion            #+#    #+#             */
-/*   Updated: 2019/11/28 15:23:09 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:45:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static int		stock_links(t_rooms *room, t_links *new)
 	while (tmp->next)
 	{
 		if (!ft_strcmp(tmp->room->name, new->room->name))
-			return (0);
+			return (1);
 		tmp = tmp->next;
 	}
 	if (!ft_strcmp(tmp->room->name, new->room->name))
-		return (0);
+		return (1);
 	tmp->next = new;
 	return (1);
 }
