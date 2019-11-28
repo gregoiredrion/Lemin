@@ -69,8 +69,6 @@ int				prep_suurballe(t_hill *hill, t_rooms **tab)
 		return (1);
 	swap_rooms(hill, tab, START, hill->start);
 	swap_rooms(hill, tab, END, hill->end);
-	display_room(tab[0]);
-	display_room(tab[1]);
 	if (direct_path(tab[0]->links))
 		return (print_direct_path(tab[1]->name, hill->ants));
 	if (!(hill->max_paths = max_paths(tab)))

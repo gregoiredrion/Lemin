@@ -64,11 +64,11 @@ static int		stock_links(t_rooms *room, t_links *new)
 	while (tmp->next)
 	{
 		if (!ft_strcmp(tmp->room->name, new->room->name))
-			return (1);
+			return (0);
 		tmp = tmp->next;
 	}
 	if (!ft_strcmp(tmp->room->name, new->room->name))
-		return (1);
+		return (0);
 	tmp->next = new;
 	return (1);
 }
@@ -90,7 +90,7 @@ static int		store_links(t_rooms *room1, t_rooms *room2)
 	{
 		free_links(in);
 		free_links(opp);
-		return (0);
+		return (1);
 	}
 	return (1);
 }
