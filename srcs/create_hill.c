@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:44:26 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/17 18:44:28 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 13:34:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_hill			*create_hill(void)
 	hill->start = -1;
 	hill->end = -1;
 	hill->turns = -1;
+	hill->max_paths = 0;
 	return (hill);
 }

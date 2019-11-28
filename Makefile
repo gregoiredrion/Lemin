@@ -38,7 +38,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ_DIR) $(OBJ) Makefile
 	@printf $(ccGREEN)
-	@$(cc) $(CFLAGS) $(OBJ) -I $(INCLUDES) -I $(LIBFT_INCLUDES) $(LIBFT) \
+	@$(cc) $(FLAGS) -fsanitize=address $(OBJ) -I $(INCLUDES) -I $(LIBFT_INCLUDES) $(LIBFT) \
 	-o $(NAME)
 	@printf "Successfully compiled %-$(WIDTH)s" $(NAME)
 	@printf "                                                    \n"

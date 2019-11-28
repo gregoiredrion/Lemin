@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/27 18:38:12 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:07:09 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,11 @@ static int		read_link(t_hill *hill, char *line)
 			ret = parse_links(hill, line);
 			if (!ret)
 			{
-				ft_strdel(&line);
-				while (get_next_line(0, &line) == 1)
-					ft_strdel(&line);
+				free_return(&line, NULL, 0);
 				break ;
 			}
 			if (ret == -1)
-			{
-				ft_strdel(&line);
 				return (-1);
-			}
 		}
 		ft_strdel(&line);
 	}
@@ -131,15 +126,13 @@ int				parser(t_hill *hill, char *line)
 	ft_strdel(&line);
 	if (ret == -1 || !ret)
 	{
-		while (get_next_line(0, &line) == 1)
-			ft_strdel(&line);
 		free(tab);
-		return (ret);
+		return (free_return(&line, NULL, ret));
 	}
 	if (read_link(hill, line) == -1)
 	{
 		free(tab);
-		return (-1);
+		return (free_return(&line, NULL, ret));
 	}
 	free(hill->rooms);
 	hill->rooms = tab;
