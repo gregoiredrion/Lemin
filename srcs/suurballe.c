@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 22:23:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/30 17:41:05 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:16:02 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static int	new_paths(t_hill *hill, t_rooms **tab, t_rooms ****paths, int nb)
 {
 	t_rooms		***tmp;
-	t_rooms		***path;
 	double		turns;
 	int			i;
 
 	i = 0;
-	path = *paths;
 	if (!(tmp = all_paths(tab, nb)))
 		return (-1);
 	if (hill->turns > (turns = max_turns(hill, tmp, nb)) || hill->turns == -1)
