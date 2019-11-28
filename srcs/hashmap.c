@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:02:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/27 14:23:47 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:16:48 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ unsigned int			hash(char *str, int size)
 
 int						hashmap(t_hill *hill, t_rooms *begin)
 {
-	t_rooms		*save;
 	int			hashed;
 
-	save = begin;
 	hill->size *= 2;
 	if (!(hill->rooms = create_hashmap(hill->size)))
 		return (-1);

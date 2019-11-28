@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:47:47 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/10/29 15:00:33 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:06:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_rooms			*create_rooms(t_rooms *last, char **line, int stend)
 	if (!(new = malloc(sizeof(t_rooms))))
 		return (free_tab(tab, NULL, line, NULL));
 	if (!(new->name = ft_strdup(tab[0])))
-		return (free_tab(tab, new, line, NULL));//free new
+		return (free_tab(tab, new, line, NULL));
 	new->stend = stend;
 	new->ants = 0;
 	new->d = (stend == 1) ? 0 : -1;

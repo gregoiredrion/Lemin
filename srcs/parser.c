@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/27 14:28:26 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:38:12 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ static int		read_rooms(t_hill *hill, char **line)
 			(begin == NULL) ? begin = last : begin;
 			hill->size++;
 		}
+		ft_strdel(line);
 	}
 	if (ret == -1)
 		return (free_return(line, begin, -1));
+	if (!hill->size)
+		return (free_return(line, begin, 0));
 	return (hashmap(hill, begin));
 }
 
@@ -95,7 +98,11 @@ static int		read_link(t_hill *hill, char *line)
 		{
 			ret = parse_links(hill, line);
 			if (!ret)
+			{
+				while (get_next_line(0, &line) == 1)
+					ft_strdel(&line);
 				break ;
+			}
 			if (ret == -1)
 			{
 				ft_strdel(&line);
@@ -117,19 +124,25 @@ int				parser(t_hill *hill, char *line)
 
 	if ((ret = read_rooms(hill, &line)) == -1 || !ret)
 		return (ret);
-	if (!(tab = small_tab(hill)) || !line || line[0] == '\0')
+	if (!line || line[0] == '\0' || !(tab = small_tab(hill)))
 		return (0);
 	ret = parse_links(hill, line);
 	ft_strdel(&line);
 	if (ret == -1 || !ret)
+	{
+		while (get_next_line(0, &line) == 1)
+			ft_strdel(&line);
+		free(tab);
 		return (ret);
+	}
 	if (read_link(hill, line) == -1)
+	{
+		free(tab);
 		return (-1);
+	}
 	free(hill->rooms);
 	hill->rooms = tab;
 	hill->size /= 2;
 	ft_printf("\n");
-	if ((ret = prep_suurballe(hill, tab)) == -1 || !ret)
-		return (ret);
-	return (1);
+	return (ret = prep_suurballe(hill, tab));
 }
