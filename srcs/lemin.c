@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/28 15:24:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:57:45 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int				main(void)
 	ft_strdel(&line);
 	if (!(ret = parser(hill, line)) || ret == -1)
 		return (free_error(hill));
-	while (get_next_line(0, &line) == 1)
-		ft_strdel(&line);
 	free_hill(hill);
 	return (0);
 }
