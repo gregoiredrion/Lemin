@@ -92,6 +92,9 @@ static int		read_link(t_hill *hill, char *line)
 {
 	int		ret;
 
+	if ((ret = parse_links(hill, line)) == -1 || !ret)
+		return (ret);
+	ft_strdel(&line);
 	while ((ret = (get_next_line(0, &line) == 1)) && line[0] != '\0')
 	{
 		if (line[0] != '#')
@@ -122,14 +125,7 @@ int				parser(t_hill *hill, char *line)
 		return (ret);
 	if (!line || line[0] == '\0' || !(tab = small_tab(hill)))
 		return (0);
-	ret = parse_links(hill, line);
-	ft_strdel(&line);
-	if (ret == -1 || !ret)
-	{
-		free(tab);
-		return (free_return(&line, NULL, ret));
-	}
-	if (read_link(hill, line) == -1)
+	if ((ret = read_link(hill, line)) == -1)
 	{
 		free(tab);
 		return (free_return(&line, NULL, ret));
@@ -137,7 +133,6 @@ int				parser(t_hill *hill, char *line)
 	free(hill->rooms);
 	hill->rooms = tab;
 	hill->size /= 2;
-	//display_tab2(tab);
 	ft_printf("\n");
 	return (ret = prep_suurballe(hill, tab));
 }
