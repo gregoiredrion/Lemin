@@ -99,6 +99,7 @@ static int		read_link(t_hill *hill, char *line)
 			ret = parse_links(hill, line);
 			if (!ret)
 			{
+				ft_strdel(&line);
 				while (get_next_line(0, &line) == 1)
 					ft_strdel(&line);
 				break ;
