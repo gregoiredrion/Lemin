@@ -54,8 +54,8 @@ static int		free_return(char **line, t_rooms *room, int ret)
 		room = tmp;
 	}
 	ft_strdel(line);
-	//while (get_next_line(0, line))
-	//	ft_strdel(line);
+	while (get_next_line(0, line))
+		ft_strdel(line);
 	return (ret);
 }
 
