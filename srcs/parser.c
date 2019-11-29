@@ -93,7 +93,7 @@ static int		read_link(t_hill *hill, char *line)
 	int		ret;
 
 	if ((ret = parse_links(hill, line)) == -1 || !ret)
-		return (ret);
+		return (-1);
 	ft_strdel(&line);
 	while ((ret = (get_next_line(0, &line) == 1)) && line[0] != '\0')
 	{
@@ -127,6 +127,7 @@ int				parser(t_hill *hill, char *line)
 		return (0);
 	if ((ret = read_link(hill, line)) == -1)
 	{
+		ft_printf("Line = %s\n", line);
 		free(tab);
 		return (free_return(&line, NULL, ret));
 	}

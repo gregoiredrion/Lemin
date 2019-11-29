@@ -12,6 +12,14 @@
 
 #include "lemin.h"
 
+static void empty_gnl(void)
+{
+ 	char 	*empty;
+
+	while (get_next_line(0, &empty) > 0)
+		ft_strdel(&empty);
+}
+
 static int		free_error(t_hill *hill)
 {
 	free_hill(hill);
@@ -39,6 +47,7 @@ int				main(void)
 	ft_strdel(&line);
 	if (!(ret = parser(hill, line)) || ret == -1)
 		return (free_error(hill));
+	empty_gnl();
 	free_hill(hill);
 	return (0);
 }
