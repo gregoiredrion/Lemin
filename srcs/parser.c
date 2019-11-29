@@ -134,6 +134,5 @@ int				parser(t_hill *hill, char *line)
 	hill->rooms = tab;
 	hill->size /= 2;
 	ft_printf("\n");
-	ft_printf("End of parsing\n");
 	return (ret = prep_suurballe(hill, tab));
 }
