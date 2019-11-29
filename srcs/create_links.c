@@ -107,6 +107,8 @@ int				parse_links(t_hill *hill, char *line)
 	ret = 1;
 	if (!(lines = check_links(line)))
 		ret = 0;
+	if (ret && !ft_strcmp(lines[0], lines[1]))
+		return (1);
 	if (ret && !(room1 = get_room(hill, lines[0], hill->size)))
 		ret = 0;
 	if (ret && !(room2 = get_room(hill, lines[1], hill->size)))

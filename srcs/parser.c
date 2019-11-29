@@ -54,8 +54,8 @@ static int		free_return(char **line, t_rooms *room, int ret)
 		room = tmp;
 	}
 	ft_strdel(line);
-	while (get_next_line(0, line))
-		ft_strdel(line);
+	//while (get_next_line(0, line))
+	//	ft_strdel(line);
 	return (ret);
 }
 
@@ -127,7 +127,6 @@ int				parser(t_hill *hill, char *line)
 		return (0);
 	if ((ret = read_link(hill, line)) == -1)
 	{
-		ft_printf("Line = %s\n", line);
 		free(tab);
 		return (free_return(&line, NULL, ret));
 	}
@@ -135,5 +134,6 @@ int				parser(t_hill *hill, char *line)
 	hill->rooms = tab;
 	hill->size /= 2;
 	ft_printf("\n");
+	ft_printf("End of parsing\n");
 	return (ret = prep_suurballe(hill, tab));
 }
