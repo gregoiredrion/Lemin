@@ -6,15 +6,15 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:09:10 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/29 18:21:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/09 14:50:35 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void empty_gnl(void)
+static void		empty_gnl(void)
 {
- 	char 	*empty;
+	char	*empty;
 
 	while (get_next_line(0, &empty) > 0)
 		ft_strdel(&empty);
@@ -22,6 +22,7 @@ static void empty_gnl(void)
 
 static int		free_error(t_hill *hill)
 {
+	empty_gnl();
 	free_hill(hill);
 	write(2, "Error\n", 6);
 	return (-1);
@@ -40,8 +41,6 @@ int				main(void)
 	if ((hill->ants = check_ants(line)) <= 0)
 	{
 		ft_strdel(&line);
-		while (get_next_line(0, &line) == 1)
-			ft_strdel(&line);
 		return (free_error(hill));
 	}
 	ft_strdel(&line);

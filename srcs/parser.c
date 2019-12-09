@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 15:06:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/29 18:18:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/09 15:13:11 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static int		free_return(char **line, t_rooms *room, int ret)
 		room = tmp;
 	}
 	ft_strdel(line);
-	while (get_next_line(0, line))
-		ft_strdel(line);
 	return (ret);
 }
 
