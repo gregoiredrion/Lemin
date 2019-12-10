@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:33:02 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/27 18:29:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/10 20:33:21 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char		**check_links(char *line)
 	{
 		if (line[i] == '-')
 		{
-			if (hyphen == 1)
+			if (hyphen == 1 || i == 0 || !line[i + 1])
 				return (NULL);
 			hyphen++;
 		}
