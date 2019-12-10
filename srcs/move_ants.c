@@ -19,7 +19,7 @@ static void		use_path(t_hill *hill, t_rooms ***paths, int i, int lines)
 	int			max;
 
 	max = hill->turns;
-	start = hill->rooms[0];
+	start = hill->rooms[START];
 	if (hill->turns > (double)(int)hill->turns)
 		lines--;
 	if (paths[i][0]->d + lines < max && id <= start->ants)
@@ -65,12 +65,9 @@ void			move_ants(t_hill *hill, t_rooms ***paths, t_rooms **tab)
 	int		i;
 	int		lines;
 	int		j;
-	char	*line;
 
 	i = 0;
 	lines = 0;
-	while (get_next_line(0, &line) > 0)
-		ft_strdel(&line);
 	while (paths[i])
 	{
 		j = find_empty(paths[i]);
